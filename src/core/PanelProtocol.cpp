@@ -853,6 +853,10 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
         sendTo(client, ack);
         return;
     }
+    if(cmd=="dust_params"){
+        for(const auto& key:{"ratio","size","flash"}){const auto v=obj.value(key);if(!v.isDouble()||v.toDouble()!=v.toInt()){rejectKeyerRequest("Dust parameters must be integers");return;}}
+        if(!m_engine->setDustMix(obj.value("ratio").toInt(),obj.value("size").toInt(),obj.value("flash").toInt())){rejectKeyerRequest("Dust Mix unavailable or invalid");return;}sendTo(client,ack);return;
+    }
     if(cmd=="dip_color"){if(!obj.value("color").isString()||!m_engine->setDipColour(obj.value("color").toString())){rejectKeyerRequest("Invalid DIP colour or failed save");return;}sendTo(client,ack);return;}
     if(cmd=="mix_params"){
         int a=obj.value("aGain").toInt(m_engine->configuration()->superMixGainA()),b=obj.value("bGain").toInt(m_engine->configuration()->superMixGainB());
@@ -1007,7 +1011,7 @@ QJsonObject PanelProtocol::stateObject() const
     QJsonArray keyModes{"linear","chroma"};if(m_engine->nativeKeyAvailable())keyModes.append("luma");
     capabilities.insert("keyModes",keyModes);capabilities.insert("keyInversion",m_engine->nativeKeyAvailable());capabilities.insert("maskInversion",m_engine->nativeKeyAvailable());
     capabilities.insert(QStringLiteral("keyMask"),true);
-    QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}capabilities.insert("mixModes",mixes);
+    QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}if(m_engine->dustMixAvailable())mixes.append("dustmix");capabilities.insert("dustMix",m_engine->dustMixAvailable());capabilities.insert("mixModes",mixes);
     QJsonArray dmeEffects{"push","slide"};if(m_engine->nativeDmeAvailable()){dmeEffects.append("move");dmeEffects.append("cube");dmeEffects.append("zoom");}if(m_engine->pageDmeAvailable()){dmeEffects.append("page_curl");dmeEffects.append("page_roll");}capabilities.insert("dmeEffects",dmeEffects);capabilities.insert("dmeBackground",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundScopes",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundImages",m_engine->staticDmeAvailable());capabilities.insert("mixPreparation",true);capabilities.insert("broadcastMixes",m_engine->broadcastMixAvailable());capabilities.insert("sonyDmeBackground",m_engine->primitiveSonyAvailable());capabilities.insert("sonyGeometry",m_engine->enhancedSonyAvailable());capabilities.insert("sonyMosaic",m_engine->mosaicSonyAvailable());
     QJsonArray sonyWipes;for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable()))sonyWipes.append(code);capabilities.insert("sonyWipes",sonyWipes);
     QJsonArray pending;for(int code:pendingSonyWipes())pending.append(code);capabilities.insert("sonyPendingWipes",pending);
@@ -1060,6 +1064,7 @@ QJsonObject PanelProtocol::stateObject() const
     }
     obj.insert(QStringLiteral("wipePresets"), presets);
     obj.insert(QStringLiteral("wipeMulti"), m_engine->configuration()->wipeMulti());
+    obj.insert("dustRatio",m_engine->configuration()->dustRatio());obj.insert("dustSize",m_engine->configuration()->dustSize());obj.insert("dustFlash",m_engine->configuration()->dustFlash());
     obj.insert("superMixGainA",m_engine->configuration()->superMixGainA());obj.insert("superMixGainB",m_engine->configuration()->superMixGainB());obj.insert("dipColor",m_engine->configuration()->dipColor());obj.insert("wipeTileSize",m_engine->configuration()->wipeTileSize());obj.insert("wipeVertices",m_engine->configuration()->wipeVertices());obj.insert("wipeRounding",m_engine->configuration()->wipeRounding());
     obj.insert(QStringLiteral("wipeBorder"), m_engine->configuration()->wipeBorderAmount());
     obj.insert(QStringLiteral("wipeShadow"), m_engine->configuration()->wipeShadowAmount());

@@ -302,6 +302,8 @@ SetupWorkspace::SetupWorkspace(Configuration* configuration, QWidget* parent)
     });
     fxRow->addRow(tr("DIP colour"), m_dipColorButton);
     m_superGainA=new QSpinBox(this);m_superGainB=new QSpinBox(this);m_superGainA->setObjectName("superMixGainA");m_superGainB->setObjectName("superMixGainB");for(auto* spin:{m_superGainA,m_superGainB}){spin->setRange(0,100);spin->setSuffix(" %");}
+    m_dustRatio=new QSpinBox(this);m_dustSize=new QSpinBox(this);m_dustFlash=new QSpinBox(this);for(auto* spin:{m_dustRatio,m_dustSize,m_dustFlash})spin->setRange(0,100);m_dustSize->setMinimum(1);
+    fxRow->addRow(tr("Dust Mix ratio (%)"),m_dustRatio);fxRow->addRow(tr("Dust particle size (% height)"),m_dustSize);fxRow->addRow(tr("Dust flash steps"),m_dustFlash);
     fxRow->addRow(tr("SUPER MIX midpoint A"),m_superGainA);fxRow->addRow(tr("SUPER MIX midpoint B"),m_superGainB);
     fxRow->addRow(tr("Duration (frames)"), m_autoFramesSpin);
     fxRow->addRow(tr("Wipe pattern"), m_wipePatternCombo);
@@ -580,6 +582,7 @@ void SetupWorkspace::populate()
     m_ndiCleanNameEdit->setText(m_config->ndiCleanName());
     m_dipColorButton->setProperty("dipColor", m_config->dipColor());
     m_dipColorButton->setText(m_config->dipColor());
+    m_dustRatio->setValue(m_config->dustRatio());m_dustSize->setValue(m_config->dustSize());m_dustFlash->setValue(m_config->dustFlash());
     m_superGainA->setValue(m_config->superMixGainA());m_superGainB->setValue(m_config->superMixGainB());
     m_autoFramesSpin->setValue(m_config->autoDurationFrames());
     const int wipeIndex = m_wipePatternCombo->findData(m_config->wipePatternId());
@@ -963,6 +966,7 @@ bool SetupWorkspace::fillDraft(Configuration* configuration) const
     configuration->setNdiProgramName(m_ndiProgramNameEdit->text());
     configuration->setNdiCleanEnabled(m_ndiCleanCheck->isChecked());
     configuration->setNdiCleanName(m_ndiCleanNameEdit->text());
+    configuration->setDustMix(m_dustRatio->value(),m_dustSize->value(),m_dustFlash->value());
     configuration->setSuperMixGains(m_superGainA->value(),m_superGainB->value());
     configuration->setAutoDurationFrames(m_autoFramesSpin->value());
     configuration->setWipePatternId(m_wipePatternCombo->currentData().toString());

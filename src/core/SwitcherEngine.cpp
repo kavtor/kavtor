@@ -219,14 +219,15 @@ void SwitcherEngine::executeTransition(const Transition& requested)
         return;
     }
 
+    transition.dustRatio=m_config->dustRatio();transition.dustSize=m_config->dustSize();transition.dustFlash=m_config->dustFlash();
     transition.videoGainA=m_config->superMixGainA();transition.videoGainB=m_config->superMixGainB();
-    const bool mesh=transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||transition.type==TransitionType::SuperMix;
+    const bool mesh=transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix);
     if(mesh&&nativeDmeSuffix(transition).isEmpty()){emit error(tr("DME scene cannot be prepared safely"));return;}
     if(transition.type==TransitionType::Smil&&transition.smilType=="sonyWipe"&&!nativeSonyCode(transition)){emit error(tr("Sony pattern or modifiers are unavailable in the connected engine"));return;}
     if(transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme){const QString effect=transition.type==TransitionType::Move?"move":transition.type==TransitionType::Cube?"cube":transition.type==TransitionType::Zoom?"zoom":transition.type==TransitionType::SonyDme?QString("sony_%1").arg(transition.sonyDmeCode):transition.type==TransitionType::PageCurl?"page_curl":"page_roll";if(transition.dmeBackground==-2){transition.dmeBackground=m_config->dmeBackground(effect);transition.dmeBackgroundImage=m_config->dmeBackgroundImage(effect);}if((transition.dmeBackground==-3&&!m_staticDmeAvailable)||dmeBackgroundProducer(transition.dmeBackground,transition.dmeBackgroundImage).isEmpty()||sourceWouldFeedback(transition.dmeBackground,m_activeMe)){emit error(tr("DME background is unavailable or would feed back"));return;}}
     if((transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll)&&!m_pageDmeAvailable){emit error(tr("Page DME requires casparMIX 0.6.0 or newer"));return;}
-    if((transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||transition.type==TransitionType::SuperMix)&&!m_nativeDmeAvailable){emit error(tr("Native DME requires casparMIX 0.5.0 or newer"));return;}
-    if((transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||transition.type==TransitionType::SuperMix)&&(!m_nextBackground||std::any_of(std::begin(m_nextKey),std::end(m_nextKey),[](bool on){return on;}))) {emit error(tr("Native DME requires background-only NEXT TRANSITION"));return;}
+    if((transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix))&&!m_nativeDmeAvailable){emit error(tr("Native DME requires casparMIX 0.5.0 or newer"));return;}
+    if((transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix))&&(!m_nextBackground||std::any_of(std::begin(m_nextKey),std::end(m_nextKey),[](bool on){return on;}))) {emit error(tr("Native DME requires background-only NEXT TRANSITION"));return;}
     if(transition.alternateMix()&&(!m_nextBackground||std::any_of(std::begin(m_nextKey),std::end(m_nextKey),[](bool on){return on;}))) {
         emit error(tr("Alternate MIX modes currently require background-only NEXT TRANSITION"));return;
     }
@@ -1335,7 +1336,7 @@ void SwitcherEngine::onAmcpConnected()
     m_restoreFailed = false;
     m_restoreVersionKnown = false;
     m_restoreBatch = 0;
-    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=false;
+    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
     setConnected(true);
     send(QStringLiteral("VERSION"));
     startOscListener();
@@ -1361,7 +1362,7 @@ void SwitcherEngine::onAmcpDisconnected()
     captureBank();
     m_restoreBatch = 0;
     m_restoreVersionKnown = false;
-    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=false;
+    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
     m_nativeMvReady=false;
     m_manualBanks = {};
     m_requestedMe = -1;
@@ -1429,6 +1430,7 @@ void SwitcherEngine::onAmcpResponse(int code, const QString& status, const QStri
         m_mirrorSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,16,0);
         m_planarSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,14,0);
         m_nativeKeyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,13,0);
+        m_dustMixAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,19,0);
         m_broadcastMixAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,11,0);
         m_restoreVersionKnown = true;
         restoreCompositions();
@@ -2284,7 +2286,7 @@ QString SwitcherEngine::backgroundRoute(int destChannel, int sourceId, const Tra
 {
     int context=m_activeMe;for(int me=0;me<4;++me)if(destChannel==meProgramChannel(me)||destChannel==mePreviewChannel(me))context=me;
     const Transition& effective = transition;
-    const QString suffix = effective.type == TransitionType::Move || effective.type == TransitionType::Cube || effective.type == TransitionType::Zoom || effective.type == TransitionType::PageCurl || effective.type == TransitionType::PageRoll || effective.type == TransitionType::SonyDme || effective.type == TransitionType::Nam || effective.type == TransitionType::SuperMix
+    const QString suffix = effective.type == TransitionType::Move || effective.type == TransitionType::Cube || effective.type == TransitionType::Zoom || effective.type == TransitionType::PageCurl || effective.type == TransitionType::PageRoll || effective.type == TransitionType::SonyDme || effective.type == TransitionType::Nam || (effective.type == TransitionType::SuperMix || effective.type == TransitionType::DustMix)
         ? nativeDmeSuffix(effective) : effective.type == TransitionType::Smil
         ? smilWipeStingSuffix(effective)
         : effective.amcpSuffix();
@@ -2301,7 +2303,7 @@ QString SwitcherEngine::backgroundRoute(int destChannel, int sourceId, const Tra
     if (channel < 0) {
         return {};
     }
-    if(effective.type==TransitionType::Move||effective.type==TransitionType::Cube||effective.type==TransitionType::Zoom||effective.type==TransitionType::PageCurl||effective.type==TransitionType::PageRoll||effective.type==TransitionType::SonyDme||effective.type==TransitionType::Nam||effective.type==TransitionType::SuperMix)
+    if(effective.type==TransitionType::Move||effective.type==TransitionType::Cube||effective.type==TransitionType::Zoom||effective.type==TransitionType::PageCurl||effective.type==TransitionType::PageRoll||effective.type==TransitionType::SonyDme||effective.type==TransitionType::Nam||(effective.type==TransitionType::SuperMix||effective.type==TransitionType::DustMix))
         return QStringLiteral("PLAY %1-1 route://%2 RENDERED").arg(destChannel).arg(channel)+suffix;
     return routePlayCommand(destChannel, channel, effective);
 }
@@ -3129,15 +3131,17 @@ bool SwitcherEngine::setSuperSourceInput(int id,const QString& boxId,int input) 
 }
 
 QString SwitcherEngine::nativeDmeSuffix(const Transition& transition,bool manual) const {
+    if(transition.type==TransitionType::DustMix){if(!m_dustMixAvailable)return {};return QString(" DUSTMIX %1 MANUAL %2 DUST_RATIO %3 H_SIZE %4 V_SIZE %4 FLASH_RATE %5").arg(qMax(1,transition.durationFrames)).arg(manual?1:0).arg(transition.dustRatio/100.,0,'f',4).arg(transition.dustSize/100.,0,'f',4).arg(transition.dustFlash);}
+
     if(transition.type!=TransitionType::Move&&transition.type!=TransitionType::Cube&&transition.type!=TransitionType::Zoom&&transition.type!=TransitionType::Push&&transition.type!=TransitionType::Slide&&transition.type!=TransitionType::PageCurl&&transition.type!=TransitionType::PageRoll&&transition.type!=TransitionType::SonyDme&&transition.type!=TransitionType::Nam&&transition.type!=TransitionType::SuperMix)return {};
     QString effect=transition.type==TransitionType::Move?"MOVE":transition.type==TransitionType::Cube?"CUBE":transition.type==TransitionType::PageCurl?"PAGE_CURL":transition.type==TransitionType::PageRoll?"PAGE_ROLL":"ZOOM";
     if(transition.type==TransitionType::Push||transition.type==TransitionType::Slide)effect=(transition.type==TransitionType::Push?"PUSH_":"SLIDE_")+transitionDirectionToken(transition.direction).mid(4);
     if(transition.type==TransitionType::SonyDme){if(!m_primitiveSonyAvailable||!supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable).contains(transition.sonyDmeCode))return {};effect=QString("SONY_%1").arg(transition.sonyDmeCode);}
-    const bool broadcast=transition.type==TransitionType::Nam||transition.type==TransitionType::SuperMix;
+    const bool broadcast=transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix);
     if(broadcast){if(!m_broadcastMixAvailable)return {};effect=transition.type==TransitionType::Nam?"NAM":"SUPER_MIX";}
     const QString key=effect.toLower();const int background=transition.dmeBackground==-2?m_config->dmeBackground(key):transition.dmeBackground;
     QString suffix=QString(" DMENATIVE %1 %2 MANUAL %3 REVERSE %4").arg(qMax(1,transition.durationFrames)).arg(effect).arg(manual?1:0).arg(transition.reverse?1:0);
-    if(transition.type==TransitionType::SuperMix)suffix+=QString(" A_GAIN %1 B_GAIN %2").arg(transition.videoGainA/100.,0,'f',4).arg(transition.videoGainB/100.,0,'f',4);
+    if((transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix))suffix+=QString(" A_GAIN %1 B_GAIN %2").arg(transition.videoGainA/100.,0,'f',4).arg(transition.videoGainB/100.,0,'f',4);
     if(m_pageDmeAvailable&&!broadcast)suffix+=" BACKGROUND "+QString::fromLatin1(dmeBackgroundProducer(background,transition.dmeBackground==-2?m_config->dmeBackgroundImage(key):transition.dmeBackgroundImage).toUtf8().toHex());
     if(transition.type!=TransitionType::Move)return suffix;
     QHash<QString,QString> producers;
@@ -3219,5 +3223,14 @@ bool SwitcherEngine::setDipColour(const QString& requested){
     if(!m_config->save()){m_config->setDipColor(old);return false;}
     if(m_manual.active&&m_manual.preview&&m_manual.transition.type==TransitionType::Dip){m_manual.transition.dipColor=colour;send(QString("PLAY %1-100 %2").arg(activePreviewChannel()).arg(colour));}
     else if(m_previewTakeRunning&&m_takeActive&&m_previewStyleTransition.type==TransitionType::Dip){m_previewStyleTransition.dipColor=colour;send(QString("PLAY %1-100 %2").arg(activePreviewChannel()).arg(colour));}
+    emit layersChanged();return true;
+}
+
+bool SwitcherEngine::setDustMix(int ratio,int size,int flash){
+    if(!m_dustMixAvailable||ratio<0||ratio>100||size<1||size>100||flash<0||flash>100)return false;
+    const auto old=m_config->toJson();m_config->setDustMix(ratio,size,flash);
+    if(!m_config->save()){m_config->fromJson(old);return false;}
+    auto update=[&](Transition& t){if(t.type!=TransitionType::DustMix)return;t.dustRatio=ratio;t.dustSize=size;t.dustFlash=flash;send(QString("CALL %1-101 \"DUST_RATIO %2 H_SIZE %3 V_SIZE %3 FLASH_RATE %4\"").arg(activePreviewChannel()).arg(ratio/100.,0,'f',4).arg(size/100.,0,'f',4).arg(flash));};
+    if(m_manual.active&&m_manual.preview)update(m_manual.transition);else if(m_previewTakeRunning&&m_takeActive)update(m_previewStyleTransition);
     emit layersChanged();return true;
 }

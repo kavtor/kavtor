@@ -37,10 +37,11 @@ bool SwitcherEngine::setManualPosition(int position, const Transition& requested
         && transition.type != TransitionType::Wipe && transition.type != TransitionType::Move
         && transition.type != TransitionType::Cube && transition.type != TransitionType::Zoom
         && transition.type != TransitionType::Push && transition.type != TransitionType::Slide
-        && transition.type != TransitionType::PageCurl && transition.type != TransitionType::PageRoll && transition.type != TransitionType::SonyDme && transition.type != TransitionType::Nam && transition.type != TransitionType::SuperMix) {
+        && transition.type != TransitionType::PageCurl && transition.type != TransitionType::PageRoll && transition.type != TransitionType::SonyDme && transition.type != TransitionType::Nam && transition.type != TransitionType::SuperMix && transition.type != TransitionType::DustMix) {
         emit error(tr("This transition does not support manual operation yet"));
         return false;
     }
+    transition.dustRatio=m_config->dustRatio();transition.dustSize=m_config->dustSize();transition.dustFlash=m_config->dustFlash();
     transition.videoGainA=m_config->superMixGainA();transition.videoGainB=m_config->superMixGainB();
     if(transition.alternateMix()&&!m_nextBackground)return false;
     for (int key = 0; key < kKeyerCount; ++key) {
@@ -50,7 +51,7 @@ bool SwitcherEngine::setManualPosition(int position, const Transition& requested
         }
         if (m_nextKey[key] && !m_keyOn[key] && !keyProducerReady(m_keySource[key])) return false;
     }
-    if((transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||transition.type==TransitionType::SuperMix)&&nativeDmeSuffix(transition,true).isEmpty())return false;
+    if((transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix))&&nativeDmeSuffix(transition,true).isEmpty())return false;
     if(transition.type==TransitionType::Smil&&transition.smilType=="sonyWipe"&&!nativeSonyCode(transition))return false;
     if(transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme){const QString effect=transition.type==TransitionType::Move?"move":transition.type==TransitionType::Cube?"cube":transition.type==TransitionType::Zoom?"zoom":transition.type==TransitionType::SonyDme?QString("sony_%1").arg(transition.sonyDmeCode):transition.type==TransitionType::PageCurl?"page_curl":"page_roll";if(transition.dmeBackground==-2){transition.dmeBackground=m_config->dmeBackground(effect);transition.dmeBackgroundImage=m_config->dmeBackgroundImage(effect);}if((transition.dmeBackground==-3&&!m_staticDmeAvailable)||dmeBackgroundProducer(transition.dmeBackground,transition.dmeBackgroundImage).isEmpty()||sourceWouldFeedback(transition.dmeBackground,m_activeMe))return false;}
     m_manual.transition = transition;
@@ -64,7 +65,7 @@ bool SwitcherEngine::setManualPosition(int position, const Transition& requested
             || transition.direction == TransitionDirection::FromBottom;
     }
     const bool shaped = m_manual.transition.type == TransitionType::Smil;
-    const bool dme=transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::Push||transition.type==TransitionType::Slide||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||transition.type==TransitionType::SuperMix;
+    const bool dme=transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::Push||transition.type==TransitionType::Slide||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix);
     if((transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll)&&!m_pageDmeAvailable){emit error(tr("Page DME requires casparMIX 0.6.0 or newer"));return false;}
     if(dme&&!m_nativeDmeAvailable){emit error(tr("Native DME requires casparMIX 0.5.0 or newer"));return false;}
     m_manual.native = dme || (shaped && nativeSonyCode(m_manual.transition) != 0);

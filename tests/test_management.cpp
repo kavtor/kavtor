@@ -35,6 +35,13 @@ class TestManagement : public QObject {
 private:
     QTemporaryDir m_configRoot;
 private slots:
+    void dustMixPreparationRoundtrip(){
+        Configuration config;config.setDustMix(75,3,10);Configuration restored;restored.fromJson(config.toJson());
+        QCOMPARE(restored.dustRatio(),75);QCOMPARE(restored.dustSize(),3);QCOMPARE(restored.dustFlash(),10);
+        restored.setDustMix(100,0,100);QCOMPARE(restored.dustSize(),3);
+        Transition transition;QVERIFY(Transition::namedMix("dustmix",25,&transition));QCOMPARE(transition.type,TransitionType::DustMix);QCOMPARE(transition.typeName(),QString("dustmix"));
+    }
+
     void initTestCase() {
         QVERIFY(m_configRoot.isValid());
         qputenv("XDG_CONFIG_HOME", m_configRoot.path().toUtf8());

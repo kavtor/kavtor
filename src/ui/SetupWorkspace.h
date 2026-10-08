@@ -66,6 +66,7 @@ private:
     QLineEdit* m_ndiProgramNameEdit = nullptr;
     QCheckBox* m_ndiCleanCheck = nullptr;
     QLineEdit* m_ndiCleanNameEdit = nullptr;
+    QSpinBox* m_dustRatio=nullptr;QSpinBox* m_dustSize=nullptr;QSpinBox* m_dustFlash=nullptr;
     QSpinBox* m_superGainA=nullptr;QSpinBox* m_superGainB=nullptr;
     QSpinBox* m_autoFramesSpin = nullptr;
     QComboBox* m_wipePatternCombo = nullptr;
