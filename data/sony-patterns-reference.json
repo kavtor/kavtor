@@ -1,0 +1,3507 @@
+{
+  "schema": 1,
+  "source_sha256": "66b011c516ae10c7de53284b0c56a36881dcdabbcc244e688ba702920c442314",
+  "note": "Reference identifiers only. Labels are development descriptions, not official Sony names. Capability lists must use validated implementations, not this inventory.",
+  "sources": [
+    "https://pro.sony/s3/cms-static-content/operation-manual/3704674111.pdf",
+    "Sony XVS manual 50135021M.pdf"
+  ],
+  "predefined_counts": {
+    "wipe": 116,
+    "dme": 238,
+    "resizer": 31
+  },
+  "patterns": [
+    {
+      "code": 1,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 1",
+      "channels": 1,
+      "source_line": 49,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 2",
+      "channels": 1,
+      "source_line": 50,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 3,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 3",
+      "channels": 1,
+      "source_line": 51,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 4,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 4",
+      "channels": 1,
+      "source_line": 52,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 5,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 5",
+      "channels": 1,
+      "source_line": 53,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 6,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 6",
+      "channels": 1,
+      "source_line": 54,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 7",
+      "channels": 1,
+      "source_line": 55,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 8,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 8",
+      "channels": 1,
+      "source_line": 56,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 9,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 9",
+      "channels": 1,
+      "source_line": 57,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 10,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 10",
+      "channels": 1,
+      "source_line": 58,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 11,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 11",
+      "channels": 1,
+      "source_line": 59,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 12,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 12",
+      "channels": 1,
+      "source_line": 60,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 13,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 13",
+      "channels": 1,
+      "source_line": 61,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 14,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 14",
+      "channels": 1,
+      "source_line": 62,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 15,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 15",
+      "channels": 1,
+      "source_line": 63,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 16,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 16",
+      "channels": 1,
+      "source_line": 64,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 17,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 17",
+      "channels": 1,
+      "source_line": 65,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 18,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 18",
+      "channels": 1,
+      "source_line": 66,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 19,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 19",
+      "channels": 1,
+      "source_line": 67,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 20,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 20",
+      "channels": 1,
+      "source_line": 68,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 21,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 21",
+      "channels": 1,
+      "source_line": 69,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 22,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 22",
+      "channels": 1,
+      "source_line": 70,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 23,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 23",
+      "channels": 1,
+      "source_line": 71,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 24,
+      "namespace": "wipe",
+      "family": "Standard",
+      "label": "Sony Standard 24",
+      "channels": 1,
+      "source_line": 72,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 26,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 26",
+      "channels": 1,
+      "source_line": 78,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 27,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 27",
+      "channels": 1,
+      "source_line": 79,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 29,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 29",
+      "channels": 1,
+      "source_line": 80,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 49,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 49",
+      "channels": 1,
+      "source_line": 81,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 300,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 300",
+      "channels": 1,
+      "source_line": 82,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 301,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 301",
+      "channels": 1,
+      "source_line": 83,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 302,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 302",
+      "channels": 1,
+      "source_line": 84,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 303,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 303",
+      "channels": 1,
+      "source_line": 85,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 304,
+      "namespace": "wipe",
+      "family": "Enhanced",
+      "label": "Sony Enhanced 304",
+      "channels": 1,
+      "source_line": 86,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 100,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 100",
+      "channels": 1,
+      "source_line": 92,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 101,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 101",
+      "channels": 1,
+      "source_line": 93,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 102,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 102",
+      "channels": 1,
+      "source_line": 94,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 103,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 103",
+      "channels": 1,
+      "source_line": 95,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 104,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 104",
+      "channels": 1,
+      "source_line": 96,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 105,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 105",
+      "channels": 1,
+      "source_line": 97,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 106,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 106",
+      "channels": 1,
+      "source_line": 98,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 107,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 107",
+      "channels": 1,
+      "source_line": 99,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 150,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 150",
+      "channels": 1,
+      "source_line": 100,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 151,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 151",
+      "channels": 1,
+      "source_line": 101,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 156,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 156",
+      "channels": 1,
+      "source_line": 102,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 158,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 158",
+      "channels": 1,
+      "source_line": 103,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 160,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 160",
+      "channels": 1,
+      "source_line": 104,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 162,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 162",
+      "channels": 1,
+      "source_line": 105,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 516,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 516",
+      "channels": 1,
+      "source_line": 106,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 518,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 518",
+      "channels": 1,
+      "source_line": 107,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 604,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 604",
+      "channels": 1,
+      "source_line": 108,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 606,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 606",
+      "channels": 1,
+      "source_line": 109,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 624,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 624",
+      "channels": 1,
+      "source_line": 110,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 661,
+      "namespace": "wipe",
+      "family": "Rotary",
+      "label": "Sony Rotary 661",
+      "channels": 1,
+      "source_line": 111,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 200,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 200",
+      "channels": 1,
+      "source_line": 123,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 201,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 201",
+      "channels": 1,
+      "source_line": 124,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 202,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 202",
+      "channels": 1,
+      "source_line": 125,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 203,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 203",
+      "channels": 1,
+      "source_line": 126,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 206,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 206",
+      "channels": 1,
+      "source_line": 127,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 207,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 207",
+      "channels": 1,
+      "source_line": 128,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 208,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 208",
+      "channels": 1,
+      "source_line": 129,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 209,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 209",
+      "channels": 1,
+      "source_line": 130,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 210,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 210",
+      "channels": 1,
+      "source_line": 131,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 211,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 211",
+      "channels": 1,
+      "source_line": 132,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 212,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 212",
+      "channels": 1,
+      "source_line": 133,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 213,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 213",
+      "channels": 1,
+      "source_line": 134,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 220,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 220",
+      "channels": 1,
+      "source_line": 140,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 221,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 221",
+      "channels": 1,
+      "source_line": 141,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 222,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 222",
+      "channels": 1,
+      "source_line": 142,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 223,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 223",
+      "channels": 1,
+      "source_line": 143,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 224,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 224",
+      "channels": 1,
+      "source_line": 151,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 225,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 225",
+      "channels": 1,
+      "source_line": 152,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 226,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 226",
+      "channels": 1,
+      "source_line": 153,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 227,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 227",
+      "channels": 1,
+      "source_line": 154,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 228,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 228",
+      "channels": 1,
+      "source_line": 155,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 229,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 229",
+      "channels": 1,
+      "source_line": 156,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 230,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 230",
+      "channels": 1,
+      "source_line": 157,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 231,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 231",
+      "channels": 1,
+      "source_line": 158,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 232,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 232",
+      "channels": 1,
+      "source_line": 164,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 233,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 233",
+      "channels": 1,
+      "source_line": 165,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 234,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 234",
+      "channels": 1,
+      "source_line": 166,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 235,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 235",
+      "channels": 1,
+      "source_line": 167,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 236,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 236",
+      "channels": 1,
+      "source_line": 168,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 237,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 237",
+      "channels": 1,
+      "source_line": 169,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 238,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 238",
+      "channels": 1,
+      "source_line": 170,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 239,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 239",
+      "channels": 1,
+      "source_line": 171,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 240,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 240",
+      "channels": 1,
+      "source_line": 179,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 241,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 241",
+      "channels": 1,
+      "source_line": 180,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 242,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 242",
+      "channels": 1,
+      "source_line": 181,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 243,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 243",
+      "channels": 1,
+      "source_line": 182,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 244,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 244",
+      "channels": 1,
+      "source_line": 183,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 245,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 245",
+      "channels": 1,
+      "source_line": 184,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 246,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 246",
+      "channels": 1,
+      "source_line": 185,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 247,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 247",
+      "channels": 1,
+      "source_line": 186,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 250,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 250",
+      "channels": 1,
+      "source_line": 192,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 251,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 251",
+      "channels": 1,
+      "source_line": 193,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 252,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 252",
+      "channels": 1,
+      "source_line": 194,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 253,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 253",
+      "channels": 1,
+      "source_line": 195,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 254,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 254",
+      "channels": 1,
+      "source_line": 196,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 255,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 255",
+      "channels": 1,
+      "source_line": 197,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 256,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 256",
+      "channels": 1,
+      "source_line": 198,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 257,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 257",
+      "channels": 1,
+      "source_line": 199,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 260,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 260",
+      "channels": 1,
+      "source_line": 203,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 261,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 261",
+      "channels": 1,
+      "source_line": 204,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 262,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 262",
+      "channels": 1,
+      "source_line": 205,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 263,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 263",
+      "channels": 1,
+      "source_line": 206,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 264,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 264",
+      "channels": 1,
+      "source_line": 207,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 265,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 265",
+      "channels": 1,
+      "source_line": 208,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 266,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 266",
+      "channels": 1,
+      "source_line": 209,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 267,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 267",
+      "channels": 1,
+      "source_line": 210,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 268,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 268",
+      "channels": 1,
+      "source_line": 211,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 269,
+      "namespace": "wipe",
+      "family": "Mosaic",
+      "label": "Sony Mosaic 269",
+      "channels": 1,
+      "source_line": 212,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 270,
+      "namespace": "wipe",
+      "family": "Random",
+      "label": "Sony Random 270",
+      "channels": 1,
+      "source_line": 218,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 271,
+      "namespace": "wipe",
+      "family": "Random",
+      "label": "Sony Random 271",
+      "channels": 1,
+      "source_line": 219,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 272,
+      "namespace": "wipe",
+      "family": "Random",
+      "label": "Sony Random 272",
+      "channels": 1,
+      "source_line": 220,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 273,
+      "namespace": "wipe",
+      "family": "Random",
+      "label": "Sony Random 273",
+      "channels": 1,
+      "source_line": 221,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 274,
+      "namespace": "wipe",
+      "family": "Random",
+      "label": "Sony Random 274",
+      "channels": 1,
+      "source_line": 222,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1001,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1001",
+      "channels": 1,
+      "source_line": 263,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1002,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1002",
+      "channels": 1,
+      "source_line": 264,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1003,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1003",
+      "channels": 1,
+      "source_line": 265,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1004,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1004",
+      "channels": 1,
+      "source_line": 266,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1005,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1005",
+      "channels": 1,
+      "source_line": 267,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1006,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1006",
+      "channels": 1,
+      "source_line": 268,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1007,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1007",
+      "channels": 1,
+      "source_line": 269,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1008,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 1008",
+      "channels": 1,
+      "source_line": 270,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1011,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1011",
+      "channels": 1,
+      "source_line": 276,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1012,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1012",
+      "channels": 1,
+      "source_line": 277,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1013,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1013",
+      "channels": 1,
+      "source_line": 278,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1021,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1021",
+      "channels": 1,
+      "source_line": 284,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1022,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1022",
+      "channels": 1,
+      "source_line": 285,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1023,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1023",
+      "channels": 1,
+      "source_line": 286,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1024,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1024",
+      "channels": 1,
+      "source_line": 287,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1025,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1025",
+      "channels": 1,
+      "source_line": 288,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1026,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1026",
+      "channels": 1,
+      "source_line": 289,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1027,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1027",
+      "channels": 1,
+      "source_line": 290,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1028,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1028",
+      "channels": 1,
+      "source_line": 291,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1029,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1029",
+      "channels": 1,
+      "source_line": 292,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1030,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1030",
+      "channels": 1,
+      "source_line": 293,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1031,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1031",
+      "channels": 1,
+      "source_line": 294,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1032,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1032",
+      "channels": 1,
+      "source_line": 295,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1033,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 1033",
+      "channels": 1,
+      "source_line": 296,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1041,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1041",
+      "channels": 1,
+      "source_line": 302,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1042,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1042",
+      "channels": 1,
+      "source_line": 303,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1043,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1043",
+      "channels": 1,
+      "source_line": 304,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1044,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1044",
+      "channels": 1,
+      "source_line": 305,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1045,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1045",
+      "channels": 1,
+      "source_line": 306,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1046,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1046",
+      "channels": 1,
+      "source_line": 307,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1047,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1047",
+      "channels": 1,
+      "source_line": 308,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1048,
+      "namespace": "dme",
+      "family": "Door",
+      "label": "Sony Door 1048",
+      "channels": 1,
+      "source_line": 309,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1051,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1051",
+      "channels": 1,
+      "source_line": 315,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1052,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1052",
+      "channels": 1,
+      "source_line": 316,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1053,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1053",
+      "channels": 1,
+      "source_line": 317,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1054,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1054",
+      "channels": 1,
+      "source_line": 318,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1055,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1055",
+      "channels": 1,
+      "source_line": 319,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1056,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1056",
+      "channels": 1,
+      "source_line": 320,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1057,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1057",
+      "channels": 1,
+      "source_line": 321,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1058,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1058",
+      "channels": 1,
+      "source_line": 322,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1061,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1061",
+      "channels": 1,
+      "source_line": 323,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1062,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1062",
+      "channels": 1,
+      "source_line": 324,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1063,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1063",
+      "channels": 1,
+      "source_line": 325,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1064,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1064",
+      "channels": 1,
+      "source_line": 326,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1068,
+      "namespace": "dme",
+      "family": "2D Trans",
+      "label": "Sony 2D Trans 1068",
+      "channels": 1,
+      "source_line": 327,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1071,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1071",
+      "channels": 1,
+      "source_line": 331,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1072,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1072",
+      "channels": 1,
+      "source_line": 332,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1074,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1074",
+      "channels": 1,
+      "source_line": 333,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1076,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1076",
+      "channels": 1,
+      "source_line": 334,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1077,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1077",
+      "channels": 1,
+      "source_line": 335,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1088,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1088",
+      "channels": 1,
+      "source_line": 336,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1091,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1091",
+      "channels": 1,
+      "source_line": 337,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1092,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1092",
+      "channels": 1,
+      "source_line": 338,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1093,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1093",
+      "channels": 1,
+      "source_line": 339,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1094,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 1094",
+      "channels": 1,
+      "source_line": 340,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1101,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1101",
+      "channels": 1,
+      "source_line": 346,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1102,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1102",
+      "channels": 1,
+      "source_line": 347,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1103,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1103",
+      "channels": 1,
+      "source_line": 348,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1104,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1104",
+      "channels": 1,
+      "source_line": 349,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1109,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1109",
+      "channels": 1,
+      "source_line": 350,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1110,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1110",
+      "channels": 1,
+      "source_line": 351,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1121,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1121",
+      "channels": 1,
+      "source_line": 352,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1122,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1122",
+      "channels": 1,
+      "source_line": 353,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1124,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1124",
+      "channels": 1,
+      "source_line": 354,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1131,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1131",
+      "channels": 1,
+      "source_line": 355,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1132,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1132",
+      "channels": 1,
+      "source_line": 356,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1133,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1133",
+      "channels": 1,
+      "source_line": 357,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1135,
+      "namespace": "dme",
+      "family": "Flip Tumble",
+      "label": "Sony Flip Tumble 1135",
+      "channels": 1,
+      "source_line": 358,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1201,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1201",
+      "channels": 1,
+      "source_line": 364,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1202,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1202",
+      "channels": 1,
+      "source_line": 365,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1203,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1203",
+      "channels": 1,
+      "source_line": 366,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1204,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1204",
+      "channels": 1,
+      "source_line": 367,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1205,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1205",
+      "channels": 1,
+      "source_line": 368,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1206,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1206",
+      "channels": 1,
+      "source_line": 369,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1207,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1207",
+      "channels": 1,
+      "source_line": 370,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1208,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1208",
+      "channels": 1,
+      "source_line": 371,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1209,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1209",
+      "channels": 1,
+      "source_line": 372,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1221,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1221",
+      "channels": 1,
+      "source_line": 373,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1222,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1222",
+      "channels": 1,
+      "source_line": 374,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1223,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1223",
+      "channels": 1,
+      "source_line": 375,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1224,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1224",
+      "channels": 1,
+      "source_line": 376,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1225,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 1225",
+      "channels": 1,
+      "source_line": 377,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1251,
+      "namespace": "dme",
+      "family": "Picture-in-picture",
+      "label": "Sony Picture-in-picture 1251",
+      "channels": 1,
+      "source_line": 381,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1301,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1301",
+      "channels": 1,
+      "source_line": 393,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1302,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1302",
+      "channels": 1,
+      "source_line": 394,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1303,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1303",
+      "channels": 1,
+      "source_line": 395,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1304,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1304",
+      "channels": 1,
+      "source_line": 396,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1305,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1305",
+      "channels": 1,
+      "source_line": 397,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1306,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1306",
+      "channels": 1,
+      "source_line": 398,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1307,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1307",
+      "channels": 1,
+      "source_line": 399,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1308,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1308",
+      "channels": 1,
+      "source_line": 400,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1309,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1309",
+      "channels": 1,
+      "source_line": 401,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1310,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1310",
+      "channels": 1,
+      "source_line": 402,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1311,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1311",
+      "channels": 1,
+      "source_line": 403,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1312,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1312",
+      "channels": 1,
+      "source_line": 404,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1313,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1313",
+      "channels": 1,
+      "source_line": 405,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1315,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1315",
+      "channels": 1,
+      "source_line": 406,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1316,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1316",
+      "channels": 1,
+      "source_line": 407,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1317,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1317",
+      "channels": 1,
+      "source_line": 408,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1318,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1318",
+      "channels": 1,
+      "source_line": 409,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1341,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1341",
+      "channels": 1,
+      "source_line": 410,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1342,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1342",
+      "channels": 1,
+      "source_line": 411,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1343,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1343",
+      "channels": 1,
+      "source_line": 412,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1344,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1344",
+      "channels": 1,
+      "source_line": 413,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1345,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 1345",
+      "channels": 1,
+      "source_line": 414,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1321,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1321",
+      "channels": 1,
+      "source_line": 420,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1322,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1322",
+      "channels": 1,
+      "source_line": 421,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1323,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1323",
+      "channels": 1,
+      "source_line": 422,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1324,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1324",
+      "channels": 1,
+      "source_line": 423,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1325,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1325",
+      "channels": 1,
+      "source_line": 424,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1326,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1326",
+      "channels": 1,
+      "source_line": 425,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1327,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1327",
+      "channels": 1,
+      "source_line": 426,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1328,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1328",
+      "channels": 1,
+      "source_line": 427,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1329,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1329",
+      "channels": 1,
+      "source_line": 428,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1330,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1330",
+      "channels": 1,
+      "source_line": 429,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1331,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1331",
+      "channels": 1,
+      "source_line": 430,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1332,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1332",
+      "channels": 1,
+      "source_line": 431,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1333,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1333",
+      "channels": 1,
+      "source_line": 432,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1335,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1335",
+      "channels": 1,
+      "source_line": 433,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1336,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1336",
+      "channels": 1,
+      "source_line": 434,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1337,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1337",
+      "channels": 1,
+      "source_line": 435,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1338,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1338",
+      "channels": 1,
+      "source_line": 436,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1346,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1346",
+      "channels": 1,
+      "source_line": 437,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1347,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1347",
+      "channels": 1,
+      "source_line": 438,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1348,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1348",
+      "channels": 1,
+      "source_line": 439,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1349,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1349",
+      "channels": 1,
+      "source_line": 440,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1350,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 1350",
+      "channels": 1,
+      "source_line": 441,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1355,
+      "namespace": "dme",
+      "family": "Mirror",
+      "label": "Sony Mirror 1355",
+      "channels": 1,
+      "source_line": 449,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1356,
+      "namespace": "dme",
+      "family": "Mirror",
+      "label": "Sony Mirror 1356",
+      "channels": 1,
+      "source_line": 450,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1357,
+      "namespace": "dme",
+      "family": "Mirror",
+      "label": "Sony Mirror 1357",
+      "channels": 1,
+      "source_line": 451,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1358,
+      "namespace": "dme",
+      "family": "Mirror",
+      "label": "Sony Mirror 1358",
+      "channels": 1,
+      "source_line": 452,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1365,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1365",
+      "channels": 1,
+      "source_line": 456,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1371,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1371",
+      "channels": 1,
+      "source_line": 457,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1372,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1372",
+      "channels": 1,
+      "source_line": 458,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1378,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1378",
+      "channels": 1,
+      "source_line": 459,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1379,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1379",
+      "channels": 1,
+      "source_line": 460,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1381,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1381",
+      "channels": 1,
+      "source_line": 461,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1384,
+      "namespace": "dme",
+      "family": "Split Slide",
+      "label": "Sony Split Slide 1384",
+      "channels": 1,
+      "source_line": 467,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1385,
+      "namespace": "dme",
+      "family": "Split Slide",
+      "label": "Sony Split Slide 1385",
+      "channels": 1,
+      "source_line": 468,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1386,
+      "namespace": "dme",
+      "family": "Split Slide",
+      "label": "Sony Split Slide 1386",
+      "channels": 1,
+      "source_line": 469,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1387,
+      "namespace": "dme",
+      "family": "Split Slide",
+      "label": "Sony Split Slide 1387",
+      "channels": 1,
+      "source_line": 470,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1388,
+      "namespace": "dme",
+      "family": "Split Slide",
+      "label": "Sony Split Slide 1388",
+      "channels": 1,
+      "source_line": 471,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1389,
+      "namespace": "dme",
+      "family": "Split Slide",
+      "label": "Sony Split Slide 1389",
+      "channels": 1,
+      "source_line": 472,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1391,
+      "namespace": "dme",
+      "family": "Sparkle",
+      "label": "Sony Sparkle 1391",
+      "channels": 1,
+      "source_line": 478,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1393,
+      "namespace": "dme",
+      "family": "Sparkle",
+      "label": "Sony Sparkle 1393",
+      "channels": 1,
+      "source_line": 479,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1394,
+      "namespace": "dme",
+      "family": "Sparkle",
+      "label": "Sony Sparkle 1394",
+      "channels": 1,
+      "source_line": 480,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1396,
+      "namespace": "dme",
+      "family": "Sparkle",
+      "label": "Sony Sparkle 1396",
+      "channels": 1,
+      "source_line": 481,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1398,
+      "namespace": "dme",
+      "family": "Sparkle",
+      "label": "Sony Sparkle 1398",
+      "channels": 1,
+      "source_line": 482,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1399,
+      "namespace": "dme",
+      "family": "Sparkle",
+      "label": "Sony Sparkle 1399",
+      "channels": 1,
+      "source_line": 483,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1701,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1701",
+      "channels": 1,
+      "source_line": 487,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 1702,
+      "namespace": "dme",
+      "family": "Surface/video effects",
+      "label": "Sony Surface/video effects 1702",
+      "channels": 1,
+      "source_line": 488,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2601,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2601",
+      "channels": 2,
+      "source_line": 500,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2602,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2602",
+      "channels": 2,
+      "source_line": 501,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2603,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2603",
+      "channels": 2,
+      "source_line": 502,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2604,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2604",
+      "channels": 2,
+      "source_line": 503,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2605,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2605",
+      "channels": 2,
+      "source_line": 504,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2606,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2606",
+      "channels": 2,
+      "source_line": 505,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2607,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2607",
+      "channels": 2,
+      "source_line": 506,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2608,
+      "namespace": "dme",
+      "family": "Slide",
+      "label": "Sony Slide 2608",
+      "channels": 2,
+      "source_line": 507,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2621,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2621",
+      "channels": 2,
+      "source_line": 511,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2622,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2622",
+      "channels": 2,
+      "source_line": 512,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2623,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2623",
+      "channels": 2,
+      "source_line": 513,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2624,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2624",
+      "channels": 2,
+      "source_line": 514,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2625,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2625",
+      "channels": 2,
+      "source_line": 515,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2626,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2626",
+      "channels": 2,
+      "source_line": 516,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2627,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2627",
+      "channels": 2,
+      "source_line": 517,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2628,
+      "namespace": "dme",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 2628",
+      "channels": 2,
+      "source_line": 518,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2631,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 2631",
+      "channels": 2,
+      "source_line": 524,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2632,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 2632",
+      "channels": 2,
+      "source_line": 525,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2633,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 2633",
+      "channels": 2,
+      "source_line": 526,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2634,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 2634",
+      "channels": 2,
+      "source_line": 527,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2642,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 2642",
+      "channels": 2,
+      "source_line": 528,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2644,
+      "namespace": "dme",
+      "family": "3D Trans",
+      "label": "Sony 3D Trans 2644",
+      "channels": 2,
+      "source_line": 529,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2651,
+      "namespace": "dme",
+      "family": "Picture-in-picture",
+      "label": "Sony Picture-in-picture 2651",
+      "channels": 2,
+      "source_line": 535,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2652,
+      "namespace": "dme",
+      "family": "Picture-in-picture",
+      "label": "Sony Picture-in-picture 2652",
+      "channels": 2,
+      "source_line": 536,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2661,
+      "namespace": "dme",
+      "family": "Crop Slide",
+      "label": "Sony Crop Slide 2661",
+      "channels": 2,
+      "source_line": 540,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2662,
+      "namespace": "dme",
+      "family": "Crop Slide",
+      "label": "Sony Crop Slide 2662",
+      "channels": 2,
+      "source_line": 541,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2701,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2701",
+      "channels": 2,
+      "source_line": 547,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2702,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2702",
+      "channels": 2,
+      "source_line": 548,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2703,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2703",
+      "channels": 2,
+      "source_line": 549,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2704,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2704",
+      "channels": 2,
+      "source_line": 550,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2705,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2705",
+      "channels": 2,
+      "source_line": 551,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2706,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2706",
+      "channels": 2,
+      "source_line": 552,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2707,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2707",
+      "channels": 2,
+      "source_line": 553,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2708,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2708",
+      "channels": 2,
+      "source_line": 554,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2709,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2709",
+      "channels": 2,
+      "source_line": 555,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2710,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2710",
+      "channels": 2,
+      "source_line": 556,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2711,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2711",
+      "channels": 2,
+      "source_line": 557,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2712,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2712",
+      "channels": 2,
+      "source_line": 558,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2713,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2713",
+      "channels": 2,
+      "source_line": 559,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2715,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2715",
+      "channels": 2,
+      "source_line": 560,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2716,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2716",
+      "channels": 2,
+      "source_line": 561,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2717,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2717",
+      "channels": 2,
+      "source_line": 562,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2718,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2718",
+      "channels": 2,
+      "source_line": 563,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2741,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2741",
+      "channels": 2,
+      "source_line": 564,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2742,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2742",
+      "channels": 2,
+      "source_line": 565,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2743,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2743",
+      "channels": 2,
+      "source_line": 566,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2744,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2744",
+      "channels": 2,
+      "source_line": 567,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2745,
+      "namespace": "dme",
+      "family": "Page Turn",
+      "label": "Sony Page Turn 2745",
+      "channels": 2,
+      "source_line": 568,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2721,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2721",
+      "channels": 2,
+      "source_line": 572,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2722,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2722",
+      "channels": 2,
+      "source_line": 573,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2723,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2723",
+      "channels": 2,
+      "source_line": 574,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2724,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2724",
+      "channels": 2,
+      "source_line": 575,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2725,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2725",
+      "channels": 2,
+      "source_line": 576,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2726,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2726",
+      "channels": 2,
+      "source_line": 577,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2727,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2727",
+      "channels": 2,
+      "source_line": 578,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2728,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2728",
+      "channels": 2,
+      "source_line": 579,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2729,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2729",
+      "channels": 2,
+      "source_line": 580,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2730,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2730",
+      "channels": 2,
+      "source_line": 581,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2731,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2731",
+      "channels": 2,
+      "source_line": 582,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2732,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2732",
+      "channels": 2,
+      "source_line": 583,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2733,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2733",
+      "channels": 2,
+      "source_line": 584,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2735,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2735",
+      "channels": 2,
+      "source_line": 585,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2736,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2736",
+      "channels": 2,
+      "source_line": 586,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2737,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2737",
+      "channels": 2,
+      "source_line": 587,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2738,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2738",
+      "channels": 2,
+      "source_line": 588,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2746,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2746",
+      "channels": 2,
+      "source_line": 589,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2747,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2747",
+      "channels": 2,
+      "source_line": 590,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2748,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2748",
+      "channels": 2,
+      "source_line": 591,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2749,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2749",
+      "channels": 2,
+      "source_line": 592,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2750,
+      "namespace": "dme",
+      "family": "Page Roll",
+      "label": "Sony Page Roll 2750",
+      "channels": 2,
+      "source_line": 593,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2801,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2801",
+      "channels": 2,
+      "source_line": 599,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2802,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2802",
+      "channels": 2,
+      "source_line": 600,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2803,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2803",
+      "channels": 2,
+      "source_line": 601,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2804,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2804",
+      "channels": 2,
+      "source_line": 602,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2811,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2811",
+      "channels": 2,
+      "source_line": 603,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2812,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2812",
+      "channels": 2,
+      "source_line": 604,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2813,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2813",
+      "channels": 2,
+      "source_line": 605,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2814,
+      "namespace": "dme",
+      "family": "Brick",
+      "label": "Sony Brick 2814",
+      "channels": 2,
+      "source_line": 606,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2851,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2851",
+      "channels": 2,
+      "source_line": 614,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2852,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2852",
+      "channels": 2,
+      "source_line": 615,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2853,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2853",
+      "channels": 2,
+      "source_line": 616,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2854,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2854",
+      "channels": 2,
+      "source_line": 617,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2861,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2861",
+      "channels": 2,
+      "source_line": 618,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2862,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2862",
+      "channels": 2,
+      "source_line": 619,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2863,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2863",
+      "channels": 2,
+      "source_line": 620,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 2864,
+      "namespace": "dme",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 2864",
+      "channels": 2,
+      "source_line": 621,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 3601,
+      "namespace": "dme",
+      "family": "DME",
+      "label": "Sony DME 3601",
+      "channels": 3,
+      "source_line": 627,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7001,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7001",
+      "channels": null,
+      "source_line": 635,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7002,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7002",
+      "channels": null,
+      "source_line": 636,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7003,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7003",
+      "channels": null,
+      "source_line": 637,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7004,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7004",
+      "channels": null,
+      "source_line": 638,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7005,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7005",
+      "channels": null,
+      "source_line": 639,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7006,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7006",
+      "channels": null,
+      "source_line": 640,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7007,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7007",
+      "channels": null,
+      "source_line": 641,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7008,
+      "namespace": "resizer",
+      "family": "Slide",
+      "label": "Sony Slide 7008",
+      "channels": null,
+      "source_line": 642,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7021,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7021",
+      "channels": null,
+      "source_line": 646,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7022,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7022",
+      "channels": null,
+      "source_line": 647,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7023,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7023",
+      "channels": null,
+      "source_line": 648,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7024,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7024",
+      "channels": null,
+      "source_line": 649,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7025,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7025",
+      "channels": null,
+      "source_line": 650,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7026,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7026",
+      "channels": null,
+      "source_line": 651,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7027,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7027",
+      "channels": null,
+      "source_line": 652,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7028,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7028",
+      "channels": null,
+      "source_line": 653,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7029,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7029",
+      "channels": null,
+      "source_line": 654,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7030,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7030",
+      "channels": null,
+      "source_line": 655,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7031,
+      "namespace": "resizer",
+      "family": "Squeeze",
+      "label": "Sony Squeeze 7031",
+      "channels": null,
+      "source_line": 656,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7201,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7201",
+      "channels": null,
+      "source_line": 660,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7202,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7202",
+      "channels": null,
+      "source_line": 661,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7203,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7203",
+      "channels": null,
+      "source_line": 662,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7204,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7204",
+      "channels": null,
+      "source_line": 663,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7205,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7205",
+      "channels": null,
+      "source_line": 664,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7206,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7206",
+      "channels": null,
+      "source_line": 665,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7207,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7207",
+      "channels": null,
+      "source_line": 666,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7208,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7208",
+      "channels": null,
+      "source_line": 667,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7221,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7221",
+      "channels": null,
+      "source_line": 668,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7222,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7222",
+      "channels": null,
+      "source_line": 669,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7223,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7223",
+      "channels": null,
+      "source_line": 670,
+      "implementation": "reference-only"
+    },
+    {
+      "code": 7224,
+      "namespace": "resizer",
+      "family": "Frame in-out",
+      "label": "Sony Frame in-out 7224",
+      "channels": null,
+      "source_line": 671,
+      "implementation": "reference-only"
+    }
+  ],
+  "user_registers": [
+    {
+      "first": 1901,
+      "last": 1999,
+      "channels": 1,
+      "content": "User-authored keyframes; not fixed presets"
+    },
+    {
+      "first": 2901,
+      "last": 2999,
+      "channels": 2,
+      "content": "User-authored keyframes; not fixed presets"
+    },
+    {
+      "first": 3901,
+      "last": 3999,
+      "channels": 3,
+      "content": "User-authored keyframes; not fixed presets"
+    }
+  ],
+  "open_questions": [
+    "Page Turn outgoing/incoming surface assignment differs between DVS and XVS manuals.",
+    "Random, Karaoke and mosaic phase timing require animated references.",
+    "Frame in-out and Picture-in-picture retain an intermediate state and cannot use a generic one-shot A-to-B completion rule.",
+    "Two-channel page backsides and DME external background signals are separate resources."
+  ]
+}

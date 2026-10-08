@@ -1,0 +1,10 @@
+{
+  "engine": "casparMIX 0.16.0",
+  "controller": "kavtor 0.23.1",
+  "duration_seconds": 30.001557886003866,
+  "sample_count": 31,
+  "measured_frames_per_second": 49.99740365815371,
+  "media_seconds_per_wall_second": 0.9999480731630742,
+  "nominal_fps": 50,
+  "scope": "Current configured test load after renderer recovery; not an A/V content lip-sync or sustained-overload test."
+}

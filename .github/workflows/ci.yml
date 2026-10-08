@@ -1,0 +1,11 @@
+name: Build and test
+on: [push, pull_request]
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y cmake g++ pkg-config qt6-base-dev libhidapi-dev
+      - run: cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build/release --parallel 2
+      - run: QT_QPA_PLATFORM=offscreen ctest --test-dir build/release --output-on-failure

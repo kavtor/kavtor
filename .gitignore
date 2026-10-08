@@ -1,0 +1,13 @@
+/build/
+/build-*/
+/.venv/
+__pycache__/
+*.log
+*.user
+/.atl/
+/sources/
+/config/switcher.json
+
+/config/caspar.config
+/config/casparcg.config
+/final_spec.md

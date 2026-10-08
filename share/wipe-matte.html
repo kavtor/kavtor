@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>kavtor wipe matte</title>
+    <style>
+        html, body { margin: 0; width: 100%; height: 100%; background: transparent; overflow: hidden; }
+        canvas { display: block; width: 100%; height: 100%; background: transparent; }
+    </style>
+</head>
+<body>
+    <canvas id="matte"></canvas>
+    <script>
+        var display = document.getElementById("matte");
+        var canvas = display;
+        var ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
+        var progress = 0;
+        var type = "barWipe";
+        var subtype = "leftToRight";
+        var sense = "fwd";
+        var edge = "hard";
+        var amount = 0;
+        var borderPx = 0;
+        var shadow = 0;
+        var multi = 1;
+        var aspectW = 1;
+        var aspectH = 1;
+        var posX = 500;
+        var posY = 500;
+        var borderColor = "#ffffff";
+        var role = "mask";
+        var autorunTimer = 0;
+        var pendingPaint = 0;
+        var triangleOffset = 0;
+        var work = document.createElement("canvas");
+        var ring = document.createElement("canvas");
+        var GRID_COLS = 16;
+        var GRID_ROWS = 9;
+        var OVERLAY_W = 960;
+        var OVERLAY_H = 540;
+
+        function clamp01(t) {
+            t = Number(t);
+            if (isNaN(t)) {
+                return 0;
+            }
+            return t < 0 ? 0 : (t > 1 ? 1 : t);
+        }
+
+        function hypot() {
+            return Math.hypot(canvas.width, canvas.height);
+        }
+
+        function coverR(cx, cy) {
+            var w = canvas.width;
+            var h = canvas.height;
+            return Math.max(
+                Math.hypot(cx, cy),
+                Math.hypot(w - cx, cy),
+                Math.hypot(cx, h - cy),
+                Math.hypot(w - cx, h - cy)
+            ) + 2;
+        }
+
+        function fillBg(incoming) {
+            ctx.fillStyle = incoming ? "#fff" : "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function white() {
+            ctx.fillStyle = "#fff";
+        }
+
+        function poly(points) {
+            if (!points.length) {
+                return;
+            }
+            ctx.beginPath();
+            ctx.moveTo(points[0][0], points[0][1]);
+            for (var i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i][0], points[i][1]);
+            }
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function wedge(cx, cy, r, a0, a1) {
+            var span = a1 - a0;
+            if (Math.abs(span) < 1e-6) {
+                return;
+            }
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, r, a0, a1, span < 0);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function regularPoly(cx, cy, r, n, rot) {
+            var pts = [];
+            for (var i = 0; i < n; i++) {
+                var a = rot + i * Math.PI * 2 / n;
+                pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+            }
+            poly(pts);
+        }
+
+        function starPoly(cx, cy, r, n, inner, rot) {
+            var pts = [];
+            for (var i = 0; i < n * 2; i++) {
+                var a = rot + i * Math.PI / n;
+                var rad = i % 2 === 0 ? r : r * inner;
+                pts.push([cx + rad * Math.cos(a), cy + rad * Math.sin(a)]);
+            }
+            poly(pts);
+        }
+
+        function growFromCenter(t, drawAtScale) {
+            if (t <= 0) {
+                return;
+            }
+            var w = canvas.width;
+            var h = canvas.height;
+            ctx.save();
+            ctx.translate(w / 2, h / 2);
+            ctx.scale(t, t);
+            ctx.translate(-w / 2, -h / 2);
+            drawAtScale();
+            ctx.restore();
+        }
+
+        function paintBar(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            if (subtype === "topToBottom") {
+                ctx.fillRect(0, 0, w, h * t);
+            } else {
+                ctx.fillRect(0, 0, w * t, h);
+            }
+        }
+
+        function paintBox(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var bw = w * t;
+            var bh = h * t;
+            switch (subtype) {
+            case "topRight":
+                ctx.fillRect(w - bw, 0, bw, bh);
+                break;
+            case "bottomRight":
+                ctx.fillRect(w - bw, h - bh, bw, bh);
+                break;
+            case "bottomLeft":
+                ctx.fillRect(0, h - bh, bw, bh);
+                break;
+            case "topCenter":
+                ctx.fillRect((w - bw) / 2, 0, bw, bh);
+                break;
+            case "rightCenter":
+                ctx.fillRect(w - bw, (h - bh) / 2, bw, bh);
+                break;
+            case "bottomCenter":
+                ctx.fillRect((w - bw) / 2, h - bh, bw, bh);
+                break;
+            case "leftCenter":
+                ctx.fillRect(0, (h - bh) / 2, bw, bh);
+                break;
+            default:
+                ctx.fillRect(0, 0, bw, bh);
+                break;
+            }
+        }
+
+        function paintFourBox(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var bw = w * 0.5 * t;
+            var bh = h * 0.5 * t;
+            if (subtype === "cornersOut") {
+                var ox = (w * 0.5 - bw) / 2;
+                var oy = (h * 0.5 - bh) / 2;
+                ctx.fillRect(w / 2 - bw - ox, h / 2 - bh - oy, bw, bh);
+                ctx.fillRect(w / 2 + ox, h / 2 - bh - oy, bw, bh);
+                ctx.fillRect(w / 2 - bw - ox, h / 2 + oy, bw, bh);
+                ctx.fillRect(w / 2 + ox, h / 2 + oy, bw, bh);
+            } else {
+                ctx.fillRect(0, 0, bw, bh);
+                ctx.fillRect(w - bw, 0, bw, bh);
+                ctx.fillRect(0, h - bh, bw, bh);
+                ctx.fillRect(w - bw, h - bh, bw, bh);
+            }
+        }
+
+        function paintBarnDoor(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var hw = w * 0.5 * t;
+            var hh = h * 0.5 * t;
+            if (subtype === "horizontal") {
+                ctx.fillRect(0, 0, w, hh);
+                ctx.fillRect(0, h - hh, w, hh);
+            } else if (subtype === "diagonalBottomLeft") {
+                poly([[0, h], [w * t, h], [0, h - h * t]]);
+                poly([[w, 0], [w - w * t, 0], [w, h * t]]);
+            } else if (subtype === "diagonalTopLeft") {
+                poly([[0, 0], [w * t, 0], [0, h * t]]);
+                poly([[w, h], [w - w * t, h], [w, h - h * t]]);
+            } else {
+                ctx.fillRect(0, 0, hw, h);
+                ctx.fillRect(w - hw, 0, hw, h);
+            }
+        }
+
+        function paintDiagonal(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            if (subtype === "topRight") {
+                if (t <= 0.5) {
+                    poly([[w, 0], [w - w * t * 2, 0], [w, h * t * 2]]);
+                } else {
+                    var u = (t - 0.5) * 2;
+                    poly([[w, 0], [0, 0], [0, h * u], [w * (1 - u), h], [w, h]]);
+                }
+            } else if (t <= 0.5) {
+                poly([[0, 0], [w * t * 2, 0], [0, h * t * 2]]);
+            } else {
+                var v = (t - 0.5) * 2;
+                poly([[0, 0], [w, 0], [w, h * v], [w * v, h], [0, h]]);
+            }
+        }
+
+        function paintBowTie(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            if (subtype === "horizontal") {
+                poly([[w / 2, h / 2], [0, h / 2 - h * t], [0, h / 2 + h * t]]);
+                poly([[w / 2, h / 2], [w, h / 2 - h * t], [w, h / 2 + h * t]]);
+            } else {
+                poly([[w / 2, h / 2], [w / 2 - w * t, 0], [w / 2 + w * t, 0]]);
+                poly([[w / 2, h / 2], [w / 2 - w * t, h], [w / 2 + w * t, h]]);
+            }
+        }
+
+        function paintMiscDiagonal(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            if (subtype === "doubleDiamond") {
+                var dw = w * t;
+                var dh = h * t;
+                poly([[w / 2, h / 2 - dh], [w / 2 + dw * 0.45, h / 2], [w / 2, h / 2 + dh], [w / 2 - dw * 0.45, h / 2]]);
+                poly([[w / 2 - dw, h / 2], [w / 2 - dw * 0.55, h / 2 - dh * 0.45], [w / 2, h / 2], [w / 2 - dw * 0.55, h / 2 + dh * 0.45]]);
+                poly([[w / 2 + dw, h / 2], [w / 2 + dw * 0.55, h / 2 - dh * 0.45], [w / 2, h / 2], [w / 2 + dw * 0.55, h / 2 + dh * 0.45]]);
+            } else {
+                poly([[0, 0], [w * t, 0], [0, h * t]]);
+                poly([[w, 0], [w - w * t, 0], [w, h * t]]);
+                poly([[0, h], [w * t, h], [0, h - h * t]]);
+                poly([[w, h], [w - w * t, h], [w, h - h * t]]);
+            }
+        }
+
+        function paintVee(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var s = Math.max(t * 2.3, t);
+            ctx.save();
+            if (subtype === "left") {
+                ctx.translate(0, h / 2);
+                ctx.scale(s, s);
+                poly([[0, 0], [w, -h / 2], [w, h / 2]]);
+            } else if (subtype === "up") {
+                ctx.translate(w / 2, h);
+                ctx.scale(s, s);
+                poly([[0, 0], [-w / 2, -h], [w / 2, -h]]);
+            } else if (subtype === "right") {
+                ctx.translate(w, h / 2);
+                ctx.scale(s, s);
+                poly([[0, 0], [-w, -h / 2], [-w, h / 2]]);
+            } else {
+                ctx.translate(w / 2, 0);
+                ctx.scale(s, s);
+                poly([[0, 0], [-w / 2, h], [w / 2, h]]);
+            }
+            ctx.restore();
+        }
+
+        function paintBarnVee(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var s = t * 1.25;
+            if (subtype === "left") {
+                poly([[0, h / 2], [w * s, h / 2 - h * s], [w * s, h / 2 + h * s]]);
+                poly([[w, h / 2], [w - w * s, h / 2 - h * s], [w - w * s, h / 2 + h * s]]);
+            } else if (subtype === "up") {
+                poly([[w / 2, h], [w / 2 - w * s, h - h * s], [w / 2 + w * s, h - h * s]]);
+                poly([[w / 2, 0], [w / 2 - w * s, h * s], [w / 2 + w * s, h * s]]);
+            } else if (subtype === "right") {
+                poly([[w, h / 2], [w - w * s, 0], [w - w * s, h]]);
+                poly([[0, h / 2], [w * s, 0], [w * s, h]]);
+            } else {
+                poly([[w / 2, 0], [w / 2 - w * s, h * s], [w / 2 + w * s, h * s]]);
+                poly([[w / 2, h], [w / 2 - w * s, h - h * s], [w / 2 + w * s, h - h * s]]);
+            }
+        }
+
+        function zigzagEdge(horizontal, fromStart, t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            var teeth = 10;
+            var amp = (horizontal ? h : w) * 0.08;
+            var pts = [];
+            if (horizontal) {
+                var x = fromStart ? w * t : w * (1 - t);
+                pts.push([fromStart ? 0 : w, 0]);
+                pts.push([x, 0]);
+                for (var i = 0; i <= teeth; i++) {
+                    var y = h * i / teeth;
+                    var bump = (i % 2 === 0 ? amp : -amp) * t;
+                    pts.push([x + (fromStart ? bump : -bump), y]);
+                }
+                pts.push([fromStart ? 0 : w, h]);
+            } else {
+                var y0 = fromStart ? h * t : h * (1 - t);
+                pts.push([0, fromStart ? 0 : h]);
+                pts.push([0, y0]);
+                for (var j = 0; j <= teeth; j++) {
+                    var x0 = w * j / teeth;
+                    var bump2 = (j % 2 === 0 ? amp : -amp) * t;
+                    pts.push([x0, y0 + (fromStart ? bump2 : -bump2)]);
+                }
+                pts.push([w, fromStart ? 0 : h]);
+            }
+            poly(pts);
+        }
+
+        function paintZigZag(t) {
+            fillBg(false);
+            white();
+            if (subtype === "topToBottom") {
+                zigzagEdge(false, true, t);
+            } else {
+                zigzagEdge(true, true, t);
+            }
+        }
+
+        function paintBarnZigZag(t) {
+            fillBg(false);
+            white();
+            if (subtype === "horizontal") {
+                zigzagEdge(false, true, t * 0.5);
+                zigzagEdge(false, false, t * 0.5);
+            } else {
+                zigzagEdge(true, true, t * 0.5);
+                zigzagEdge(true, false, t * 0.5);
+            }
+        }
+
+        function paintIris(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            if (subtype === "diamond") {
+                poly([
+                    [w / 2, h / 2 - h * t],
+                    [w / 2 + w * t, h / 2],
+                    [w / 2, h / 2 + h * t],
+                    [w / 2 - w * t, h / 2]
+                ]);
+            } else if (subtype === "circle") {
+                ctx.beginPath();
+                ctx.arc(w / 2, h / 2, hypot() * 0.5 * t, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                ctx.fillRect((w - w * t) / 2, (h - h * t) / 2, w * t, h * t);
+            }
+        }
+
+        function paintTriangle(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            function offsetTriangle(points) {
+                var lengths=points.map(function(p,i) {
+                    var a=points[(i+1)%3],b=points[(i+2)%3];return Math.hypot(a[0]-b[0],a[1]-b[1]);
+                });
+                var perimeter=lengths[0]+lengths[1]+lengths[2];
+                var cx=0,cy=0;
+                for(var i=0;i<3;i++){cx+=points[i][0]*lengths[i]/perimeter;cy+=points[i][1]*lengths[i]/perimeter;}
+                var area=Math.abs((points[1][0]-points[0][0])*(points[2][1]-points[0][1])-
+                    (points[2][0]-points[0][0])*(points[1][1]-points[0][1]))/2;
+                var radius=2*area/perimeter, scale=1+triangleOffset/(2.1*t*radius);
+                if(scale<=0)return;
+                poly(points.map(function(p){return [cx+(p[0]-cx)*scale,cy+(p[1]-cy)*scale];}));
+            }
+            growFromCenter(t * 2.1, function () {
+                if (subtype === "right") {
+                    offsetTriangle([[w, h / 2], [0, 0], [0, h]]);
+                } else if (subtype === "down") {
+                    offsetTriangle([[w / 2, h], [0, 0], [w, 0]]);
+                } else if (subtype === "left") {
+                    offsetTriangle([[0, h / 2], [w, 0], [w, h]]);
+                } else {
+                    offsetTriangle([[w / 2, 0], [0, h], [w, h]]);
+                }
+            });
+        }
+
+        function paintArrowHead(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            growFromCenter(t * 2.2, function () {
+                if (subtype === "right") {
+                    poly([[w, h / 2], [w * 0.35, 0], [w * 0.35, h * 0.28], [0, h * 0.28], [0, h * 0.72], [w * 0.35, h * 0.72], [w * 0.35, h]]);
+                } else if (subtype === "down") {
+                    poly([[w / 2, h], [w, h * 0.35], [w * 0.72, h * 0.35], [w * 0.72, 0], [w * 0.28, 0], [w * 0.28, h * 0.35], [0, h * 0.35]]);
+                } else if (subtype === "left") {
+                    poly([[0, h / 2], [w * 0.65, 0], [w * 0.65, h * 0.28], [w, h * 0.28], [w, h * 0.72], [w * 0.65, h * 0.72], [w * 0.65, h]]);
+                } else {
+                    poly([[w / 2, 0], [0, h * 0.65], [w * 0.28, h * 0.65], [w * 0.28, h], [w * 0.72, h], [w * 0.72, h * 0.65], [w, h * 0.65]]);
+                }
+            });
+        }
+
+        function paintPentagon(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var rot = subtype === "down" ? Math.PI / 2 : -Math.PI / 2;
+            regularPoly(w / 2, h / 2, coverR(w / 2, h / 2) * t, 5, rot);
+        }
+
+        function paintHexagon(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var rot = subtype === "vertical" ? Math.PI / 2 : 0;
+            regularPoly(w / 2, h / 2, coverR(w / 2, h / 2) * t, 6, rot);
+        }
+
+        function paintEllipse(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            ctx.beginPath();
+            if (subtype === "horizontal") {
+                ctx.ellipse(w / 2, h / 2, w * t, h * 0.55 * t, 0, 0, Math.PI * 2);
+            } else if (subtype === "vertical") {
+                ctx.ellipse(w / 2, h / 2, w * 0.55 * t, h * t, 0, 0, Math.PI * 2);
+            } else {
+                ctx.arc(w / 2, h / 2, hypot() * 0.5 * t, 0, Math.PI * 2);
+            }
+            ctx.fill();
+        }
+
+        function paintEye(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            ctx.beginPath();
+            if (subtype === "vertical") {
+                ctx.moveTo(w / 2, h / 2 - h * t);
+                ctx.quadraticCurveTo(w / 2 + w * 0.55 * t, h / 2, w / 2, h / 2 + h * t);
+                ctx.quadraticCurveTo(w / 2 - w * 0.55 * t, h / 2, w / 2, h / 2 - h * t);
+            } else {
+                ctx.moveTo(w / 2 - w * t, h / 2);
+                ctx.quadraticCurveTo(w / 2, h / 2 - h * 0.55 * t, w / 2 + w * t, h / 2);
+                ctx.quadraticCurveTo(w / 2, h / 2 + h * 0.55 * t, w / 2 - w * t, h / 2);
+            }
+            ctx.fill();
+        }
+
+        function paintRoundRect(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var rw = subtype === "vertical" ? w * 0.62 * t : w * t;
+            var rh = subtype === "vertical" ? h * t : h * 0.62 * t;
+            var r = Math.min(rw, rh) * 0.22;
+            var x = (w - rw) / 2;
+            var y = (h - rh) / 2;
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.arcTo(x + rw, y, x + rw, y + rh, r);
+            ctx.arcTo(x + rw, y + rh, x, y + rh, r);
+            ctx.arcTo(x, y + rh, x, y, r);
+            ctx.arcTo(x, y, x + rw, y, r);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function paintStar(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var n = subtype === "fourPoint" ? 4 : (subtype === "sixPoint" ? 6 : 5);
+            starPoly(w / 2, h / 2, coverR(w / 2, h / 2) * t, n, 0.42, -Math.PI / 2);
+        }
+
+        function paintMiscShape(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            ctx.save();
+            ctx.translate(w / 2, h / 2);
+            ctx.scale(t * 2.1, t * 2.1);
+            if (subtype === "keyhole") {
+                ctx.beginPath();
+                ctx.arc(0, -h * 0.16, Math.min(w, h) * 0.18, 0, Math.PI * 2);
+                ctx.fill();
+                poly([[-w * 0.08, -h * 0.02], [w * 0.08, -h * 0.02], [w * 0.12, h * 0.32], [-w * 0.12, h * 0.32]]);
+            } else {
+                ctx.beginPath();
+                ctx.moveTo(0, h * 0.32);
+                ctx.bezierCurveTo(-w * 0.48, h * 0.02, -w * 0.28, -h * 0.32, 0, -h * 0.12);
+                ctx.bezierCurveTo(w * 0.28, -h * 0.32, w * 0.48, h * 0.02, 0, h * 0.32);
+                ctx.fill();
+            }
+            ctx.restore();
+        }
+
+        function clockStart(name) {
+            if (name.indexOf("Three") >= 0 || name.indexOf("Right") >= 0) {
+                return 0;
+            }
+            if (name.indexOf("Six") >= 0 || name.indexOf("Bottom") >= 0) {
+                return Math.PI / 2;
+            }
+            if (name.indexOf("Nine") >= 0 || name.indexOf("Left") >= 0) {
+                return Math.PI;
+            }
+            return -Math.PI / 2;
+        }
+
+        function paintClock(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var a0 = clockStart(subtype);
+            wedge(w / 2, h / 2, hypot() * 0.5, a0, a0 + Math.PI * 2 * t);
+        }
+
+        function paintPinWheel(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var r = hypot() * 0.5;
+            var blades = subtype === "fourBlade" ? 4 : 2;
+            var a0 = subtype === "twoBladeHorizontal" ? 0 : -Math.PI / 2;
+            var span = (Math.PI * 2 / blades) * t;
+            for (var i = 0; i < blades; i++) {
+                var start = a0 + i * Math.PI * 2 / blades;
+                wedge(w / 2, h / 2, r, start, start + span);
+            }
+        }
+
+        function paintFan(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var r = hypot();
+            var cx = w / 2;
+            var cy = h / 2;
+            var a0 = -Math.PI / 2;
+            if (subtype === "centerRight" || subtype === "right") {
+                cx = w;
+                cy = h / 2;
+                a0 = Math.PI;
+            } else if (subtype === "bottom") {
+                cx = w / 2;
+                cy = h;
+                a0 = -Math.PI / 2;
+            } else if (subtype === "left") {
+                cx = 0;
+                cy = h / 2;
+                a0 = 0;
+            } else {
+                cx = w / 2;
+                cy = 0;
+                a0 = Math.PI / 2;
+            }
+            var span = (subtype.indexOf("center") === 0 ? Math.PI : Math.PI) * t;
+            wedge(cx, cy, r, a0 - span / 2, a0 + span / 2);
+        }
+
+        function paintDoubleFan(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var r = hypot();
+            var inward = subtype.indexOf("fanIn") === 0;
+            var horiz = subtype.indexOf("Horizontal") >= 0;
+            var span = Math.PI * t;
+            if (horiz) {
+                if (inward) {
+                    wedge(w / 2, h / 2, r, Math.PI - span / 2, Math.PI + span / 2);
+                    wedge(w / 2, h / 2, r, -span / 2, span / 2);
+                } else {
+                    wedge(0, h / 2, r, -span / 2, span / 2);
+                    wedge(w, h / 2, r, Math.PI - span / 2, Math.PI + span / 2);
+                }
+            } else if (inward) {
+                wedge(w / 2, h / 2, r, -Math.PI / 2 - span / 2, -Math.PI / 2 + span / 2);
+                wedge(w / 2, h / 2, r, Math.PI / 2 - span / 2, Math.PI / 2 + span / 2);
+            } else {
+                wedge(w / 2, 0, r, Math.PI / 2 - span / 2, Math.PI / 2 + span / 2);
+                wedge(w / 2, h, r, -Math.PI / 2 - span / 2, -Math.PI / 2 + span / 2);
+            }
+        }
+
+        function paintSingleSweep(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var cx = w / 2;
+            var cy = h / 2;
+            var a0 = -Math.PI / 2;
+            var ccw = subtype.indexOf("counterClockwise") === 0;
+            if (subtype === "clockwiseRight") {
+                a0 = 0;
+            } else if (subtype === "clockwiseBottom") {
+                a0 = Math.PI / 2;
+            } else if (subtype === "clockwiseLeft") {
+                a0 = Math.PI;
+            } else if (subtype === "clockwiseTopLeft") {
+                cx = 0;
+                cy = 0;
+                a0 = 0;
+            } else if (subtype === "counterClockwiseBottomLeft") {
+                cx = 0;
+                cy = h;
+                a0 = 0;
+            } else if (subtype === "clockwiseBottomRight") {
+                cx = w;
+                cy = h;
+                a0 = Math.PI;
+            } else if (subtype === "counterClockwiseTopRight") {
+                cx = w;
+                cy = 0;
+                a0 = Math.PI;
+            }
+            var a1 = a0 + (ccw ? -1 : 1) * Math.PI * 2 * t;
+            wedge(cx, cy, coverR(cx, cy), a0, a1);
+        }
+
+        function paintDoubleSweep(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var r = hypot() * 0.5;
+            var cx = w / 2;
+            var cy = h / 2;
+            if (subtype === "parallelVertical") {
+                wedge(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * t);
+                wedge(cx, cy, r, Math.PI / 2, Math.PI / 2 + Math.PI * t);
+            } else if (subtype === "parallelDiagonal") {
+                wedge(cx, cy, r, -Math.PI * 0.75, -Math.PI * 0.75 + Math.PI * t);
+                wedge(cx, cy, r, Math.PI * 0.25, Math.PI * 0.25 + Math.PI * t);
+            } else if (subtype === "oppositeVertical") {
+                wedge(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * t);
+                wedge(cx, cy, r, Math.PI / 2, Math.PI / 2 - Math.PI * t);
+            } else if (subtype === "oppositeHorizontal") {
+                wedge(cx, cy, r, 0, Math.PI * t);
+                wedge(cx, cy, r, Math.PI, Math.PI - Math.PI * t);
+            } else if (subtype === "parallelDiagonalBottomLeft") {
+                wedge(cx, cy, r, Math.PI * 0.75, Math.PI * 0.75 + Math.PI * t);
+                wedge(cx, cy, r, -Math.PI * 0.25, -Math.PI * 0.25 + Math.PI * t);
+            } else {
+                wedge(cx, cy, r, -Math.PI * 0.75, -Math.PI * 0.75 + Math.PI * t);
+                wedge(cx, cy, r, Math.PI * 0.25, Math.PI * 0.25 + Math.PI * t);
+            }
+        }
+
+        function paintSaloon(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var r = hypot();
+            var span = (Math.PI / 2) * t;
+            if (subtype === "left") {
+                wedge(0, 0, r, 0, span);
+                wedge(0, h, r, 0, -span);
+            } else if (subtype === "bottom") {
+                wedge(0, h, r, -Math.PI / 2, -Math.PI / 2 - span);
+                wedge(w, h, r, -Math.PI / 2, -Math.PI / 2 + span);
+            } else if (subtype === "right") {
+                wedge(w, 0, r, Math.PI, Math.PI - span);
+                wedge(w, h, r, Math.PI, Math.PI + span);
+            } else {
+                wedge(0, 0, r, Math.PI / 2, Math.PI / 2 + span);
+                wedge(w, 0, r, Math.PI / 2, Math.PI / 2 - span);
+            }
+        }
+
+        function paintWindshield(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var r = hypot();
+            var span = Math.PI * t;
+            if (subtype === "up") {
+                wedge(0, h, r, 0, -span);
+            } else if (subtype === "vertical") {
+                wedge(0, h / 2, r, -span / 2, span / 2);
+                wedge(w, h / 2, r, Math.PI - span / 2, Math.PI + span / 2);
+            } else if (subtype === "horizontal") {
+                wedge(w / 2, 0, r, Math.PI / 2 - span / 2, Math.PI / 2 + span / 2);
+                wedge(w / 2, h, r, -Math.PI / 2 - span / 2, -Math.PI / 2 + span / 2);
+            } else {
+                wedge(0, h, r, -Math.PI / 2, -Math.PI / 2 + span);
+            }
+        }
+
+        function cellRect(c, r) {
+            return {
+                x: c * canvas.width / GRID_COLS,
+                y: r * canvas.height / GRID_ROWS,
+                w: canvas.width / GRID_COLS + 1,
+                h: canvas.height / GRID_ROWS + 1
+            };
+        }
+
+        function fillOrdered(order, t, partial) {
+            var count = t * order.length;
+            for (var i = 0; i < order.length; i++) {
+                var local = count - i;
+                if (local <= 0) {
+                    continue;
+                }
+                if (local > 1) {
+                    local = 1;
+                }
+                var cell = order[i];
+                var rect = cellRect(cell[0], cell[1]);
+                if (!partial || local >= 1) {
+                    ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+                } else if (cell[2] === "rtl") {
+                    ctx.fillRect(rect.x + rect.w * (1 - local), rect.y, rect.w * local, rect.h);
+                } else if (cell[2] === "btt") {
+                    ctx.fillRect(rect.x, rect.y + rect.h * (1 - local), rect.w, rect.h * local);
+                } else if (cell[2] === "ttb") {
+                    ctx.fillRect(rect.x, rect.y, rect.w, rect.h * local);
+                } else {
+                    ctx.fillRect(rect.x, rect.y, rect.w * local, rect.h);
+                }
+            }
+        }
+
+        function snakeOrder(vertical, startRight, startBottom, diagonal, diagFrom) {
+            var order = [];
+            if (diagonal) {
+                var max = GRID_COLS + GRID_ROWS - 2;
+                for (var s = 0; s <= max; s++) {
+                    var cells = [];
+                    for (var c = 0; c < GRID_COLS; c++) {
+                        var r = s - c;
+                        if (r >= 0 && r < GRID_ROWS) {
+                            cells.push([c, r, "ltr"]);
+                        }
+                    }
+                    if (diagFrom === "tr") {
+                        cells = cells.map(function (cell) {
+                            return [GRID_COLS - 1 - cell[0], cell[1], "rtl"];
+                        });
+                    } else if (diagFrom === "br") {
+                        cells = cells.map(function (cell) {
+                            return [GRID_COLS - 1 - cell[0], GRID_ROWS - 1 - cell[1], "rtl"];
+                        });
+                    } else if (diagFrom === "bl") {
+                        cells = cells.map(function (cell) {
+                            return [cell[0], GRID_ROWS - 1 - cell[1], "ltr"];
+                        });
+                    }
+                    if (s % 2) {
+                        cells.reverse();
+                    }
+                    order = order.concat(cells);
+                }
+                return order;
+            }
+            if (vertical) {
+                for (var col = 0; col < GRID_COLS; col++) {
+                    var c0 = startRight ? GRID_COLS - 1 - col : col;
+                    for (var row = 0; row < GRID_ROWS; row++) {
+                        var down = (col % 2 === 0) !== startBottom;
+                        var r0 = down ? row : GRID_ROWS - 1 - row;
+                        order.push([c0, r0, down ? "ttb" : "btt"]);
+                    }
+                }
+            } else {
+                for (var row2 = 0; row2 < GRID_ROWS; row2++) {
+                    var r1 = startBottom ? GRID_ROWS - 1 - row2 : row2;
+                    for (var col2 = 0; col2 < GRID_COLS; col2++) {
+                        var right = (row2 % 2 === 0) !== startRight;
+                        var c1 = right ? col2 : GRID_COLS - 1 - col2;
+                        order.push([c1, r1, right ? "ltr" : "rtl"]);
+                    }
+                }
+            }
+            return order;
+        }
+
+        function spiralOrder(start, clockwise) {
+            var visited = [];
+            var r, c;
+            for (r = 0; r < GRID_ROWS; r++) {
+                visited[r] = [];
+            }
+            if (start === "tr") {
+                r = 0;
+                c = GRID_COLS - 1;
+            } else if (start === "br") {
+                r = GRID_ROWS - 1;
+                c = GRID_COLS - 1;
+            } else if (start === "bl") {
+                r = GRID_ROWS - 1;
+                c = 0;
+            } else {
+                r = 0;
+                c = 0;
+            }
+            var dirs = clockwise
+                ? [[0, 1], [1, 0], [0, -1], [-1, 0]]
+                : [[1, 0], [0, 1], [-1, 0], [0, -1]];
+            if (start === "tr") {
+                dirs = clockwise ? [[1, 0], [0, -1], [-1, 0], [0, 1]] : [[0, -1], [1, 0], [0, 1], [-1, 0]];
+            } else if (start === "br") {
+                dirs = clockwise ? [[0, -1], [-1, 0], [0, 1], [1, 0]] : [[-1, 0], [0, -1], [1, 0], [0, 1]];
+            } else if (start === "bl") {
+                dirs = clockwise ? [[-1, 0], [0, 1], [1, 0], [0, -1]] : [[0, 1], [-1, 0], [0, -1], [1, 0]];
+            }
+            var dir = 0;
+            var order = [];
+            for (var n = 0; n < GRID_COLS * GRID_ROWS; n++) {
+                order.push([c, r, "ltr"]);
+                visited[r][c] = true;
+                var nr = r + dirs[dir][0];
+                var nc = c + dirs[dir][1];
+                if (nr < 0 || nc < 0 || nr >= GRID_ROWS || nc >= GRID_COLS || visited[nr][nc]) {
+                    dir = (dir + 1) % 4;
+                    nr = r + dirs[dir][0];
+                    nc = c + dirs[dir][1];
+                }
+                r = nr;
+                c = nc;
+            }
+            return order;
+        }
+
+        function paintSnake(t) {
+            fillBg(false);
+            white();
+            var order;
+            if (subtype === "topLeftVertical") {
+                order = snakeOrder(true, false, false, false);
+            } else if (subtype === "topLeftDiagonal") {
+                order = snakeOrder(false, false, false, true, "tl");
+            } else if (subtype === "topRightDiagonal") {
+                order = snakeOrder(false, false, false, true, "tr");
+            } else if (subtype === "bottomRightDiagonal") {
+                order = snakeOrder(false, false, false, true, "br");
+            } else if (subtype === "bottomLeftDiagonal") {
+                order = snakeOrder(false, false, false, true, "bl");
+            } else {
+                order = snakeOrder(false, false, false, false);
+            }
+            fillOrdered(order, t, true);
+        }
+
+        function paintSpiral(t) {
+            fillBg(false);
+            white();
+            var start = "tl";
+            var clockwise = subtype.indexOf("Counter") < 0;
+            if (subtype.indexOf("topRight") === 0) {
+                start = "tr";
+            } else if (subtype.indexOf("bottomRight") === 0) {
+                start = "br";
+            } else if (subtype.indexOf("bottomLeft") === 0) {
+                start = "bl";
+            }
+            fillOrdered(spiralOrder(start, clockwise), t, true);
+        }
+
+        function regionOrder(c0, c1, r0, r1, vertical, startRight, startBottom) {
+            var order = [];
+            var cols = c1 - c0;
+            var rows = r1 - r0;
+            if (vertical) {
+                for (var col = 0; col < cols; col++) {
+                    var c = startRight ? c1 - 1 - col : c0 + col;
+                    for (var row = 0; row < rows; row++) {
+                        var down = (col % 2 === 0) !== startBottom;
+                        var r = down ? r0 + row : r1 - 1 - row;
+                        order.push([c, r, down ? "ttb" : "btt"]);
+                    }
+                }
+            } else {
+                for (var row2 = 0; row2 < rows; row2++) {
+                    var r2 = startBottom ? r1 - 1 - row2 : r0 + row2;
+                    for (var col2 = 0; col2 < cols; col2++) {
+                        var right = (row2 % 2 === 0) !== startRight;
+                        var c2 = right ? c0 + col2 : c1 - 1 - col2;
+                        order.push([c2, r2, right ? "ltr" : "rtl"]);
+                    }
+                }
+            }
+            return order;
+        }
+
+        function paintParallelSnakes(t) {
+            fillBg(false);
+            white();
+            var midC = Math.floor(GRID_COLS / 2);
+            var midR = Math.floor(GRID_ROWS / 2);
+            var a;
+            var b;
+            switch (subtype) {
+            case "verticalBottomSame":
+                a = regionOrder(0, midC, 0, GRID_ROWS, true, false, true);
+                b = regionOrder(midC, GRID_COLS, 0, GRID_ROWS, true, false, true);
+                break;
+            case "verticalTopLeftOpposite":
+                a = regionOrder(0, midC, 0, GRID_ROWS, true, false, false);
+                b = regionOrder(midC, GRID_COLS, 0, GRID_ROWS, true, true, true);
+                break;
+            case "verticalBottomLeftOpposite":
+                a = regionOrder(0, midC, 0, GRID_ROWS, true, false, true);
+                b = regionOrder(midC, GRID_COLS, 0, GRID_ROWS, true, true, false);
+                break;
+            case "horizontalLeftSame":
+                a = regionOrder(0, GRID_COLS, 0, midR, false, false, false);
+                b = regionOrder(0, GRID_COLS, midR, GRID_ROWS, false, false, false);
+                break;
+            case "horizontalRightSame":
+                a = regionOrder(0, GRID_COLS, 0, midR, false, true, false);
+                b = regionOrder(0, GRID_COLS, midR, GRID_ROWS, false, true, false);
+                break;
+            case "horizontalTopLeftOpposite":
+                a = regionOrder(0, GRID_COLS, 0, midR, false, false, false);
+                b = regionOrder(0, GRID_COLS, midR, GRID_ROWS, false, true, true);
+                break;
+            case "horizontalTopRightOpposite":
+                a = regionOrder(0, GRID_COLS, 0, midR, false, true, false);
+                b = regionOrder(0, GRID_COLS, midR, GRID_ROWS, false, false, true);
+                break;
+            case "diagonalBottomLeftOpposite":
+                a = snakeOrder(false, false, true, true, "bl");
+                b = snakeOrder(false, false, false, true, "tr");
+                break;
+            case "diagonalTopLeftOpposite":
+                a = snakeOrder(false, false, false, true, "tl");
+                b = snakeOrder(false, false, false, true, "br");
+                break;
+            default:
+                a = regionOrder(0, midC, 0, GRID_ROWS, true, false, false);
+                b = regionOrder(midC, GRID_COLS, 0, GRID_ROWS, true, false, false);
+                break;
+            }
+            fillOrdered(a, t, true);
+            fillOrdered(b, t, true);
+        }
+
+        function paintBoxSnakes(t) {
+            fillBg(false);
+            white();
+            var midC = Math.floor(GRID_COLS / 2);
+            var midR = Math.floor(GRID_ROWS / 2);
+            var regions = [];
+            if (subtype === "twoBoxBottom") {
+                regions = [
+                    regionOrder(0, GRID_COLS, midR, GRID_ROWS, false, false, true),
+                    regionOrder(0, GRID_COLS, 0, midR, false, false, true)
+                ];
+            } else if (subtype === "twoBoxLeft") {
+                regions = [
+                    regionOrder(0, midC, 0, GRID_ROWS, true, false, false),
+                    regionOrder(midC, GRID_COLS, 0, GRID_ROWS, true, true, false)
+                ];
+            } else if (subtype === "twoBoxRight") {
+                regions = [
+                    regionOrder(midC, GRID_COLS, 0, GRID_ROWS, true, true, false),
+                    regionOrder(0, midC, 0, GRID_ROWS, true, false, false)
+                ];
+            } else if (subtype === "fourBoxVertical") {
+                regions = [
+                    regionOrder(0, midC, 0, midR, true, false, false),
+                    regionOrder(midC, GRID_COLS, 0, midR, true, true, false),
+                    regionOrder(0, midC, midR, GRID_ROWS, true, false, true),
+                    regionOrder(midC, GRID_COLS, midR, GRID_ROWS, true, true, true)
+                ];
+            } else if (subtype === "fourBoxHorizontal") {
+                regions = [
+                    regionOrder(0, midC, 0, midR, false, false, false),
+                    regionOrder(midC, GRID_COLS, 0, midR, false, true, false),
+                    regionOrder(0, midC, midR, GRID_ROWS, false, false, true),
+                    regionOrder(midC, GRID_COLS, midR, GRID_ROWS, false, true, true)
+                ];
+            } else {
+                regions = [
+                    regionOrder(0, GRID_COLS, 0, midR, false, false, false),
+                    regionOrder(0, GRID_COLS, midR, GRID_ROWS, false, false, false)
+                ];
+            }
+            for (var i = 0; i < regions.length; i++) {
+                fillOrdered(regions[i], t, true);
+            }
+        }
+
+        function paintWaterfall(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            fillBg(false);
+            white();
+            var vertical = subtype.indexOf("vertical") === 0;
+            var fromStart = subtype.indexOf("Left") >= 0 || subtype === "verticalLeft" || subtype === "horizontalLeft";
+            if (vertical) {
+                for (var c = 0; c < GRID_COLS; c++) {
+                    var col = fromStart ? c : GRID_COLS - 1 - c;
+                    var local = clamp01(t * GRID_COLS - c);
+                    var rect = cellRect(col, 0);
+                    ctx.fillRect(rect.x, 0, rect.w, h * local);
+                }
+            } else {
+                for (var r = 0; r < GRID_ROWS; r++) {
+                    var row = fromStart ? r : GRID_ROWS - 1 - r;
+                    var local2 = clamp01(t * GRID_ROWS - r);
+                    var rect2 = cellRect(0, row);
+                    ctx.fillRect(0, rect2.y, w * local2, rect2.h);
+                }
+            }
+        }
+
+        function paintRaw(t) {
+            switch (type) {
+            case "boxWipe":
+                paintBox(t);
+                break;
+            case "fourBoxWipe":
+                paintFourBox(t);
+                break;
+            case "barnDoorWipe":
+                paintBarnDoor(t);
+                break;
+            case "diagonalWipe":
+                paintDiagonal(t);
+                break;
+            case "bowTieWipe":
+                paintBowTie(t);
+                break;
+            case "miscDiagonalWipe":
+                paintMiscDiagonal(t);
+                break;
+            case "veeWipe":
+                paintVee(t);
+                break;
+            case "barnVeeWipe":
+                paintBarnVee(t);
+                break;
+            case "zigZagWipe":
+                paintZigZag(t);
+                break;
+            case "barnZigZagWipe":
+                paintBarnZigZag(t);
+                break;
+            case "irisWipe":
+                paintIris(t);
+                break;
+            case "triangleWipe":
+                paintTriangle(t);
+                break;
+            case "arrowHeadWipe":
+                paintArrowHead(t);
+                break;
+            case "pentagonWipe":
+                paintPentagon(t);
+                break;
+            case "hexagonWipe":
+                paintHexagon(t);
+                break;
+            case "ellipseWipe":
+                paintEllipse(t);
+                break;
+            case "eyeWipe":
+                paintEye(t);
+                break;
+            case "roundRectWipe":
+                paintRoundRect(t);
+                break;
+            case "starWipe":
+                paintStar(t);
+                break;
+            case "miscShapeWipe":
+                paintMiscShape(t);
+                break;
+            case "clockWipe":
+                paintClock(t);
+                break;
+            case "pinWheelWipe":
+                paintPinWheel(t);
+                break;
+            case "fanWipe":
+                paintFan(t);
+                break;
+            case "doubleFanWipe":
+                paintDoubleFan(t);
+                break;
+            case "singleSweepWipe":
+                paintSingleSweep(t);
+                break;
+            case "doubleSweepWipe":
+                paintDoubleSweep(t);
+                break;
+            case "saloonDoorWipe":
+                paintSaloon(t);
+                break;
+            case "windshieldWipe":
+                paintWindshield(t);
+                break;
+            case "snakeWipe":
+                paintSnake(t);
+                break;
+            case "spiralWipe":
+                paintSpiral(t);
+                break;
+            case "parallelSnakesWipe":
+                paintParallelSnakes(t);
+                break;
+            case "boxSnakesWipe":
+                paintBoxSnakes(t);
+                break;
+            case "kavtorWipe":
+                var cols = 8, rows = 6, cw = canvas.width / cols, ch = canvas.height / rows;
+                fillBg(false); white();
+                for (var row = 0; row < rows; row++) for (var col = 0; col < cols; col++) {
+                    var x = col * cw, y = row * ch;
+                    if (subtype === "blinds") ctx.fillRect(x, y, cw + 1, ch * t);
+                    else if (subtype === "circles") {
+                        ctx.beginPath(); ctx.arc(x + cw / 2, y + ch / 2, Math.hypot(cw, ch) * t / 2, 0, Math.PI * 2); ctx.fill();
+                    } else ctx.fillRect(x + cw * (1 - t) / 2, y + ch * (1 - t) / 2, cw * t, ch * t);
+                }
+                break;
+            case "waterfallWipe":
+                paintWaterfall(t);
+                break;
+            default:
+                paintBar(t);
+                break;
+            }
+        }
+
+        function invertLuma() {
+            copyTo(work);
+            ctx.filter = "invert(1)";
+            ctx.drawImage(work, 0, 0);
+            ctx.filter = "none";
+        }
+
+        function edgePixels() {
+            return Math.max(0, Number(amount) || 0) * Math.min(canvas.width, canvas.height) / 270;
+        }
+
+        function borderPixels() {
+            var px = borderPx > 0 ? borderPx : (edge === "border" ? amount : 0);
+            return Math.max(0, Number(px) || 0) * Math.min(canvas.width, canvas.height) / 270;
+        }
+
+        function paintShaped(t) {
+            var w = canvas.width;
+            var h = canvas.height;
+            var ax = aspectH > 0 ? aspectW / aspectH : 1;
+            if (!(ax > 0)) {
+                ax = 1;
+            }
+            var sx = Math.sqrt(ax);
+            var sy = 1 / sx;
+            var cx = w * (posX / 1000);
+            var cy = h * (posY / 1000);
+            var coverX = (Math.abs(cx - w / 2) + w / 2) / (w / 2);
+            var coverY = (Math.abs(cy - h / 2) + h / 2) / (h / 2);
+            var k = Math.max(1, coverX / sx, coverY / sy);
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.scale(sx * k, sy * k);
+            ctx.translate(-w / 2, -h / 2);
+            paintRaw(t);
+            ctx.restore();
+        }
+
+        function multiCount() {
+            return (multi === 2 || multi === 4 || multi === 9 || multi === 16) ? multi : 1;
+        }
+
+        // One-axis wipes repeat the whole count along that axis.
+        // Two-axis wipes keep a square: 4, 9 and 16, and 2 sits as a single row.
+        function multiGrid() {
+            var count = multiCount();
+            var axis = "xy";
+            if (type === "barWipe") {
+                axis = subtype === "topToBottom" ? "y" : "x";
+            } else if (type === "barnDoorWipe") {
+                axis = subtype === "horizontal" ? "y" : subtype === "vertical" ? "x" : "xy";
+            } else if (type === "bowTieWipe") {
+                axis = subtype === "horizontal" ? "x" : "y";
+            } else if (type === "veeWipe" || type === "barnVeeWipe") {
+                axis = (subtype === "left" || subtype === "right") ? "x" : "y";
+            } else if (type === "zigZagWipe") {
+                axis = subtype === "topToBottom" ? "y" : "x";
+            } else if (type === "barnZigZagWipe") {
+                axis = subtype === "horizontal" ? "y" : "x";
+            } else if (type === "waterfallWipe") {
+                axis = subtype.indexOf("horizontal") === 0 ? "y" : "x";
+            }
+            if (count <= 1) {
+                return { cols: 1, rows: 1 };
+            }
+            if (axis === "x") {
+                return { cols: count, rows: 1 };
+            }
+            if (axis === "y") {
+                return { cols: 1, rows: count };
+            }
+            if (count === 2) {
+                return { cols: 2, rows: 1 };
+            }
+            var n = count === 9 ? 3 : count === 16 ? 4 : 2;
+            return { cols: n, rows: n };
+        }
+
+        function paintFramed(t) {
+            var grid = multiGrid();
+            if (grid.cols === 1 && grid.rows === 1) {
+                paintShaped(t);
+                return;
+            }
+            var w = canvas.width;
+            var h = canvas.height;
+            var cw = w / grid.cols;
+            var ch = h / grid.rows;
+            for (var r = 0; r < grid.rows; r++) {
+                for (var c = 0; c < grid.cols; c++) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(c * cw, r * ch, cw + 1, ch + 1);
+                    ctx.clip();
+                    ctx.translate(c * cw, r * ch);
+                    ctx.scale(cw / w, ch / h);
+                    paintShaped(t);
+                    ctx.restore();
+                }
+            }
+        }
+
+        function ensureSize(target, w, h) {
+            if (target.width !== w || target.height !== h) {
+                target.width = w;
+                target.height = h;
+            }
+        }
+
+        function scratchContext(target) {
+            return target.getContext("2d", { alpha: true, willReadFrequently: true });
+        }
+
+        function copyTo(dest) {
+            ensureSize(dest, canvas.width, canvas.height);
+            var c = scratchContext(dest);
+            c.setTransform(1, 0, 0, 1, 0, 0);
+            c.globalCompositeOperation = "copy";
+            c.drawImage(canvas, 0, 0);
+            c.globalCompositeOperation = "source-over";
+        }
+
+        function lumaToAlpha(target) {
+            var c = scratchContext(target);
+            var img = c.getImageData(0, 0, target.width, target.height);
+            var d = img.data;
+            for (var i = 0; i < d.length; i += 4) {
+                d[i + 3] = d[i];
+                d[i] = 255;
+                d[i + 1] = 255;
+                d[i + 2] = 255;
+            }
+            c.putImageData(img, 0, 0);
+        }
+
+        // Extend the edge pixels before filtering: transparent canvas edges must
+        // not darken a fully covered mask or leave a rim around the picture.
+        function applySoft() {
+            var px = edgePixels();
+            if (px <= 0) {
+                return;
+            }
+            copyTo(work);
+            var pad = Math.ceil(px * 3);
+            ensureSize(ring, canvas.width + 2 * pad, canvas.height + 2 * pad);
+            var c = scratchContext(ring), w = canvas.width, h = canvas.height;
+            c.clearRect(0, 0, ring.width, ring.height);
+            c.drawImage(work, pad, pad);
+            c.drawImage(work, 0, 0, w, 1, pad, 0, w, pad);
+            c.drawImage(work, 0, h - 1, w, 1, pad, pad + h, w, pad);
+            c.drawImage(work, 0, 0, 1, h, 0, pad, pad, h);
+            c.drawImage(work, w - 1, 0, 1, h, pad + w, pad, pad, h);
+            for (var y = 0; y < 2; y++) for (var x = 0; x < 2; x++)
+                c.drawImage(work, x ? w - 1 : 0, y ? h - 1 : 0, 1, 1,
+                    x ? pad + w : 0, y ? pad + h : 0, pad, pad);
+            ctx.globalCompositeOperation = "copy";
+            ctx.filter = "blur(" + px + "px)";
+            ctx.drawImage(ring, -pad, -pad);
+            ctx.filter = "none";
+            ctx.globalCompositeOperation = "source-over";
+        }
+
+        function paintLuma(t) {
+            t = clamp01(t);
+            // Transformed shapes may not cover the canvas. Never retain pixels
+            // from the previous frame outside their new bounds.
+            fillBg(false);
+            if (sense === "rev") {
+                paintFramed(1 - t);
+                invertLuma();
+            } else {
+                paintFramed(t);
+            }
+        }
+
+        // Sliding extrema compute a spatial contour in linear time. Clamped
+        // samples keep the picture boundary out of the border. Unlike two
+        // progress samples, this width does not depend on the wipe's speed.
+        function contourExtrema(input, w, h, radius, maximum) {
+            var pass = new Uint8Array(w * h), result = new Uint8Array(w * h);
+            function sweep(src, dst, length, lines, stride, lineStride) {
+                var queue = new Int32Array(length + 2 * radius);
+                for (var line = 0; line < lines; line++) {
+                    var head = 0, tail = 0, base = line * lineStride;
+                    for (var i = -radius; i < length + radius; i++) {
+                        var value = src[base + Math.max(0, Math.min(length - 1, i)) * stride];
+                        while (tail > head) {
+                            var last = queue[tail - 1];
+                            var old = src[base + Math.max(0, Math.min(length - 1, last)) * stride];
+                            if (maximum ? old > value : old < value) break;
+                            tail--;
+                        }
+                        queue[tail++] = i;
+                        while (queue[head] < i - 2 * radius) head++;
+                        if (i >= radius) {
+                            var at = Math.max(0, Math.min(length - 1, queue[head]));
+                            dst[base + (i - radius) * stride] = src[base + at * stride];
+                        }
+                    }
+                }
+            }
+            sweep(input, pass, w, h, 1, w);
+            sweep(pass, result, h, w, w, 1);
+            return result;
+        }
+
+        function applyBorderOverlay() {
+            var t = clamp01(progress), w = canvas.width, h = canvas.height;
+            // No decoration survives either endpoint, even with a large blur.
+            if (t <= 0 || t >= 1) { ctx.clearRect(0, 0, w, h); return; }
+            paintLuma(t);
+            copyTo(work);
+            var c = scratchContext(work), image = c.getImageData(0, 0, w, h);
+            var mask = new Uint8Array(w * h);
+            for (var i = 0; i < mask.length; i++) mask[i] = image.data[i * 4];
+            var radius = Math.max(1, Math.round(borderPixels() / 2));
+            var outer = contourExtrema(mask, w, h, radius, true);
+            var inner = contourExtrema(mask, w, h, radius, false);
+            for (var i = 0; i < mask.length; i++) {
+                image.data[i * 4] = image.data[i * 4 + 1] = image.data[i * 4 + 2] = 255;
+                image.data[i * 4 + 3] = Math.max(0, outer[i] - inner[i]);
+            }
+            c.putImageData(image, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            // Tint only the contour; the mask producer remains monochrome.
+            ensureSize(ring, w, h);
+            var rc = scratchContext(ring);
+            rc.clearRect(0, 0, w, h);
+            rc.fillStyle = borderPixels() > 0 ? (borderColor || "#ffffff") : "#000000";
+            rc.fillRect(0, 0, w, h);
+            rc.globalCompositeOperation = "destination-in";
+            rc.drawImage(work, 0, 0);
+            rc.globalCompositeOperation = "source-over";
+            if (shadow > 0) {
+                ctx.save();
+                ctx.shadowColor = "rgba(0,0,0,0.7)";
+                ctx.shadowBlur = shadow * h / 270;
+                ctx.shadowOffsetX = ctx.shadowOffsetY = shadow * h / 540;
+                ctx.drawImage(ring, 0, 0);
+                ctx.restore();
+            }
+            if (borderPixels() > 0) ctx.drawImage(ring, 0, 0);
+            else {
+                ctx.globalCompositeOperation = "destination-out";
+                ctx.drawImage(work, 0, 0);
+                ctx.globalCompositeOperation = "source-over";
+            }
+        }
+
+        function paintSingle() {
+            var t = clamp01(progress);
+            if (role === "overlay") {
+                if (borderPixels() > 0 || shadow > 0) {
+                    applyBorderOverlay();
+                    // The coloured edge is part of the soft transition, not
+                    // a hard stroke laid over a blurred picture.
+                    if (edge === "soft" && amount > 0) {
+                        copyTo(work);
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.filter = "blur(" + edgePixels() + "px)";
+                        ctx.drawImage(work, 0, 0);
+                        ctx.filter = "none";
+                    }
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+                return;
+            }
+            if (t <= 0 || t >= 1) { fillBg(t >= 1); return; }
+            paintLuma(t);
+            if (edge === "soft" && amount > 0) {
+                applySoft();
+            }
+        }
+
+        // The two keys leave a coloured gap underneath the video. Both are
+        // derived from one geometry sample, including the soft boundary.
+        function paint() {
+            if (role !== "packed") { paintSingle(); return; }
+            var t = clamp01(progress), w = canvas.width, h = canvas.height;
+            paintLuma(t);
+            if (t <= 0 || t >= 1) fillBg(t >= 1);
+            var image = ctx.getImageData(0, 0, w, h), mask = new Uint8Array(w*h);
+            for (var i=0;i<mask.length;i++) mask[i]=image.data[4*i];
+            var radius = Math.round(borderPixels()/2);
+            var outer, inner;
+            if (type === "triangleWipe" && multiCount() === 1 && radius > 0 && t > 0 && t < 1) {
+                // Parallel offsets of this homothetic triangle preserve sharp
+                // mitre vertices; square neighbourhood dilation does not.
+                function triangleMask(offset) {
+                    triangleOffset = sense === "rev" ? -offset : offset;
+                    paintLuma(t);
+                    triangleOffset = 0;
+                    var data=ctx.getImageData(0,0,w,h).data, values=new Uint8Array(w*h);
+                    for(var i=0;i<values.length;i++) values[i]=data[4*i];
+                    return values;
+                }
+                outer=triangleMask(radius);
+                inner=triangleMask(-radius);
+            } else {
+                outer = radius>0 && t>0 && t<1 ? contourExtrema(mask,w,h,radius,true) : mask;
+                inner = radius>0 && t>0 && t<1 ? contourExtrema(mask,w,h,radius,false) : mask;
+            }
+            function filtered(values) {
+                for(var i=0;i<values.length;i++) {
+                    image.data[4*i]=image.data[4*i+1]=image.data[4*i+2]=values[i];
+                    image.data[4*i+3]=255;
+                }
+                ctx.putImageData(image,0,0);
+                if(edge==="soft" && amount>0 && t>0 && t<1) applySoft();
+                var pixels=ctx.getImageData(0,0,w,h).data, result=new Uint8Array(w*h);
+                for(var i=0;i<result.length;i++) result[i]=pixels[4*i];
+                return result;
+            }
+            outer=filtered(outer); inner=filtered(inner);
+            var output=display.getContext("2d");
+            output.clearRect(0,0,display.width,display.height);
+            // Incoming key on the left, outgoing key on the right. Compensate
+            // for source-over so the visible colour weight is outer - inner.
+            for(var side=0;side<2;side++) {
+                for(var i=0;i<mask.length;i++) {
+                    var value=side===0 ? inner[i] : inner[i]===255 ? 0 :
+                        Math.round(255*(255-outer[i])/(255-inner[i]));
+                    image.data[4*i]=image.data[4*i+1]=image.data[4*i+2]=value;
+                    image.data[4*i+3]=255;
+                }
+                ctx.putImageData(image,0,0);
+                output.drawImage(canvas,side*w,0);
+            }
+        }
+
+        function setProgress(t) {
+            if (autorunTimer) {
+                cancelAnimationFrame(autorunTimer);
+                autorunTimer = 0;
+            }
+            progress = clamp01(t);
+            // CALL must not synchronously render every queued serial sample.
+            // Consume the latest value once per display frame instead.
+            if (!pendingPaint) pendingPaint = requestAnimationFrame(function () {
+                pendingPaint = 0;
+                paint();
+            });
+        }
+
+        function playWipe(frames, fps, originMs) {
+            frames = Math.max(1, Number(frames) || 25);
+            fps = Math.max(1, Number(fps) || 50);
+            var durationMs = (frames / fps) * 1000;
+            var origin = Number(originMs);
+            if (!isFinite(origin) || origin <= 0) {
+                origin = Date.now();
+            }
+            if (autorunTimer) {
+                cancelAnimationFrame(autorunTimer);
+            }
+            function tick() {
+                progress = clamp01((Date.now() - origin) / durationMs);
+                paint();
+                if (progress < 1) {
+                    autorunTimer = requestAnimationFrame(tick);
+                } else {
+                    autorunTimer = 0;
+                }
+            }
+            autorunTimer = requestAnimationFrame(tick);
+        }
+
+        function applyParams(params) {
+            type = params.type || type;
+            subtype = params.subtype || subtype;
+            var dir = String(params.sense || params.direction || "").toLowerCase();
+            sense = (dir === "rev" || dir === "reverse") ? "rev" : "fwd";
+            edge = String(params.edge || edge || "hard").toLowerCase();
+            if (params.amount != null) {
+                amount = Number(params.amount) || 0;
+            }
+            if (params.border != null) {
+                borderPx = Number(params.border) || 0;
+            }
+            if (params.shadow != null) shadow = Math.max(0, Math.min(40, Number(params.shadow) || 0));
+            if (params.multi != null) {
+                var nextMulti = Number(params.multi) || 1;
+                multi = (nextMulti === 2 || nextMulti === 4 || nextMulti === 9 || nextMulti === 16) ? nextMulti : 1;
+            }
+            if (params.aw != null) {
+                aspectW = Number(params.aw) || 1;
+            }
+            if (params.ah != null) {
+                aspectH = Number(params.ah) || 1;
+            }
+            if (params.px != null) {
+                posX = Number(params.px);
+            }
+            if (params.py != null) {
+                posY = Number(params.py);
+            }
+            if (params.color) {
+                borderColor = params.color;
+            }
+            if (params.role) {
+                role = params.role;
+            }
+            if (params.progress != null) {
+                setProgress(params.progress);
+            }
+        }
+
+        window.setProgress = setProgress;
+        window.playWipe = playWipe;
+        window.update = function (data) {
+            applyParams(typeof data === "string" ? JSON.parse(data) : (data || {}));
+            setProgress(progress);
+        };
+        window.play = function () {
+            var query = new URLSearchParams(window.location.search);
+            playWipe(query.get("frames") || 25, query.get("fps") || 50, query.get("t0"));
+        };
+        window.stop = function () {
+            setProgress(1);
+        };
+
+        (function init() {
+            var query = new URLSearchParams(window.location.search);
+            applyParams({
+                type: query.get("type"),
+                subtype: query.get("subtype"),
+                sense: query.get("sense") || query.get("direction"),
+                edge: query.get("edge"),
+                amount: query.get("amount"),
+                border: query.get("border"),
+                shadow: query.get("shadow"),
+                multi: query.get("multi"),
+                aw: query.get("aw"),
+                ah: query.get("ah"),
+                px: query.get("px"),
+                py: query.get("py"),
+                color: query.get("color"),
+                role: query.get("role")
+            });
+            function fitCanvas() {
+                if (role === "packed") {
+                    display.width = window.innerWidth || 3840;
+                    display.height = window.innerHeight || 1080;
+                    if (canvas === display) canvas = document.createElement("canvas");
+                    canvas.width = display.width / 2;
+                    canvas.height = display.height;
+                    ctx = canvas.getContext("2d", { alpha: true, willReadFrequently: true });
+                    return;
+                }
+                if (role === "overlay") {
+                    canvas.width = OVERLAY_W;
+                    canvas.height = OVERLAY_H;
+                    return;
+                }
+                canvas.width = window.innerWidth || 1920;
+                canvas.height = window.innerHeight || 1080;
+            }
+            window.addEventListener("resize", function () {
+                fitCanvas();
+                paint();
+            });
+            fitCanvas();
+            progress = clamp01(query.get("progress") || 0);
+            paint();
+            if (query.get("autorun") === "1") {
+                playWipe(query.get("frames") || 25, query.get("fps") || 50, query.get("t0"));
+            }
+        })();
+    </script>
+</body>
+</html>

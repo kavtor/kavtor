@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>kavtor preview cursor</title>
+    <style>
+        html, body { margin: 0; width: 100%; height: 100%; background: transparent; overflow: hidden; }
+        canvas { display: block; width: 100%; height: 100%; background: transparent; }
+    </style>
+</head>
+<body>
+    <canvas id="cursor"></canvas>
+    <script>
+        var canvas = document.getElementById("cursor");
+        var ctx = canvas.getContext("2d");
+        var x = 500;
+        var y = 500;
+        var show = false;
+
+        function paint() {
+            canvas.width = window.innerWidth || 1920;
+            canvas.height = window.innerHeight || 1080;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (!show) {
+                return;
+            }
+            var cx = canvas.width * (x / 1000);
+            var cy = canvas.height * (y / 1000);
+            var arm = Math.max(18, Math.round(Math.min(canvas.width, canvas.height) * 0.035));
+            ctx.beginPath();
+            ctx.moveTo(cx - arm, cy);
+            ctx.lineTo(cx + arm, cy);
+            ctx.moveTo(cx, cy - arm);
+            ctx.lineTo(cx, cy + arm);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "#111111";
+            ctx.stroke();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#ffffff";
+            ctx.stroke();
+        }
+
+        function updateCursor(nextX, nextY, visible) {
+            x = Number(nextX);
+            y = Number(nextY);
+            show = Number(visible) !== 0;
+            paint();
+        }
+
+        window.updateCursor = updateCursor;
+        window.addEventListener("resize", paint);
+        var query = new URLSearchParams(window.location.search);
+        updateCursor(query.get("x") || 500, query.get("y") || 500, query.get("show") || 0);
+    </script>
+</body>
+</html>

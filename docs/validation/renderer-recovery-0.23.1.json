@@ -1,0 +1,15 @@
+{
+  "version": "2.5.1 N/A Stable (casparMIX 0.16.0)",
+  "kavtor": "0.23.1",
+  "routes_before": {
+    "9": "2",
+    "10": "1"
+  },
+  "routes_after": {
+    "9": "2",
+    "10": "1"
+  },
+  "automatic_recovery": true,
+  "logical_buses_preserved": true,
+  "clip_positions_restored_by_test_harness": 4
+}

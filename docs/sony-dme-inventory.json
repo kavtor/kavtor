@@ -1,0 +1,2428 @@
+{
+  "source": "Operator-supplied catalogue cross-checked with Sony XVS manual pictograms",
+  "native_implemented": 72,
+  "pending": 197,
+  "entries": [
+    {
+      "code": 1001,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1002,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1003,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1004,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1005,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1006,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1007,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1008,
+      "family": "Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1011,
+      "family": "Split",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1012,
+      "family": "Split",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1013,
+      "family": "Split",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1021,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1022,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1023,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1024,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1025,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1026,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1027,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1028,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1029,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1030,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1031,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1032,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1033,
+      "family": "Squeeze",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1041,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1042,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1043,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1044,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1045,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1046,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1047,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1048,
+      "family": "Door",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator reported interpretation errors on 2026-10-07; geometry review deferred. Implementation exists but is not Sony-validated."
+    },
+    {
+      "code": 1051,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1052,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1053,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1054,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1055,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1056,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1057,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1058,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator confirmed motion and specified corrected corner pivots on 2026-10-07: LL, UL, UR, LR for both groups; 1051\u20131054 clockwise, 1055\u20131058 counterclockwise. Corrected pivot captures pending operator confirmation."
+    },
+    {
+      "code": 1061,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator specified corner-of-A / side-centre-of-B initial hinge pairing on 2026-10-07: UL/left/CCW, UR/right/CW, LR/right/CCW, LL/left/CW. Hinge moves to final side centre as B reaches full frame. Corrected captures pending operator confirmation."
+    },
+    {
+      "code": 1062,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator specified corner-of-A / side-centre-of-B initial hinge pairing on 2026-10-07: UL/left/CCW, UR/right/CW, LR/right/CCW, LL/left/CW. Hinge moves to final side centre as B reaches full frame. Corrected captures pending operator confirmation."
+    },
+    {
+      "code": 1063,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator specified corner-of-A / side-centre-of-B initial hinge pairing on 2026-10-07: UL/left/CCW, UR/right/CW, LR/right/CCW, LL/left/CW. Hinge moves to final side centre as B reaches full frame. Corrected captures pending operator confirmation."
+    },
+    {
+      "code": 1064,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Operator specified corner-of-A / side-centre-of-B initial hinge pairing on 2026-10-07: UL/left/CCW, UR/right/CW, LR/right/CCW, LL/left/CW. Hinge moves to final side centre as B reaches full frame. Corrected captures pending operator confirmation."
+    },
+    {
+      "code": 1068,
+      "family": "2D Trans",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed correct motion/appearance on 2026-10-07; unchanged by pivot corrections."
+    },
+    {
+      "code": 1071,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1072,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1074,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1076,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1077,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1088,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1091,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1092,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1093,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1094,
+      "family": "3D Trans",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1101,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed expected appearance and behaviour on 2026-10-07. Native geometry, texture, endpoint and reverse captures also passed."
+    },
+    {
+      "code": 1102,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed expected appearance and behaviour on 2026-10-07. Native geometry, texture, endpoint and reverse captures also passed."
+    },
+    {
+      "code": 1103,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed expected appearance and behaviour on 2026-10-07. Native geometry, texture, endpoint and reverse captures also passed."
+    },
+    {
+      "code": 1104,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed expected appearance and behaviour on 2026-10-07. Native geometry, texture, endpoint and reverse captures also passed."
+    },
+    {
+      "code": 1109,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1110,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1121,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed expected appearance and behaviour on 2026-10-07. Native geometry, texture, endpoint and reverse captures also passed."
+    },
+    {
+      "code": 1122,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": true,
+      "review": "Operator confirmed expected appearance and behaviour on 2026-10-07. Native geometry, texture, endpoint and reverse captures also passed."
+    },
+    {
+      "code": 1124,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1131,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1132,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1133,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1135,
+      "family": "Flip Tumble",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 1201,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Frame In: incoming B grows from centre over stationary A. Linear size is a project default. Native texture/endpoints/reverse/rewind/program-MV captures passed; operator review and Sony multi-stage preparation are pending."
+    },
+    {
+      "code": 1202,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 1203,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 1204,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 1205,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1206,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1207,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1208,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1209,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 1221,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1222,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1223,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1224,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": false,
+      "operator_verified": false,
+      "review": "Reference pictogram is missing; frame in/out also requires retained two-take state."
+    },
+    {
+      "code": 1225,
+      "family": "Frame in-out",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 1251,
+      "family": "Picture-in-picture",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 1301,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1302,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1303,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1304,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1305,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1306,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1307,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1308,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1309,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1310,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1311,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1312,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1313,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1315,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1316,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1317,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1318,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1341,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1342,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1343,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1344,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1345,
+      "family": "Page Turn",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1321,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1322,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1323,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1324,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1325,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1326,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1327,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1328,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1329,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1330,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1331,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1332,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1333,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1335,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1336,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1337,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1338,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1346,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1347,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1348,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1349,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1350,
+      "family": "Page Roll / Roll",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 1355,
+      "family": "Mirror",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Four real reflected texture tiles expand from UL/UR/LR/LL corners. Normal tile becomes full-frame while reflected neighbours leave the raster. Native UV capture pending operator review; scale law is a project default."
+    },
+    {
+      "code": 1356,
+      "family": "Mirror",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Four real reflected texture tiles expand from UL/UR/LR/LL corners. Normal tile becomes full-frame while reflected neighbours leave the raster. Native UV capture pending operator review; scale law is a project default."
+    },
+    {
+      "code": 1357,
+      "family": "Mirror",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Four real reflected texture tiles expand from UL/UR/LR/LL corners. Normal tile becomes full-frame while reflected neighbours leave the raster. Native UV capture pending operator review; scale law is a project default."
+    },
+    {
+      "code": 1358,
+      "family": "Mirror",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Four real reflected texture tiles expand from UL/UR/LR/LL corners. Normal tile becomes full-frame while reflected neighbours leave the raster. Native UV capture pending operator review; scale law is a project default."
+    },
+    {
+      "code": 1365,
+      "family": "Sphere, Character Trail, Wave and Ripple",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1371,
+      "family": "Sphere, Character Trail, Wave and Ripple",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1372,
+      "family": "Sphere, Character Trail, Wave and Ripple",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1378,
+      "family": "Sphere, Character Trail, Wave and Ripple",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1379,
+      "family": "Sphere, Character Trail, Wave and Ripple",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1381,
+      "family": "Sphere, Character Trail, Wave and Ripple",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1384,
+      "family": "Split Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1385,
+      "family": "Split Slide",
+      "channel_mode": 1,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 1386,
+      "family": "Split Slide",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1387,
+      "family": "Split Slide",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1388,
+      "family": "Split Slide",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1389,
+      "family": "Split Slide",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1391,
+      "family": "Sparkle",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1393,
+      "family": "Sparkle",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1394,
+      "family": "Sparkle",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1396,
+      "family": "Sparkle",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1398,
+      "family": "Sparkle",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1399,
+      "family": "Sparkle",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1701,
+      "family": "Mosaic and Defocus",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 1702,
+      "family": "Mosaic and Defocus",
+      "channel_mode": 1,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 2601,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2602,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2603,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2604,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2605,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2606,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2607,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2608,
+      "family": "Slide",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2621,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2622,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2623,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2624,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2625,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2626,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2627,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2628,
+      "family": "Squeeze",
+      "channel_mode": 2,
+      "implemented": true,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Native geometry and texture captures passed; operator review pending."
+    },
+    {
+      "code": 2631,
+      "family": "3D Trans",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 2632,
+      "family": "3D Trans",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 2633,
+      "family": "3D Trans",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 2634,
+      "family": "3D Trans",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 2642,
+      "family": "3D Trans",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 2644,
+      "family": "3D Trans",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pivots, rotation range and full trajectory are not fixed by the still pictogram."
+    },
+    {
+      "code": 2651,
+      "family": "Picture-in-picture",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2652,
+      "family": "Picture-in-picture",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2661,
+      "family": "Crop Slide",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 2662,
+      "family": "Crop Slide",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Distinct texture deformation, time curve or mask generation still needs implementation and validation."
+    },
+    {
+      "code": 2701,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2702,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2703,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2704,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2705,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2706,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2707,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2708,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2709,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2710,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2711,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2712,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2713,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2715,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2716,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2717,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2718,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2741,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2742,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2743,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2744,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2745,
+      "family": "Page Turn (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2721,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2722,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2723,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2724,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2725,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2726,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2727,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2728,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2729,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2730,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2731,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2732,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2733,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2735,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2736,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2737,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2738,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2746,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2747,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2748,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2749,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2750,
+      "family": "Roll (two-channel)",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+    },
+    {
+      "code": 2801,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2802,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2803,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2804,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2811,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2812,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2813,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2814,
+      "family": "Brick",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Face texture assignments, side scaling and utility/background roles need dedicated preparation."
+    },
+    {
+      "code": 2851,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2852,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2853,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2854,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2861,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2862,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2863,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 2864,
+      "family": "Frame in-out",
+      "channel_mode": 2,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 3601,
+      "family": "Brick",
+      "channel_mode": 3,
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires three independent face textures, per-face scale and position, and utility/background assignment."
+    },
+    {
+      "code": 7001,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7002,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7003,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7004,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7005,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7006,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7007,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7008,
+      "family": "Resizer Slide",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7021,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7022,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7023,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7024,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7025,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7026,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7027,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7028,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7029,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7030,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7031,
+      "family": "Resizer Squeeze",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Key-only transition context and retained resizer geometry are not implemented."
+    },
+    {
+      "code": 7201,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7202,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7203,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7204,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7205,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7206,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7207,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7208,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7221,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7222,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7223,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    },
+    {
+      "code": 7224,
+      "family": "Resizer Frame in-out",
+      "channel_mode": "resizer",
+      "implemented": false,
+      "pictogram_available": true,
+      "operator_verified": false,
+      "review": "Requires explicit retained state/utility texture assignments across multiple stages."
+    }
+  ]
+}
