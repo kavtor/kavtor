@@ -317,3 +317,29 @@ Existing numeric effect assignments still create explicit CUSTOM values.
 Optional `me` must match the controlled M/E. Scope changes cannot also specify
 a source. Live preview follows effective changes; programme takes remain
 snapshots. Configurations retain raw custom descriptors while GLOBAL is active.
+
+## Dust Mix and border profile
+
+`capabilities.dustMix` and `capabilities.asymmetricBorder` require casparMIX 0.19.0.
+`mixModes` includes `dustmix`; AUTO/manual commands use `mode: "dustmix"`.
+
+```json
+{"cmd":"dust_params","ratio":50,"size":2,"flash":0}
+{"cmd":"wipe_border_profile","side":-1,"innerSoft":15,"outerSoft":0}
+```
+
+All three fields are required integers. Dust ranges are 0–100, 1–100 and 0–100.
+Border side is -1/0/+1 for inner/center/outer; softness is -1 (inherit SOFT) or
+0–100. A complete request is validated before persistence. State includes
+`dustRatio`, `dustSize`, `dustFlash`, `wipeBorderSide`, `wipeInnerSoft` and
+`wipeOuterSoft`. Failed persistence restores the previous configuration.
+
+Preparation requests may include `expectedMe` to pin the expected M/E. A mismatch is
+rejected. `key_processing` from a browser can include `guardOnAir: true` and
+`allowOnAir: true` only after explicit operator confirmation; an on-air key
+rejects a guarded request without that confirmation. Existing panel clients
+retain their current command semantics.
+
+`capabilities.touchPreparation` identifies a backend with expected-M/E and
+on-air-edit guards. The HTTP surface requires this capability before submitting
+preparation commands; an older backend remains read-only.

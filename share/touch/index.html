@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>kavtor · Touch preparation</title>
+<link rel="stylesheet" href="/surface.css">
+</head>
+<body>
+<header>
+  <button id="home" class="brand">kavtor</button>
+  <div id="mes" class="delegation" aria-label="M/E delegation"></div>
+  <span id="status" class="status">Connecting</span>
+  <button id="fullscreen" aria-label="Toggle full screen">Full screen</button>
+</header>
+<div id="workspace">
+  <nav id="rail" aria-label="Function menus"></nav>
+  <main>
+    <div class="titlebar">
+      <div><h1 id="title">Preparation</h1><span id="context" class="hint"></span></div>
+      <div id="pagination" aria-label="Matrix page selection"></div>
+    </div>
+    <div id="message" class="message" role="status" aria-live="polite"></div>
+    <div id="matrix" class="matrix"></div>
+  </main>
+</div>
+<footer>
+  <button id="back">Back</button>
+  <nav id="submenus" aria-label="Parameter pages"></nav>
+</footer>
+<div id="lost" class="lost"><strong>SERVER LOST</strong><span>Waiting for kavtor</span></div>
+<dialog id="editor">
+  <h2 id="editTitle"></h2>
+  <div id="editHint" class="hint"></div>
+  <div id="draft" class="display" aria-live="polite"></div>
+  <div id="pad" class="pad"></div>
+  <div class="actions"><button id="cancel">Cancel</button><button id="commit">Enter</button></div>
+</dialog>
+<script src="/surface.js"></script>
+</body>
+</html>

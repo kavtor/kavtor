@@ -1,0 +1,15 @@
+{
+  "source": "Browser measurements against synthetic panel state; not physical-panel acceptance",
+  "layout": "fixed vertical function buttons, horizontal submenus, paged central button matrix",
+  "viewports": [
+    {"width": 1024, "height": 768, "document_scroll_width": 1024, "document_scroll_height": 768, "matrix_client_height": 527, "matrix_scroll_height": 527},
+    {"width": 800, "height": 400, "document_scroll_width": 800, "document_scroll_height": 400, "matrix_client_height": 224, "matrix_scroll_height": 224},
+    {"width": 320, "height": 568, "document_scroll_width": 320, "document_scroll_height": 568, "matrix_client_height": 368, "matrix_scroll_height": 368, "edge_pages": 2, "both_pages_accessible": true}
+  ],
+  "numeric_keypad": [
+    {"viewport_height": 568, "top": 103.421875, "bottom": 464.578125, "client_height": 357, "scroll_height": 357},
+    {"viewport_height": 400, "top": 22.5, "bottom": 377.5, "client_height": 351, "scroll_height": 351}
+  ],
+  "fullscreen_toggle": "Button switched to Window on entry and Full screen on exit",
+  "draft": "Committed 50 stayed visible while draft 75 was entered; Enter updated the simulated authoritative state"
+}

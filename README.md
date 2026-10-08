@@ -40,6 +40,7 @@ original is retained. Personal source names and routes are not rewritten.
 
 ## Documentation
 
+- [Browser touch preparation](docs/touch-surface.md)
 - [Preparation workspace](docs/management.md)
 - [Architecture and development](docs/development.md)
 - [Panel/control API](docs/panel-protocol.md)
