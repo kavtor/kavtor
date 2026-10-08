@@ -1,0 +1,15 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file alias="kavtor.svg">resources/icons/kavtor.svg</file>
+    <file alias="ui-down.svg">resources/icons/ui-down.svg</file>
+    <file alias="ui-up.svg">resources/icons/ui-up.svg</file>
+    <file>resources/icons/program-red.svg</file>
+    <file>resources/icons/preview-green.svg</file>
+    <file>resources/icons/cut.svg</file>
+    <file>resources/icons/auto.svg</file>
+    <file>resources/icons/wipe.svg</file>
+</qresource>
+<qresource prefix="/styles">
+    <file alias="styles.css">resources/styles.css</file>
+</qresource>
+</RCC>

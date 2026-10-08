@@ -1,0 +1,2 @@
+#pragma once
+#define KAVTOR_VERSION "@PROJECT_VERSION@"

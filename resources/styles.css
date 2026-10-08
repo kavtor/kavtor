@@ -1,0 +1,32 @@
+/* kavtor engine management workspace */
+QWidget { background: #151b25; color: #dde5f2; font-family: "Noto Sans", sans-serif; font-size: 13px; }
+QMainWindow { background: #101620; }
+QLabel#workspaceTitle { font-size: 22px; font-weight: 700; color: #f0f5ff; padding: 10px 0; }
+QLabel#engineSummary { background: #202c3d; padding: 12px; border-radius: 6px; color: #a9c4e8; }
+QLabel#workspaceNotice { padding: 8px; color: #c5d3e5; }
+QLabel#configHeading { font-size: 12px; font-weight: 700; color: #899db8; padding: 8px; }
+QLabel#mutedLabel { color: #93a8c4; }
+QGroupBox { border: 1px solid #334158; border-radius: 7px; margin-top: 18px; padding: 18px 12px 12px; }
+QGroupBox::title { subcontrol-origin: margin; left: 14px; padding: 0 6px; color: #a5cafa; font-weight: 600; }
+QLineEdit, QSpinBox, QComboBox { background: #101722; border: 1px solid #3b4e69; border-radius: 4px; padding: 6px; min-height: 22px; }
+QLineEdit:focus, QSpinBox:focus, QComboBox:focus { border: 1px solid #73adf5; }
+QPushButton { background: #283952; border: 1px solid #445b79; border-radius: 5px; padding: 8px 14px; }
+QPushButton:hover { background: #344e72; }
+QPushButton:disabled { color: #69778a; background: #1b2636; }
+QPushButton#saveApplyButton { background: #285889; }
+QListWidget#setupNavigation { background: #101722; border: none; border-radius: 7px; padding: 5px; }
+QListWidget::item { padding: 10px 10px; margin: 2px; border-radius: 4px; }
+QListWidget::item:selected { background: #2b527d; color: #ffffff; }
+QTableWidget { background: #101722; alternate-background-color: #1c2839; gridline-color: #334158; border: 1px solid #334158; }
+QHeaderView::section { background: #27364b; padding: 9px; border: none; color: #b9cfe9; }
+QScrollArea { border: none; }
+QStatusBar { color: #93a8c4; background: #101620; }
+QSpinBox::up-button, QSpinBox::down-button { background: #354b68; width: 16px; }
+QComboBox::drop-down { border: none; background: #354b68; width: 20px; }
+QComboBox::down-arrow, QSpinBox::down-arrow { image: url(:/icons/ui-down.svg); width: 12px; height: 8px; }
+QSpinBox::up-arrow { image: url(:/icons/ui-up.svg); width: 12px; height: 8px; }
+QScrollBar:vertical { background: #101722; width: 10px; margin: 0; }
+QScrollBar:horizontal { background: #101722; height: 10px; margin: 0; }
+QScrollBar::handle { background: #455c79; border-radius: 4px; min-height: 24px; min-width: 24px; }
+QScrollBar::add-line, QScrollBar::sub-line { width: 0; height: 0; }
+QScrollBar::add-page, QScrollBar::sub-page { background: #101722; }
