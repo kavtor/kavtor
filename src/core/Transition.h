@@ -139,6 +139,7 @@ struct Transition {
         return transition;
     }
 
+    int borderSide=0,innerSoft=-1,outerSoft=-1;
     int dustRatio=50,dustSize=2,dustFlash=0;
     bool alternateMix() const { return type==TransitionType::VFade||type==TransitionType::Dip||type==TransitionType::FadeCut||type==TransitionType::CutFade; }
     static bool namedMix(const QString& mode,int frames,Transition* result) {

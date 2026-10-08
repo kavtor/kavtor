@@ -270,6 +270,10 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
     ack.insert(QStringLiteral("event"), QStringLiteral("ack"));
     ack.insert(QStringLiteral("cmd"), cmd);
 
+    // Browser preparation can pin an edit to the M/E visible when it started.
+    if(obj.contains("expectedMe")&&(!obj.value("expectedMe").isDouble()||obj.value("expectedMe").toDouble()!=m_engine->activeMe())){
+        sendTo(client,QJsonObject{{"event","error"},{"cmd",cmd},{"message","Selected M/E changed; reopen the preparation field"}});return;
+    }
     const auto saveConfiguration = [&]() {
         if (m_engine->configuration()->save()) {
             return true;
@@ -349,6 +353,7 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
             rejectKeyerRequest(QStringLiteral("Invalid key processing target, slot or settings"));return;
         }
         const int slot=obj.value("slot").toInt();
+        if(obj.value("guardOnAir").toBool()&&!obj.value("allowOnAir").toBool()&&(dsk?m_engine->isDskOn(slot):m_engine->keyOn(m_engine->activeMe(),slot))){rejectKeyerRequest("On-air key requires explicit confirmation");return;}
         auto processing=m_engine->configuration()->keyProcessing(m_engine->activeMe(),slot,dsk);
         QString error;
         if(!processing.update(obj.value("settings").toObject(),&error)) {rejectKeyerRequest(error);return;}
@@ -853,6 +858,10 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
         sendTo(client, ack);
         return;
     }
+    if(cmd=="wipe_border_profile"){
+        for(const auto& key:{"side","innerSoft","outerSoft"}){auto v=obj.value(key);if(!v.isDouble()||v.toDouble()!=v.toInt()){rejectKeyerRequest("Border profile must contain integers");return;}}
+        if(!m_engine->setWipeBorderProfile(obj.value("side").toInt(),obj.value("innerSoft").toInt(),obj.value("outerSoft").toInt())){rejectKeyerRequest("Border profile unavailable or invalid");return;}sendTo(client,ack);return;
+    }
     if(cmd=="dust_params"){
         for(const auto& key:{"ratio","size","flash"}){const auto v=obj.value(key);if(!v.isDouble()||v.toDouble()!=v.toInt()){rejectKeyerRequest("Dust parameters must be integers");return;}}
         if(!m_engine->setDustMix(obj.value("ratio").toInt(),obj.value("size").toInt(),obj.value("flash").toInt())){rejectKeyerRequest("Dust Mix unavailable or invalid");return;}sendTo(client,ack);return;
@@ -1011,7 +1020,7 @@ QJsonObject PanelProtocol::stateObject() const
     QJsonArray keyModes{"linear","chroma"};if(m_engine->nativeKeyAvailable())keyModes.append("luma");
     capabilities.insert("keyModes",keyModes);capabilities.insert("keyInversion",m_engine->nativeKeyAvailable());capabilities.insert("maskInversion",m_engine->nativeKeyAvailable());
     capabilities.insert(QStringLiteral("keyMask"),true);
-    QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}if(m_engine->dustMixAvailable())mixes.append("dustmix");capabilities.insert("dustMix",m_engine->dustMixAvailable());capabilities.insert("mixModes",mixes);
+    QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}if(m_engine->dustMixAvailable())mixes.append("dustmix");capabilities.insert("touchPreparation",true);capabilities.insert("dustMix",m_engine->dustMixAvailable());capabilities.insert("asymmetricBorder",m_engine->dustMixAvailable());capabilities.insert("mixModes",mixes);
     QJsonArray dmeEffects{"push","slide"};if(m_engine->nativeDmeAvailable()){dmeEffects.append("move");dmeEffects.append("cube");dmeEffects.append("zoom");}if(m_engine->pageDmeAvailable()){dmeEffects.append("page_curl");dmeEffects.append("page_roll");}capabilities.insert("dmeEffects",dmeEffects);capabilities.insert("dmeBackground",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundScopes",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundImages",m_engine->staticDmeAvailable());capabilities.insert("mixPreparation",true);capabilities.insert("broadcastMixes",m_engine->broadcastMixAvailable());capabilities.insert("sonyDmeBackground",m_engine->primitiveSonyAvailable());capabilities.insert("sonyGeometry",m_engine->enhancedSonyAvailable());capabilities.insert("sonyMosaic",m_engine->mosaicSonyAvailable());
     QJsonArray sonyWipes;for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable()))sonyWipes.append(code);capabilities.insert("sonyWipes",sonyWipes);
     QJsonArray pending;for(int code:pendingSonyWipes())pending.append(code);capabilities.insert("sonyPendingWipes",pending);
@@ -1064,6 +1073,7 @@ QJsonObject PanelProtocol::stateObject() const
     }
     obj.insert(QStringLiteral("wipePresets"), presets);
     obj.insert(QStringLiteral("wipeMulti"), m_engine->configuration()->wipeMulti());
+    obj.insert("wipeBorderSide",m_engine->configuration()->wipeBorderSide());obj.insert("wipeInnerSoft",m_engine->configuration()->wipeInnerSoft());obj.insert("wipeOuterSoft",m_engine->configuration()->wipeOuterSoft());
     obj.insert("dustRatio",m_engine->configuration()->dustRatio());obj.insert("dustSize",m_engine->configuration()->dustSize());obj.insert("dustFlash",m_engine->configuration()->dustFlash());
     obj.insert("superMixGainA",m_engine->configuration()->superMixGainA());obj.insert("superMixGainB",m_engine->configuration()->superMixGainB());obj.insert("dipColor",m_engine->configuration()->dipColor());obj.insert("wipeTileSize",m_engine->configuration()->wipeTileSize());obj.insert("wipeVertices",m_engine->configuration()->wipeVertices());obj.insert("wipeRounding",m_engine->configuration()->wipeRounding());
     obj.insert(QStringLiteral("wipeBorder"), m_engine->configuration()->wipeBorderAmount());

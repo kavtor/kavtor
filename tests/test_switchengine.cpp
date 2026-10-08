@@ -277,6 +277,21 @@ private slots:
         QTRY_VERIFY(caspar.commands.join('\n').contains("BACKGROUND "+next));
     }
 
+    void browserPreparationContext() {
+        FakeCaspar peer;peer.engineVersion="2.5.1 Stable (casparMIX 0.19.0)";
+        QTemporaryDir dir;Configuration config;config.setConfigFilePath(dir.filePath("config.json"));config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(peer.port());
+        AmcpClient client;client.setReconnectIntervalMs(0);SwitcherEngine engine(&config,&client);engine.connectToCaspar();QTRY_VERIFY(engine.isConnected());QTRY_COMPARE(client.queuedCommandCount(),0);
+        PanelProtocol protocol(&engine);QVERIFY(protocol.start(0));QTcpSocket browser;QByteArray received;
+        connect(&browser,&QTcpSocket::readyRead,this,[&]{received+=browser.readAll();});browser.connectToHost(QHostAddress::LocalHost,protocol.port());QTRY_COMPARE(browser.state(),QAbstractSocket::ConnectedState);QTest::qWait(20);
+        auto request=[&](QJsonObject object){received.clear();browser.write(QJsonDocument(object).toJson(QJsonDocument::Compact)+'\n');};
+        request({{"cmd","dust_params"},{"expectedMe",1},{"ratio",99},{"size",3},{"flash",0}});QTRY_VERIFY(received.contains("Selected M/E changed"));QCOMPARE(config.dustRatio(),50);
+        request({{"cmd","dust_params"},{"expectedMe",0},{"ratio",75},{"size",3},{"flash",0}});QTRY_COMPARE(config.dustRatio(),75);
+        engine.setKeySource(0,0);QTRY_VERIFY(!engine.isBusy());engine.setKeyOn(0,true);QTRY_VERIFY(engine.keyOn(0));QTRY_VERIFY(!engine.isBusy());
+        QJsonObject key{{"cmd","key_processing"},{"expectedMe",0},{"target","key"},{"slot",0},{"settings",QJsonObject{{"mode","luma"}}},{"guardOnAir",true}};
+        request(key);QTRY_VERIFY(received.contains("explicit confirmation"));QCOMPARE(config.keyProcessing(0,0).mode,QString("linear"));
+        key["allowOnAir"]=true;request(key);QTRY_COMPARE(config.keyProcessing(0,0).mode,QString("luma"));
+    }
+
     void dustMixProtocol() {
         FakeCaspar peer;peer.engineVersion="2.5.1 Stable (casparMIX 0.19.0)";
         QTemporaryDir dir;Configuration config;config.setConfigFilePath(dir.filePath("config.json"));config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(peer.port());
@@ -284,7 +299,7 @@ private slots:
         QVERIFY(engine.dustMixAvailable());QVERIFY(engine.setDustMix(75,3,10));QVERIFY(!engine.setDustMix(75,0,10));
         engine.selectPreview(0);QTRY_COMPARE(engine.previewSource(),0);engine.executeCut();QTRY_COMPARE(engine.programSource(),0);engine.selectPreview(1);QTRY_COMPARE(engine.previewSource(),1);
         Transition t;QVERIFY(Transition::namedMix("dustmix",2,&t));QVERIFY(engine.setManualPosition(2000,t));QTRY_COMPARE(client.queuedCommandCount(),0);
-        QVERIFY(peer.commands.join('\n').contains("DUSTMIX 1 MANUAL 1 DUST_RATIO 0.7500 H_SIZE 0.0300 V_SIZE 0.0300 FLASH_RATE 10"));
+        QVERIFY(peer.commands.join('\n').contains("DUSTMIX 2 MANUAL 1 DUST_RATIO 0.7500 H_SIZE 0.0300 V_SIZE 0.0300 FLASH_RATE 10"));
         peer.commands.clear();QVERIFY(engine.setDustMix(20,4,0));QTRY_COMPARE(client.queuedCommandCount(),0);QVERIFY(!peer.commands.join('\n').contains("DUST_RATIO"));
         QVERIFY(engine.setManualPosition(0,t));QTRY_VERIFY(!engine.isBusy());QVERIFY(engine.setTransitionPreview(true));QVERIFY(engine.setManualPosition(2000,t));QTRY_COMPARE(client.queuedCommandCount(),0);
         peer.commands.clear();QVERIFY(engine.setDustMix(60,5,20));QTRY_COMPARE(client.queuedCommandCount(),0);QVERIFY(peer.commands.contains("CALL 9-101 \"DUST_RATIO 0.6000 H_SIZE 0.0500 V_SIZE 0.0500 FLASH_RATE 20\""));

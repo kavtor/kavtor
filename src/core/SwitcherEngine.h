@@ -40,6 +40,7 @@ public:
     bool expandedSonyAvailable() const { return m_expandedSonyAvailable; }
     bool staticDmeAvailable() const {return m_staticDmeAvailable;}
     bool dustMixAvailable()const{return m_dustMixAvailable;}
+    bool setWipeBorderProfile(int side,int inner,int outer);
     bool setDustMix(int ratio,int size,int flash);
     bool broadcastMixAvailable()const {return m_broadcastMixAvailable;}
     bool setSuperMixGains(int a,int b);

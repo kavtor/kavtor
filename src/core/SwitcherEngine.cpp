@@ -219,6 +219,7 @@ void SwitcherEngine::executeTransition(const Transition& requested)
         return;
     }
 
+    transition.borderSide=m_config->wipeBorderSide();transition.innerSoft=m_config->wipeInnerSoft();transition.outerSoft=m_config->wipeOuterSoft();
     transition.dustRatio=m_config->dustRatio();transition.dustSize=m_config->dustSize();transition.dustFlash=m_config->dustFlash();
     transition.videoGainA=m_config->superMixGainA();transition.videoGainB=m_config->superMixGainB();
     const bool mesh=transition.type==TransitionType::Move||transition.type==TransitionType::Cube||transition.type==TransitionType::Zoom||transition.type==TransitionType::PageCurl||transition.type==TransitionType::PageRoll||transition.type==TransitionType::SonyDme||transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix);
@@ -2415,7 +2416,7 @@ QString SwitcherEngine::nativeWipeOptions(const Transition& transition) const
     const int softness = transition.edge == WipeEdgeMode::Soft ? transition.edgeAmount : 0;
     const int border = transition.borderAmount > 0 ? transition.borderAmount
         : transition.edge == WipeEdgeMode::Border ? transition.edgeAmount : 0;
-    return (m_mosaicSonyAvailable?QString("TILESIZE %1 ").arg(transition.tileSize):QString())+(m_enhancedSonyAvailable?QString("VERTICES %1 ROUNDING %2 ").arg(transition.vertices).arg(transition.rounding):QString())+QStringLiteral("SOFT %1 BORDER %2 ASPECT %3 MULTI %4 X %5 Y %6 REVERSE %7")
+    return (m_dustMixAvailable?QString("BORDER_SIDE %1 INNER_SOFT %2 OUTER_SOFT %3 ").arg(transition.borderSide).arg(transition.innerSoft).arg(transition.outerSoft):QString())+(m_mosaicSonyAvailable?QString("TILESIZE %1 ").arg(transition.tileSize):QString())+(m_enhancedSonyAvailable?QString("VERTICES %1 ROUNDING %2 ").arg(transition.vertices).arg(transition.rounding):QString())+QStringLiteral("SOFT %1 BORDER %2 ASPECT %3 MULTI %4 X %5 Y %6 REVERSE %7")
         .arg(softness).arg(border).arg(double(transition.aspectW)/qMax(1,transition.aspectH),0,'f',6)
         .arg(transition.multi).arg(transition.posX/1000.0,0,'f',6)
         .arg(transition.posY/1000.0,0,'f',6).arg(reverse ? 1 : 0);
@@ -3234,3 +3235,5 @@ bool SwitcherEngine::setDustMix(int ratio,int size,int flash){
     if(m_manual.active&&m_manual.preview)update(m_manual.transition);else if(m_previewTakeRunning&&m_takeActive)update(m_previewStyleTransition);
     emit layersChanged();return true;
 }
+
+bool SwitcherEngine::setWipeBorderProfile(int side,int inner,int outer){if(!m_dustMixAvailable||side<-1||side>1||inner<-1||inner>100||outer<-1||outer>100)return false;const auto old=m_config->toJson();m_config->setWipeBorderProfile(side,inner,outer);if(!m_config->save()){m_config->fromJson(old);return false;}emit layersChanged();return true;}

@@ -41,6 +41,7 @@ bool SwitcherEngine::setManualPosition(int position, const Transition& requested
         emit error(tr("This transition does not support manual operation yet"));
         return false;
     }
+    transition.borderSide=m_config->wipeBorderSide();transition.innerSoft=m_config->wipeInnerSoft();transition.outerSoft=m_config->wipeOuterSoft();
     transition.dustRatio=m_config->dustRatio();transition.dustSize=m_config->dustSize();transition.dustFlash=m_config->dustFlash();
     transition.videoGainA=m_config->superMixGainA();transition.videoGainB=m_config->superMixGainB();
     if(transition.alternateMix()&&!m_nextBackground)return false;
@@ -199,7 +200,7 @@ void SwitcherEngine::flushManualPosition()
         Transition current=m_previewStyleTransition;
         current.edge=m_config->wipeEdgeMode();
         current.edgeAmount=m_config->wipeEdgeAmount();
-        current.borderAmount=m_config->wipeBorderAmount();
+        current.borderAmount=m_config->wipeBorderAmount();current.borderSide=m_config->wipeBorderSide();current.innerSoft=m_config->wipeInnerSoft();current.outerSoft=m_config->wipeOuterSoft();
         current.aspectW=m_config->wipeAspectW();current.aspectH=m_config->wipeAspectH();
         current.multi=m_config->wipeMulti();current.posX=m_config->wipePosX();current.posY=m_config->wipePosY();current.vertices=m_config->wipeVertices();current.rounding=m_config->wipeRounding();current.tileSize=m_config->wipeTileSize();
         const QString options=nativeWipeOptions(current)+QStringLiteral(" BORDERCOLOR %1").arg(m_config->wipeBorderColor());
@@ -224,7 +225,7 @@ void SwitcherEngine::flushManualPosition()
             Transition current = m_manual.transition;
             current.edge = m_config->wipeEdgeMode();
             current.edgeAmount = m_config->wipeEdgeAmount();
-            current.borderAmount = m_config->wipeBorderAmount();
+            current.borderAmount = m_config->wipeBorderAmount();current.borderSide=m_config->wipeBorderSide();current.innerSoft=m_config->wipeInnerSoft();current.outerSoft=m_config->wipeOuterSoft();
             current.aspectW = m_config->wipeAspectW();
             current.aspectH = m_config->wipeAspectH();
             current.multi = m_config->wipeMulti();
