@@ -21,7 +21,8 @@ enum class TransitionType {
     PageRoll,
     SonyDme,
     Nam,
-    SuperMix
+    SuperMix,
+    DustMix
 };
 
 enum class TransitionDirection {
@@ -138,10 +139,13 @@ struct Transition {
         return transition;
     }
 
+    int borderSide=0,innerSoft=-1,outerSoft=-1;
+    int dustRatio=50,dustSize=2,dustFlash=0;
     bool alternateMix() const { return type==TransitionType::VFade||type==TransitionType::Dip||type==TransitionType::FadeCut||type==TransitionType::CutFade; }
     static bool namedMix(const QString& mode,int frames,Transition* result) {
         Transition t=Transition::mix(frames);
-        if(mode=="nam")t.type=TransitionType::Nam;
+        if(mode=="dustmix")t.type=TransitionType::DustMix;
+        else if(mode=="nam")t.type=TransitionType::Nam;
         else if(mode=="supermix")t.type=TransitionType::SuperMix;
         else if(mode=="dip")t.type=TransitionType::Dip;
         else if(mode=="vfade")t.type=TransitionType::VFade;
@@ -158,6 +162,7 @@ struct Transition {
         case TransitionType::Mix:
             return QStringLiteral("mix");
         case TransitionType::Nam: return QStringLiteral("nam");
+        case TransitionType::DustMix: return QStringLiteral("dustmix");
         case TransitionType::SuperMix: return QStringLiteral("supermix");
         case TransitionType::Dip: return QStringLiteral("dip");
         case TransitionType::VFade: return QStringLiteral("vfade");

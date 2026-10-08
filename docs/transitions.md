@@ -99,3 +99,27 @@ DME takes route complete rendered pictures and reject empty/unavailable scenes
 instead of falling through to a cut. Page Turn/Roll back faces sample the same
 live video, mirrored by their surface orientation; the old neutral paper material
 is removed. Existing independent, silent DME backgrounds remain supported.
+
+## Dust Mix and asymmetric borders (0.26.0)
+
+With casparMIX 0.19.0, `dustmix` is an additional MIX mode. faderOS assigns it to
+MIX 8. Preparation stores ratio 0–100%, square particle side 1–100% of picture
+height and flash steps 0–100. Default 50 / 2 / 0 combines a normal dissolve with
+stable diamond-shaped reveal. Flash steps change the deterministic particle
+sequence as progress advances; stopping/rewinding a manual take holds/retraces it.
+This is a project interpretation of Sony's Dust Mix concept, not a measured
+implementation of its random generator or clock. Standalone Sony 274 remains
+reserved pending its separate review.
+
+Dust parameters are captured for program takes. Rehearsal can update them live.
+MODFY provides transactional keypad fields, immediate encoder preparation and
+reset to the actual defaults. New features are advertised only with a capable
+renderer; unsupported MIX 8 does not light up or silently fall back to dissolve.
+
+Wipe border placement can be centered, inner (incoming B) or outer (outgoing A).
+Inner and outer softness are independent; -1 follows general SOFT. This produces
+a geometric colored trail, not temporal video feedback. Both contour and picture
+mask use the same frame-local distance field. BORD F4 cycles placement; detailed
+softness is available in Qt preparation and the touch surface. The profile is a
+shared preparation default in this first version, while existing width/softness
+local overrides retain their prior behavior.

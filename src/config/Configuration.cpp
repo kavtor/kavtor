@@ -467,6 +467,8 @@ void Configuration::setDefaults()
     m_meKeySources = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
     m_dmeBackgrounds={};m_dmeBackgroundScopes={};
     m_dipColor = QStringLiteral("#000000");
+    m_wipeBorderSide=0;m_wipeInnerSoft=m_wipeOuterSoft=-1;
+    m_dustRatio=50;m_dustSize=2;m_dustFlash=0;
     m_autoDurationFrames = 25;m_superMixGainA=m_superMixGainB=100;
     m_wipePatternId = QStringLiteral("wipe_horizontal");
     m_wipeDirectionMode = WipeDirectionMode::Forward;
@@ -664,6 +666,8 @@ QJsonObject Configuration::toJson() const
     root.insert(QStringLiteral("sources"), sourcesArray);
 
     QJsonObject transitions;
+    transitions.insert("wipeBorderSide",m_wipeBorderSide);transitions.insert("wipeInnerSoft",m_wipeInnerSoft);transitions.insert("wipeOuterSoft",m_wipeOuterSoft);
+    transitions.insert("dustRatio",m_dustRatio);transitions.insert("dustSize",m_dustSize);transitions.insert("dustFlash",m_dustFlash);
     transitions.insert("superMixGainA",m_superMixGainA);transitions.insert("superMixGainB",m_superMixGainB);
     transitions.insert(QStringLiteral("dipColor"), m_dipColor);
     transitions.insert(QStringLiteral("autoDurationFrames"), m_autoDurationFrames);
@@ -821,6 +825,8 @@ bool Configuration::applyJson(const QJsonObject& obj)
         const QJsonObject transitions = obj.value(QStringLiteral("transitions")).toObject();
         const QString dip = opaqueMatteColor(transitions.value(QStringLiteral("dipColor")).toString());
         if (!dip.isEmpty()) m_dipColor = dip;
+        m_wipeBorderSide=qBound(-1,transitions.value("wipeBorderSide").toInt(0),1);m_wipeInnerSoft=qBound(-1,transitions.value("wipeInnerSoft").toInt(-1),100);m_wipeOuterSoft=qBound(-1,transitions.value("wipeOuterSoft").toInt(-1),100);
+        m_dustRatio=qBound(0,transitions.value("dustRatio").toInt(50),100);m_dustSize=qBound(1,transitions.value("dustSize").toInt(2),100);m_dustFlash=qBound(0,transitions.value("dustFlash").toInt(0),100);
         m_superMixGainA=qBound(0,transitions.value("superMixGainA").toInt(100),100);m_superMixGainB=qBound(0,transitions.value("superMixGainB").toInt(100),100);
         m_autoDurationFrames = transitions.value(QStringLiteral("autoDurationFrames")).toInt(m_autoDurationFrames);
         const QString wipe = transitions.value(QStringLiteral("wipePattern")).toString(m_wipePatternId);
@@ -1590,3 +1596,7 @@ void Configuration::setWipeGeometry(int vertices,int rounding){if(vertices<3||ve
 void Configuration::setWipeTileSize(int size){if(size<2||size>50||m_wipeTileSize==size)return;m_wipeTileSize=size;emit configurationChanged();}
 
 void Configuration::setSuperMixGains(int a,int b){if(a<0||a>100||b<0||b>100||(a==m_superMixGainA&&b==m_superMixGainB))return;m_superMixGainA=a;m_superMixGainB=b;emit configurationChanged();}
+
+void Configuration::setDustMix(int ratio,int size,int flash){if(ratio<0||ratio>100||size<1||size>100||flash<0||flash>100)return;if(ratio==m_dustRatio&&size==m_dustSize&&flash==m_dustFlash)return;m_dustRatio=ratio;m_dustSize=size;m_dustFlash=flash;emit configurationChanged();}
+
+void Configuration::setWipeBorderProfile(int side,int inner,int outer){if(side<-1||side>1||inner<-1||inner>100||outer<-1||outer>100)return;if(side==m_wipeBorderSide&&inner==m_wipeInnerSoft&&outer==m_wipeOuterSoft)return;m_wipeBorderSide=side;m_wipeInnerSoft=inner;m_wipeOuterSoft=outer;emit configurationChanged();}

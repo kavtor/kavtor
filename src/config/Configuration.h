@@ -144,6 +144,14 @@ public:
     void setDmeBackground(const QString& effect,int input);
     void setDmeBackgroundScope(const QString& effect,bool custom,bool copyGlobal=false);
 
+    int wipeBorderSide()const{return m_wipeBorderSide;}
+    int wipeInnerSoft()const{return m_wipeInnerSoft;}
+    int wipeOuterSoft()const{return m_wipeOuterSoft;}
+    void setWipeBorderProfile(int side,int inner,int outer);
+    int dustRatio()const{return m_dustRatio;}
+    int dustSize()const{return m_dustSize;}
+    int dustFlash()const{return m_dustFlash;}
+    void setDustMix(int ratio,int size,int flash);
     int superMixGainA()const {return m_superMixGainA;}
     int superMixGainB()const {return m_superMixGainB;}
     void setSuperMixGains(int a,int b);
@@ -261,6 +269,8 @@ private:
     QList<OutputDestination> m_destinations;
     QList<Source> m_sources;
     QString m_dipColor = QStringLiteral("#000000");
+    int m_wipeBorderSide=0,m_wipeInnerSoft=-1,m_wipeOuterSoft=-1;
+    int m_dustRatio=50,m_dustSize=2,m_dustFlash=0;
     int m_superMixGainA=100,m_superMixGainB=100;
     int m_autoDurationFrames = 25;
     QString m_wipePatternId;
