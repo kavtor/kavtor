@@ -136,3 +136,13 @@ T-bar, AUTO and existing default/custom DME background preparation apply.
 These presets are hidden when the connected engine is older; no substitute
 effect is used. Radius/Magnitude/Start Angle editors remain future work.
 Operator morphological validation is pending.
+
+## Karaoke row wipes
+
+casparMIX 0.21.0 enables DIRECT 220–223. Neutral project orientations are
+left-to-right, right-to-left, top-to-bottom and bottom-to-top. The manual
+defines START, ROWNO and PHASE but does not identify the four neutral
+orientations in its labelled pictograms; operator validation is pending.
+Defaults are eight lanes with overlapping sequential row reveal. Native
+command parameter preparation exists, while dedicated MODFY/touch editors
+for these new parameters are pending. SOFT/BORDER use the same tiled frontier.
