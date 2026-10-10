@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.30.0 — complete provisional native WIPE catalogue
+
+- Discover all 116 Sony WIPE patterns with casparMIX 0.23.0; enable DIRECT, AUTO, manual T-bar and preparation. Older servers retain their prior lists.
+- Document every newly interpreted path and leave operator approval separate. Unknown codes remain invalid; DME inventory is unchanged.
+- No new dependencies or firmware update.
+
 ## 0.29.0 — native random wipe discovery
 
 - Discover Sony 273/274 only with casparMIX 0.22.0 or later, for DIRECT, AUTO, manual T-bar and preparation. Older engines keep these codes reserved.

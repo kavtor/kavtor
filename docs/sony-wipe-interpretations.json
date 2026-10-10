@@ -1,0 +1,222 @@
+{
+  "version": "casparMIX 0.23.0",
+  "basis": "Sony pictograms and operator authorization to interpret all remaining WIPE patterns. Not a claim of exact Sony hardware emulation.",
+  "patterns": [
+    {
+      "code": 224,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal paired serpents, centre outward, mirrored forward winding"
+    },
+    {
+      "code": 225,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal paired serpents, centre outward, mirrored reverse winding"
+    },
+    {
+      "code": 226,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal paired serpents, edges inward, mirrored forward winding"
+    },
+    {
+      "code": 227,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal paired serpents, edges inward, mirrored reverse winding"
+    },
+    {
+      "code": 228,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical paired serpents, centre outward, mirrored forward winding"
+    },
+    {
+      "code": 229,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical paired serpents, centre outward, mirrored reverse winding"
+    },
+    {
+      "code": 230,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical paired serpents, edges inward, mirrored forward winding"
+    },
+    {
+      "code": 231,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical paired serpents, edges inward, mirrored reverse winding"
+    },
+    {
+      "code": 232,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal twin spirals, inward, forward winding"
+    },
+    {
+      "code": 233,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal twin spirals, inward, counter winding"
+    },
+    {
+      "code": 234,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical twin spirals, inward, forward winding"
+    },
+    {
+      "code": 235,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical twin spirals, inward, counter winding"
+    },
+    {
+      "code": 236,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal twin spirals, outward, forward winding"
+    },
+    {
+      "code": 237,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal twin spirals, outward, counter winding"
+    },
+    {
+      "code": 238,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical twin spirals, outward, forward winding"
+    },
+    {
+      "code": 239,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical twin spirals, outward, counter winding"
+    },
+    {
+      "code": 240,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal parallel staggered bands, forward travel, forward lane order"
+    },
+    {
+      "code": 241,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal parallel staggered bands, reverse travel, forward lane order"
+    },
+    {
+      "code": 242,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal parallel staggered bands, reverse travel, reverse lane order"
+    },
+    {
+      "code": 243,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "horizontal parallel staggered bands, forward travel, reverse lane order"
+    },
+    {
+      "code": 244,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical parallel staggered bands, forward travel, forward lane order"
+    },
+    {
+      "code": 245,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical parallel staggered bands, reverse travel, forward lane order"
+    },
+    {
+      "code": 246,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical parallel staggered bands, reverse travel, reverse lane order"
+    },
+    {
+      "code": 247,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "vertical parallel staggered bands, forward travel, reverse lane order"
+    },
+    {
+      "code": 270,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "fine pixel grain"
+    },
+    {
+      "code": 271,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "coarse grain"
+    },
+    {
+      "code": 272,
+      "family": "wipe",
+      "implemented": true,
+      "operator_verified": false,
+      "provisional": true,
+      "interpretation": "clustered multiscale grain"
+    }
+  ]
+}

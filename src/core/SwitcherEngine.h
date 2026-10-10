@@ -48,6 +48,7 @@ public:
     bool nativeKeyAvailable() const {return m_nativeKeyAvailable;}
     bool frameSonyAvailable() const {return m_frameSonyAvailable;}
     bool edgePageSonyAvailable() const {return m_edgePageSonyAvailable;}
+    bool completeSonyWipesAvailable() const {return m_completeSonyWipesAvailable;}
     bool randomSonyAvailable() const {return m_randomSonyAvailable;}
     bool karaokeSonyAvailable() const {return m_karaokeSonyAvailable;}
     bool mirrorSonyAvailable() const {return m_mirrorSonyAvailable;}
@@ -308,7 +309,7 @@ private:
     QString nativeWipeOptions(const Transition& transition) const;
     int m_takeDmeBackground=-1;
     bool m_transportGraphicsAvailable=false;
-    bool m_nativeDmeAvailable=false,m_pageDmeAvailable=false,m_expandedSonyAvailable=false,m_staticDmeAvailable=false,m_enhancedSonyAvailable=false,m_rotarySonyAvailable=false,m_mosaicSonyAvailable=false,m_compoundSonyAvailable=false,m_karaokeSonyAvailable=false,m_randomSonyAvailable=false,m_primitiveSonyAvailable=false,m_spatialSonyAvailable=false,m_planarSonyAvailable=false,m_mirrorSonyAvailable=false,m_frameSonyAvailable=false,m_edgePageSonyAvailable=false,m_nativeKeyAvailable=false,m_broadcastMixAvailable=false,m_dustMixAvailable=false;
+    bool m_nativeDmeAvailable=false,m_pageDmeAvailable=false,m_expandedSonyAvailable=false,m_staticDmeAvailable=false,m_enhancedSonyAvailable=false,m_rotarySonyAvailable=false,m_mosaicSonyAvailable=false,m_compoundSonyAvailable=false,m_karaokeSonyAvailable=false,m_randomSonyAvailable=false,m_completeSonyWipesAvailable=false,m_primitiveSonyAvailable=false,m_spatialSonyAvailable=false,m_planarSonyAvailable=false,m_mirrorSonyAvailable=false,m_frameSonyAvailable=false,m_edgePageSonyAvailable=false,m_nativeKeyAvailable=false,m_broadcastMixAvailable=false,m_dustMixAvailable=false;
     QString nativeDmeSuffix(const Transition&, bool manual=false) const;
     QString nativeWipeSuffix(const Transition& transition, bool manual = false) const;
     QString wipeBorderLayerCommand(const Transition& transition) const;

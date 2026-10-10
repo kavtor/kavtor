@@ -9,7 +9,8 @@ labels are development labels, not claimed official Sony pattern names.
 
 This is an inventory, not an implementation or a capability advertisement. Native
 MOVE/CUBE/PAGE primitives are not automatically equivalent to a numbered Sony
-preset. Only verified patterns may be enabled on the panel or reported by the API.
+preset. Native-validated patterns may be enabled on the panel or reported by the API;
+provisional morphology is recorded separately from operator approval.
 
 Wipes reveal an unchanged texture through a moving mask; DME transforms the
 video texture. Programme must match the intended endpoint, except for families
@@ -45,12 +46,42 @@ changes preparation directly. Tile size can update a private wipe preview.
 The Sony XVS operation manual classifies 224–247, 250–257 and 260–269 as
 mosaic patterns with horizontal/vertical tile counts. It does not provide
 a textual traversal algorithm. Their pictograms are insufficient to establish
-exact dual-path timing, so they remain unimplemented.
+exact dual-path timing. They are now implemented with explicit provisional
+interpretations under casparMIX 0.23.0; 250–257 and 260–269 were added earlier.
 
 Karaoke 220–223 have Start, Row No and Phase: Phase spans simultaneous rows
-to starting each row after the preceding row completes. They remain pending
-a separate preparation model rather than borrowing the snake algorithm.
+to starting each row after the preceding row completes. The native row model
+was implemented in casparMIX 0.21.0; dedicated preparation controls remain pending.
 Reference: https://pro.sony/support/res/manuals/5013/ac0fcd23e79e1fe9ad1e3707c87879a1/50135021M.pdf (printed p.143).
 
 Sony 273/274 are native from casparMIX 0.22.0 (kavtor 0.29.0). Their deterministic
-project generation curves await morphology review; 270–272 and 224–247 remain reserved.
+project generation curves await morphology review. The remaining 270–272
+and 224–247 were added provisionally in 0.23.0.
+
+## Complete provisional WIPE inventory (casparMIX 0.23.0)
+
+All 116 reference WIPE identifiers are executable, including 224–247 and
+270–272. The operator authorized implementation by interpretation and later
+correction. None of this batch is marked operator-verified.
+
+* 224–227: horizontally paired, mirrored serpents, from the middle outward
+  (224/225) or the outer edges inward (226/227), with opposed winding variants.
+* 228–231: corresponding vertically paired serpents.
+* 232–235: inward twin spirals, horizontal/vertical and winding variants.
+* 236–239: outward counterparts of those twin spirals.
+* 240–243: parallel horizontal bands, with forward/reverse travel and lane order.
+* 244–247: parallel vertical counterparts.
+* 270: fine pixel grain; 271: coarser grain; 272: clustered multiscale grain.
+  Fixed spatial thresholds make these reproducible with manual progress.
+
+These are explicit provisional interpretations of the pictograms, not claims
+that Sony's undisclosed path tables or timing laws have been reproduced exactly.
+Square mosaic cells use TILESIZE; native contour modifiers remain supported.
+Discrete grain avoids geometric derivative antialiasing, which would otherwise
+turn noise into an unintended dissolve. SOFT still applies when requested.
+The complete code-by-code interpretation is tracked in kavtor's
+`docs/sony-wipe-interpretations.json`. Existing approved morphology is unchanged.
+
+WIPE DIRECT now covers the entire reference inventory. No pending WIPE codes
+remain with this engine version. DME is a separate catalogue and its unimplemented
+identifiers remain reserved. Unknown codes still reject execution.
