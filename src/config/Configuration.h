@@ -270,7 +270,7 @@ private:
     QList<Source> m_sources;
     QString m_dipColor = QStringLiteral("#000000");
     int m_wipeBorderSide=0,m_wipeInnerSoft=-1,m_wipeOuterSoft=-1;
-    int m_dustRatio=50,m_dustSize=2,m_dustFlash=0;
+    int m_dustRatio=100,m_dustSize=2,m_dustFlash=0;
     int m_superMixGainA=100,m_superMixGainB=100;
     int m_autoDurationFrames = 25;
     QString m_wipePatternId;

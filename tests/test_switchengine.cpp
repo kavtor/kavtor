@@ -284,7 +284,7 @@ private slots:
         PanelProtocol protocol(&engine);QVERIFY(protocol.start(0));QTcpSocket browser;QByteArray received;
         connect(&browser,&QTcpSocket::readyRead,this,[&]{received+=browser.readAll();});browser.connectToHost(QHostAddress::LocalHost,protocol.port());QTRY_COMPARE(browser.state(),QAbstractSocket::ConnectedState);QTest::qWait(20);
         auto request=[&](QJsonObject object){received.clear();browser.write(QJsonDocument(object).toJson(QJsonDocument::Compact)+'\n');};
-        request({{"cmd","dust_params"},{"expectedMe",1},{"ratio",99},{"size",3},{"flash",0}});QTRY_VERIFY(received.contains("Selected M/E changed"));QCOMPARE(config.dustRatio(),50);
+        request({{"cmd","dust_params"},{"expectedMe",1},{"ratio",99},{"size",3},{"flash",0}});QTRY_VERIFY(received.contains("Selected M/E changed"));QCOMPARE(config.dustRatio(),100);
         request({{"cmd","dust_params"},{"expectedMe",0},{"ratio",75},{"size",3},{"flash",0}});QTRY_COMPARE(config.dustRatio(),75);
         engine.setKeySource(0,0);QTRY_VERIFY(!engine.isBusy());engine.setKeyOn(0,true);QTRY_VERIFY(engine.keyOn(0));QTRY_VERIFY(!engine.isBusy());
         QJsonObject key{{"cmd","key_processing"},{"expectedMe",0},{"target","key"},{"slot",0},{"settings",QJsonObject{{"mode","luma"}}},{"guardOnAir",true}};

@@ -468,7 +468,7 @@ void Configuration::setDefaults()
     m_dmeBackgrounds={};m_dmeBackgroundScopes={};
     m_dipColor = QStringLiteral("#000000");
     m_wipeBorderSide=0;m_wipeInnerSoft=m_wipeOuterSoft=-1;
-    m_dustRatio=50;m_dustSize=2;m_dustFlash=0;
+    m_dustRatio=100;m_dustSize=2;m_dustFlash=0;
     m_autoDurationFrames = 25;m_superMixGainA=m_superMixGainB=100;
     m_wipePatternId = QStringLiteral("wipe_horizontal");
     m_wipeDirectionMode = WipeDirectionMode::Forward;
@@ -826,7 +826,7 @@ bool Configuration::applyJson(const QJsonObject& obj)
         const QString dip = opaqueMatteColor(transitions.value(QStringLiteral("dipColor")).toString());
         if (!dip.isEmpty()) m_dipColor = dip;
         m_wipeBorderSide=qBound(-1,transitions.value("wipeBorderSide").toInt(0),1);m_wipeInnerSoft=qBound(-1,transitions.value("wipeInnerSoft").toInt(-1),100);m_wipeOuterSoft=qBound(-1,transitions.value("wipeOuterSoft").toInt(-1),100);
-        m_dustRatio=qBound(0,transitions.value("dustRatio").toInt(50),100);m_dustSize=qBound(1,transitions.value("dustSize").toInt(2),100);m_dustFlash=qBound(0,transitions.value("dustFlash").toInt(0),100);
+        m_dustRatio=qBound(0,transitions.value("dustRatio").toInt(100),100);m_dustSize=qBound(1,transitions.value("dustSize").toInt(2),100);m_dustFlash=qBound(0,transitions.value("dustFlash").toInt(0),100);
         m_superMixGainA=qBound(0,transitions.value("superMixGainA").toInt(100),100);m_superMixGainB=qBound(0,transitions.value("superMixGainB").toInt(100),100);
         m_autoDurationFrames = transitions.value(QStringLiteral("autoDurationFrames")).toInt(m_autoDurationFrames);
         const QString wipe = transitions.value(QStringLiteral("wipePattern")).toString(m_wipePatternId);
