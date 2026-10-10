@@ -51,3 +51,6 @@ Karaoke 220–223 have Start, Row No and Phase: Phase spans simultaneous rows
 to starting each row after the preceding row completes. They remain pending
 a separate preparation model rather than borrowing the snake algorithm.
 Reference: https://pro.sony/support/res/manuals/5013/ac0fcd23e79e1fe9ad1e3707c87879a1/50135021M.pdf (printed p.143).
+
+Sony 273/274 are native from casparMIX 0.22.0 (kavtor 0.29.0). Their deterministic
+project generation curves await morphology review; 270–272 and 224–247 remain reserved.

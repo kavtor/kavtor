@@ -378,7 +378,7 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
             const bool sony=obj.contains("sony");
             const QString codeField=sony?QStringLiteral("sony"):QStringLiteral("smpte");
             if ((sony&&obj.contains("smpte"))||!validIndex(codeField, 1000, true)
-                || !(sony?(supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable()).contains(obj.value(codeField).toInt())&&lookupWipeBySony(obj.value(codeField).toInt(), &pattern, &inherentReverse)):lookupWipeBySmpte(obj.value(codeField).toInt(), &pattern, &inherentReverse))
+                || !(sony?(supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable()).contains(obj.value(codeField).toInt())&&lookupWipeBySony(obj.value(codeField).toInt(), &pattern, &inherentReverse)):lookupWipeBySmpte(obj.value(codeField).toInt(), &pattern, &inherentReverse))
                 || (direction != QLatin1String("fwd") && direction != QLatin1String("rev"))
                 || (obj.contains(QStringLiteral("amount")) && !validIndex(QStringLiteral("amount"),41,true))) {
                 rejectKeyerRequest(QStringLiteral("Invalid manual wipe pattern, direction or softness"));
@@ -523,7 +523,7 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
         int amount = config->wipeEdgeAmount();
         QString color = config->wipeBorderColor();
         if(obj.contains("sony")) {
-            if(obj.contains("smpte")||!validIndex("sony",1000,true)||!supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable()).contains(obj.value("sony").toInt())||!lookupWipeBySony(obj.value("sony").toInt(),&pattern,&inherentReverse))validationError=QStringLiteral("Unknown or invalid Sony wipe");
+            if(obj.contains("smpte")||!validIndex("sony",1000,true)||!supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable()).contains(obj.value("sony").toInt())||!lookupWipeBySony(obj.value("sony").toInt(),&pattern,&inherentReverse))validationError=QStringLiteral("Unknown or invalid Sony wipe");
             else {patternId=pattern.id;direction=WipeDirectionMode::Forward;}
         } else if (obj.contains(QStringLiteral("smpte"))) {
             const int code = obj.value(QStringLiteral("smpte")).toInt(-1);
@@ -744,7 +744,7 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
             row.insert(QStringLiteral("smpte"), pattern.smpte);
             row.insert(QStringLiteral("smpteReverse"), pattern.smpteReverse);
             QJsonArray sonyAliases;
-            for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable())) {
+            for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable())) {
                 WipePattern mapped;bool reverse=false;
                 if(lookupWipeBySony(code,&mapped,&reverse)&&mapped.id==pattern.id)
                     sonyAliases.append(QJsonObject{{"code",code},{"reverse",reverse}});
@@ -1022,8 +1022,8 @@ QJsonObject PanelProtocol::stateObject() const
     capabilities.insert(QStringLiteral("keyMask"),true);
     QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}if(m_engine->dustMixAvailable())mixes.append("dustmix");capabilities.insert("touchPreparation",true);capabilities.insert("dustMix",m_engine->dustMixAvailable());capabilities.insert("asymmetricBorder",m_engine->dustMixAvailable());capabilities.insert("mixModes",mixes);
     QJsonArray dmeEffects{"push","slide"};if(m_engine->nativeDmeAvailable()){dmeEffects.append("move");dmeEffects.append("cube");dmeEffects.append("zoom");}if(m_engine->pageDmeAvailable()){dmeEffects.append("page_curl");dmeEffects.append("page_roll");}capabilities.insert("dmeEffects",dmeEffects);capabilities.insert("dmeBackground",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundScopes",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundImages",m_engine->staticDmeAvailable());capabilities.insert("mixPreparation",true);capabilities.insert("broadcastMixes",m_engine->broadcastMixAvailable());capabilities.insert("sonyDmeBackground",m_engine->primitiveSonyAvailable());capabilities.insert("sonyGeometry",m_engine->enhancedSonyAvailable());capabilities.insert("sonyMosaic",m_engine->mosaicSonyAvailable());
-    QJsonArray sonyWipes;for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable()))sonyWipes.append(code);capabilities.insert("sonyWipes",sonyWipes);
-    QJsonArray pending;for(int code:pendingSonyWipes(m_engine->karaokeSonyAvailable()))pending.append(code);capabilities.insert("sonyPendingWipes",pending);
+    QJsonArray sonyWipes;for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable()))sonyWipes.append(code);capabilities.insert("sonyWipes",sonyWipes);
+    QJsonArray pending;for(int code:pendingSonyWipes(m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable()))pending.append(code);capabilities.insert("sonyPendingWipes",pending);
     QJsonArray sonyDmes;if(m_engine->nativeDmeAvailable())for(int code:supportedSonyDmes(m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable(),m_engine->edgePageSonyAvailable()))sonyDmes.append(code);capabilities.insert("sonyDmes",sonyDmes);
     QJsonArray pendingDmes;for(int code:pendingSonyDmes(m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable(),m_engine->edgePageSonyAvailable()))pendingDmes.append(code);capabilities.insert("sonyPendingDmes",pendingDmes);
     obj.insert(QStringLiteral("capabilities"), capabilities);
