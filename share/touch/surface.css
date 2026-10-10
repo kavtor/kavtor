@@ -126,3 +126,12 @@ footer { min-height: 0; overflow: hidden; }
  .status { padding: 0 2px; font-size: 8px; }
 }
 @media (max-height: 450px) { main { padding: 0 5px; grid-template-rows: var(--bar) calc(5 * var(--bar)); } .tile .detail { display: none; } }
+
+/* Matrix owns the full central area; no empty breadcrumb row above it. */
+main { display: block; padding: 7px 9px; }
+.matrix { height: 100%; padding-bottom: 0; }
+#breadcrumb .message { font-size: 10px; }
+#breadcrumb .message:empty { display: none; }
+#pagination button { height: 24px; min-width: 28px; padding: 1px 4px; }
+#pagination { font-size: 10px; }
+@media (max-height:450px) { main { display:block; padding:5px; } }
