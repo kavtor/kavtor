@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.29.0 — native random wipe discovery
+
+- Discover Sony 273/274 only with casparMIX 0.22.0 or later, for DIRECT, AUTO, manual T-bar and preparation. Older engines keep these codes reserved.
+- Advertise 89 native wipes and 27 pending identifiers; Dust Mix remains independent. No new dependencies or firmware update.
+- Native capture validation is distinct from pending operator morphology approval.
+
 ## 0.8.8 — configuration and tally consistency
 
 - Fix missing audio meters on the M/E 3 and 4 side tiles by assigning each tile its own DOM ID.

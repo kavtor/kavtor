@@ -200,6 +200,8 @@ QVector<WipePattern> builtinWipePatterns()
         smil(0,"sonyWipe","pattern211","Sony 211 — Spiral counterclockwise top right"),
         smil(0,"sonyWipe","pattern212","Sony 212 — Spiral counterclockwise bottom right"),
         smil(0,"sonyWipe","pattern213","Sony 213 — Spiral counterclockwise bottom left"),
+        smil(0,"sonyWipe","pattern273","Sony 273 — Random mosaic"),
+        smil(0,"sonyWipe","pattern274","Sony 274 — Diamond Dust"),
         smil(0,"sonyWipe","pattern220","Sony 220 — Karaoke left-to-right"),
         smil(0,"sonyWipe","pattern221","Sony 221 — Karaoke right-to-left"),
         smil(0,"sonyWipe","pattern222","Sony 222 — Karaoke top-to-bottom"),
@@ -302,7 +304,7 @@ QVector<WipePattern> builtinWipePatterns()
         smil(350, "waterfallWipe", "verticalLeft", "waterfall vertical", 351),
         smil(352, "waterfallWipe", "horizontalLeft", "waterfall horizontal", 353),
     };
-    for(int code:pendingSonyWipes(true)){
+    for(int code:pendingSonyWipes(true,true)){
         auto pattern=smil(0,"sonyWipe",QString("pattern%1").arg(code).toUtf8().constData(),QString("Sony %1 — Pending implementation").arg(code).toUtf8().constData());
         pattern.label=QString("Sony %1 — Pending implementation").arg(code);pattern.implemented=false;patterns.append(pattern);
     }
@@ -445,7 +447,7 @@ bool wipeEdgeModeFromString(const QString& text, WipeEdgeMode* mode)
 // namespace separate from SMPTE; do not guess unverified Sony catalogue IDs.
 bool lookupWipeBySony(int code,WipePattern* pattern,bool* inherentReverse)
 {
-    if(QList<int>{13,14,15,16,19,20,26,27,29,49,300,301,302,303,304,100,101,102,103,104,105,106,107,150,151,156,158,160,162,516,518,604,606,624,661,200,201,202,203,206,207,208,209,210,211,212,213,220,221,222,223,250,251,252,253,254,255,256,257,260,261,262,263,264,265,266,267,268,269}.contains(code)){if(pattern)*pattern=wipePatternById(QString("smil_sonyWipe_pattern%1").arg(code));if(inherentReverse)*inherentReverse=false;return true;}
+    if(QList<int>{13,14,15,16,19,20,26,27,29,49,300,301,302,303,304,100,101,102,103,104,105,106,107,150,151,156,158,160,162,516,518,604,606,624,661,200,201,202,203,206,207,208,209,210,211,212,213,220,221,222,223,273,274,250,251,252,253,254,255,256,257,260,261,262,263,264,265,266,267,268,269}.contains(code)){if(pattern)*pattern=wipePatternById(QString("smil_sonyWipe_pattern%1").arg(code));if(inherentReverse)*inherentReverse=false;return true;}
     int smpte=-1;bool reverse=false;
     switch(code) {
     case 1:smpte=1;break;
@@ -474,7 +476,8 @@ bool lookupWipeBySony(int code,WipePattern* pattern,bool* inherentReverse)
     return true;
 }
 
-QList<int> supportedSonyWipes(bool expanded,bool enhanced,bool rotary,bool mosaic,bool compound,bool karaoke) {
+QList<int> supportedSonyWipes(bool expanded,bool enhanced,bool rotary,bool mosaic,bool compound,bool karaoke,bool random) {
+    if(random){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,compound,karaoke,false);codes.append(QList<int>{273,274});std::sort(codes.begin(),codes.end());return codes;}
     if(karaoke){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,compound,false);codes.append(QList<int>{220,221,222,223});std::sort(codes.begin(),codes.end());return codes;}
     if(compound){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,false);codes.append(QList<int>{250,251,252,253,254,255,256,257,260,261,262,263,264,265,266,267,268,269});return codes;}
     if(mosaic){auto codes=supportedSonyWipes(expanded,enhanced,rotary,false);codes.append(QList<int>{200,201,202,203,206,207,208,209,210,211,212,213});return codes;}
@@ -497,11 +500,11 @@ bool lookupDmeBySony(int code, QString* effect, QString* direction,bool primitiv
     return true;
 }
 
-QList<int> pendingSonyWipes(bool karaoke){
+QList<int> pendingSonyWipes(bool karaoke,bool random){
     // TODO: 224-247 need decoded paths; 220-223 are version-gated row patterns;
-    // 270-272 need identified preset masks; 273 needs volatility, 274 flash rate.
+    // 270-272 need identified preset masks; 273/274 are version gated.
     QList<int> codes;for(int code=karaoke?224:220;code<=247;++code)codes.append(code);
-    for(int code=270;code<=274;++code)codes.append(code);return codes;
+    for(int code=270;code<=(random?272:274);++code)codes.append(code);return codes;
 }
 
 QList<int> pendingSonyDmes(bool spatial,bool planar,bool mirror,bool frame,bool pages){
