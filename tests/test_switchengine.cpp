@@ -657,7 +657,8 @@ void TestSwitcherEngine::testNumberedMultiviewLabels()
     for(const auto& value:scene.value("nodes").toArray()){auto n=value.toObject();
         if(n.value("text")=="00:00:12")elapsed=n.value("font")=="mono"&&n.value("color")=="#ffffff";
         if(n.value("text")=="-00:59:47")remaining=n.value("font")=="mono"&&n.value("color")=="#ffd56a";
-        if(n.value("text")=="NO SOURCE")unavailable=true;
+        if(n.value("text")=="NO SOURCE"){unavailable=true;QCOMPARE(n.value("valign").toString(),QStringLiteral("center"));}
+        if(n.value("text")=="1 - Camera A")QCOMPARE(n.value("valign").toString(),QStringLiteral("center"));
     }
     QVERIFY(elapsed);QVERIFY(remaining);QVERIFY(unavailable);
     const auto exportPath=qEnvironmentVariable("KAVTOR_TEST_SCENE");if(!exportPath.isEmpty()){QFile file(exportPath);QVERIFY(file.open(QIODevice::WriteOnly));file.write(QJsonDocument(scene).toJson());}
