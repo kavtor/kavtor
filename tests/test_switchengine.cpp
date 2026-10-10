@@ -455,6 +455,22 @@ private slots:
         config.setAutoDurationFrames(2);peer.commands.clear();socket.write("{\"cmd\":\"dme\",\"sony\":1025}\n");QTRY_VERIFY(peer.commands.join('\n').contains("route://2 RENDERED DMENATIVE 2 SONY_1025"));QTRY_VERIFY(!engine.isBusy());
     }
 
+    void independentTouchKeyPreparation() {
+        FakeCaspar peer;peer.engineVersion="2.5.1 Stable (casparMIX 0.23.0)";
+        Configuration config;config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(peer.port());
+        AmcpClient client;client.setReconnectIntervalMs(0);SwitcherEngine engine(&config,&client);
+        engine.connectToCaspar();QTRY_VERIFY(engine.nativeKeyAvailable());QTRY_COMPARE(client.queuedCommandCount(),0);
+        PanelProtocol panel(&engine);QVERIFY(panel.start(0));QTcpSocket socket;socket.connectToHost(QHostAddress::LocalHost,panel.port());QTRY_VERIFY(socket.canReadLine());socket.readAll();
+        const auto original=config.keyProcessing(0,0).toJson();peer.commands.clear();
+        socket.write(QJsonDocument(QJsonObject{{"cmd","key_processing"},{"target","key"},{"slot",0},{"targetMe",2},{"settings",QJsonObject{{"invert",true}}}}).toJson(QJsonDocument::Compact)+"\n");
+        QTRY_VERIFY(config.keyProcessing(2,0).invert);QTRY_COMPARE(client.queuedCommandCount(),0);
+        QCOMPARE(engine.activeMe(),0);QCOMPARE(config.keyProcessing(0,0).toJson(),original);
+        QVERIFY(peer.commands.join('\n').contains("MIXER 15-"));QVERIFY(peer.commands.join('\n').contains("MIXER 16-"));
+        QVERIFY(!peer.commands.join('\n').contains("PLAY "));
+        socket.write(QJsonDocument(QJsonObject{{"cmd","key_processing"},{"target","key"},{"slot",0},{"targetMe",4},{"settings",QJsonObject{{"invert",false}}}}).toJson(QJsonDocument::Compact)+"\n");
+        QTest::qWait(60);QVERIFY(config.keyProcessing(2,0).invert);QCOMPARE(engine.activeMe(),0);
+    }
+
     void completeSonyWipeProtocol() {
         FakeCaspar peer;peer.engineVersion="2.5.1 Stable (casparMIX 0.23.0)";
         Configuration config;config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(peer.port());

@@ -134,6 +134,7 @@ public slots:
     void setKeyOn(int slot, bool on);
     void setKeySource(int slot, int sourceId);
     bool setKeyProcessing(int slot, bool dsk, const KeyProcessing& processing);
+    bool setKeyProcessingForMe(int me, int slot, bool dsk, const KeyProcessing& processing);
     void resetNextTransition();
     void toggleNextBackground();
     void toggleNextKey(int slot);
@@ -435,6 +436,7 @@ private:
     PendingKind m_pendingKind = PendingKind::None;
     ::KeyProcessing m_pendingProcessing;
     int m_pendingProcessingSlot = 0;
+    int m_pendingProcessingMe = 0;
     bool m_pendingProcessingDsk = false;
     quint64 m_pendingBatch = 0;
     int m_transitionHoldMs = 0;

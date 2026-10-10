@@ -1708,7 +1708,7 @@ void SwitcherEngine::finishPending()
         syncPreviewKey(keySlot);
         emit layersChanged();
     } else if (kind == PendingKind::KeyProcessing) {
-        m_config->setKeyProcessing(m_activeMe,m_pendingProcessingSlot,m_pendingProcessingDsk,m_pendingProcessing);
+        m_config->setKeyProcessing(m_pendingProcessingMe,m_pendingProcessingSlot,m_pendingProcessingDsk,m_pendingProcessing);
         emit keyerConfigurationCommitted();
         emit layersChanged();
     } else if (kind == PendingKind::KeySource) {
@@ -3067,17 +3067,22 @@ bool SwitcherEngine::setAuxSource(int role, int source)
 
 bool SwitcherEngine::setKeyProcessing(int slot,bool dsk,const ::KeyProcessing& processing)
 {
+    return setKeyProcessingForMe(m_activeMe,slot,dsk,processing);
+}
+
+bool SwitcherEngine::setKeyProcessingForMe(int me,int slot,bool dsk,const ::KeyProcessing& processing)
+{
     ::KeyProcessing validated;
-    if(slot<0||slot>=(dsk?2:kKeyerCount)||!m_connected||isBusy()||!validated.update(processing.toJson())||(processing.requiresNative()&&!m_nativeKeyAvailable))return false;
+    if(me<0||me>=kMeCount||slot<0||slot>=(dsk?2:kKeyerCount)||!m_connected||isBusy()||!validated.update(processing.toJson())||(processing.requiresNative()&&!m_nativeKeyAvailable))return false;
     QStringList commands;
     if(dsk) {
         commands+=processing.commands(airChannel(),kDskLayer+slot,m_nativeKeyAvailable);
         commands+=processing.commands(m_config->previewChannel(),kDskLayer+slot,m_nativeKeyAvailable);
     } else {
-        commands+=processing.commands(activePreviewChannel(),kKeyLayer0+slot,m_nativeKeyAvailable);
-        commands+=(m_keyRouted[slot]?::KeyProcessing{}:processing).commands(activeProgramChannel(),kKeyLayer0+slot,m_nativeKeyAvailable);
+        commands+=processing.commands(mePreviewChannel(me),kKeyLayer0+slot,m_nativeKeyAvailable);
+        commands+=((me==m_activeMe?m_keyRouted[slot]:m_bank[me].keyRouted[slot])?::KeyProcessing{}:processing).commands(meProgramChannel(me),kKeyLayer0+slot,m_nativeKeyAvailable);
     }
-    m_pendingProcessing=processing;m_pendingProcessingSlot=slot;m_pendingProcessingDsk=dsk;
+    m_pendingProcessing=processing;m_pendingProcessingMe=me;m_pendingProcessingSlot=slot;m_pendingProcessingDsk=dsk;
     beginPending(PendingKind::KeyProcessing,commands,m_previewSource,m_programSource);
     return true;
 }

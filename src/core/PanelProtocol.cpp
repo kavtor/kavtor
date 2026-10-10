@@ -274,6 +274,10 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
     if(obj.contains("expectedMe")&&(!obj.value("expectedMe").isDouble()||obj.value("expectedMe").toDouble()!=m_engine->activeMe())){
         sendTo(client,QJsonObject{{"event","error"},{"cmd",cmd},{"message","Selected M/E changed; reopen the preparation field"}});return;
     }
+    const int preparationMe=obj.contains("targetMe")?obj.value("targetMe").toInt(-1):m_engine->activeMe();
+    if(obj.contains("targetMe")&&(!obj.value("targetMe").isDouble()||obj.value("targetMe").toDouble()!=preparationMe||preparationMe<0||preparationMe>=m_engine->meCount())) {
+        sendTo(client,QJsonObject{{"event","error"},{"cmd",cmd},{"message","Invalid preparation M/E"}});return;
+    }
     const auto saveConfiguration = [&]() {
         if (m_engine->configuration()->save()) {
             return true;
@@ -353,11 +357,11 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
             rejectKeyerRequest(QStringLiteral("Invalid key processing target, slot or settings"));return;
         }
         const int slot=obj.value("slot").toInt();
-        if(obj.value("guardOnAir").toBool()&&!obj.value("allowOnAir").toBool()&&(dsk?m_engine->isDskOn(slot):m_engine->keyOn(m_engine->activeMe(),slot))){rejectKeyerRequest("On-air key requires explicit confirmation");return;}
-        auto processing=m_engine->configuration()->keyProcessing(m_engine->activeMe(),slot,dsk);
+        if(obj.value("guardOnAir").toBool()&&!obj.value("allowOnAir").toBool()&&(dsk?m_engine->isDskOn(slot):m_engine->keyOn(preparationMe,slot))){rejectKeyerRequest("On-air key requires explicit confirmation");return;}
+        auto processing=m_engine->configuration()->keyProcessing(preparationMe,slot,dsk);
         QString error;
         if(!processing.update(obj.value("settings").toObject(),&error)) {rejectKeyerRequest(error);return;}
-        if(!m_engine->setKeyProcessing(slot,dsk,processing)) {rejectKeyerRequest(QStringLiteral("Key processing is unavailable while the mixer is busy"));return;}
+        if(!m_engine->setKeyProcessingForMe(preparationMe,slot,dsk,processing)) {rejectKeyerRequest(QStringLiteral("Key processing is unavailable while the mixer is busy"));return;}
         sendTo(client,ack);return;
     }
     if (cmd == QLatin1String("manual")) {
@@ -1020,7 +1024,7 @@ QJsonObject PanelProtocol::stateObject() const
     QJsonArray keyModes{"linear","chroma"};if(m_engine->nativeKeyAvailable())keyModes.append("luma");
     capabilities.insert("keyModes",keyModes);capabilities.insert("keyInversion",m_engine->nativeKeyAvailable());capabilities.insert("maskInversion",m_engine->nativeKeyAvailable());
     capabilities.insert(QStringLiteral("keyMask"),true);
-    QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}if(m_engine->dustMixAvailable())mixes.append("dustmix");capabilities.insert("touchPreparation",true);capabilities.insert("dustMix",m_engine->dustMixAvailable());capabilities.insert("asymmetricBorder",m_engine->dustMixAvailable());capabilities.insert("mixModes",mixes);
+    QJsonArray mixes{"mix","dip","vfade","fadecut","cutfade"};if(m_engine->broadcastMixAvailable()){mixes.append("nam");mixes.append("supermix");}if(m_engine->dustMixAvailable())mixes.append("dustmix");capabilities.insert("touchPreparation",true);capabilities.insert("touchIndependentMe",true);capabilities.insert("dustMix",m_engine->dustMixAvailable());capabilities.insert("asymmetricBorder",m_engine->dustMixAvailable());capabilities.insert("mixModes",mixes);
     QJsonArray dmeEffects{"push","slide"};if(m_engine->nativeDmeAvailable()){dmeEffects.append("move");dmeEffects.append("cube");dmeEffects.append("zoom");}if(m_engine->pageDmeAvailable()){dmeEffects.append("page_curl");dmeEffects.append("page_roll");}capabilities.insert("dmeEffects",dmeEffects);capabilities.insert("dmeBackground",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundScopes",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundImages",m_engine->staticDmeAvailable());capabilities.insert("mixPreparation",true);capabilities.insert("broadcastMixes",m_engine->broadcastMixAvailable());capabilities.insert("sonyDmeBackground",m_engine->primitiveSonyAvailable());capabilities.insert("sonyGeometry",m_engine->enhancedSonyAvailable());capabilities.insert("sonyMosaic",m_engine->mosaicSonyAvailable());
     QJsonArray sonyWipes;for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable(),m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable(),m_engine->completeSonyWipesAvailable()))sonyWipes.append(code);capabilities.insert("sonyWipes",sonyWipes);
     QJsonArray pending;for(int code:pendingSonyWipes(m_engine->karaokeSonyAvailable(),m_engine->randomSonyAvailable(),m_engine->completeSonyWipesAvailable()))pending.append(code);capabilities.insert("sonyPendingWipes",pending);

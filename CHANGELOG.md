@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.31.0 — fixed-grid extended touch operation
+
+- Use stable eight-row layout, six rail menus and five matrix rows; move breadcrumbs into status and add the existing symbol-only logo.
+- Define navigation/function/on-air button colors and a persistent FULL SCREEN label.
+- Decouple browser M/E from physical panel delegation; directly target and commit key processing to its bank. Shared transition fields remain explicit.
+- Document Qt preparation, physical live operation and touch extended operation, with a future basic control mode.
+
 ## 0.30.0 — complete provisional native WIPE catalogue
 
 - Discover all 116 Sony WIPE patterns with casparMIX 0.23.0; enable DIRECT, AUTO, manual T-bar and preparation. Older servers retain their prior lists.

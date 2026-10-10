@@ -3,8 +3,8 @@ const $ = id => document.getElementById(id);
 const categories = { mix: 'MIX', wipe: 'WIPE', keys: 'KEYERS', dme: 'DME' };
 let state = {}, catalogue = [], page = 'mix', keySlot = 0, keyTarget = 'key', effect = 'move';
 let editing = null, draft = '', replace = true, busy = false, touching = false, paintedMe = 0;
-let matrixPage = 0, lastPaint = '';
-const subpages = { mix: 'rate', wipe: 'edge', keys: 'delegate', dme: 'effects' };
+let matrixPage = 0, lastPaint = '', touchMe = null, panelMe = 0;
+const subpages = { mix: 'rate', wipe: 'edge', keys: 'type', dme: 'effects' };
 
 function button(text, action, selected = false) {
   const item = document.createElement('button');
@@ -18,10 +18,10 @@ function notify(text, error = false) {
   $('message').classList.toggle('error', error);
 }
 async function command(value) {
-  if (value.cmd !== 'me') value = { ...value, expectedMe: editing ? editing.me : paintedMe };
+  value = { ...value, targetMe: editing ? editing.me : paintedMe };
   if (busy) return false;
   busy = true;
-  notify('Submitting preparation');
+  notify('Applying parameters');
   try {
     const response = await fetch('/api/command', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(value),
@@ -60,10 +60,11 @@ function keySave(settings) {
 }
 function currentScreen() {
   const caps = state.capabilities || {}, entries = [];
-  let menus = [], title = 'Preparation', hint = 'Preparation only', onAir = false;
-  if (page === 'home') {
+  let menus = [], title = 'Extended operation', hint = 'Parameter controls', onAir = false;
+  if (page === 'home' || page === 'trans' || page === 'misc') {
     title = 'Top menu';
-    for (const [id, label] of Object.entries(categories)) entries.push(choice(label, () => selectCategory(id)));
+    const choices = page === 'trans' ? [['mix','MIX'],['wipe','WIPE'],['dme','DME']] : page === 'misc' ? [['keys','DSK 1'],['keys','DSK 2']] : Object.entries(categories);
+    choices.forEach(([id,label],slot) => entries.push(choice(label, () => { if(page==='misc'){keyTarget='dsk';keySlot=slot;}selectCategory(id); })));
     return { title, hint, menus, entries };
   }
   if (page === 'mix') {
@@ -73,7 +74,7 @@ function currentScreen() {
     if (caps.broadcastMixes) menus.push(['super', 'SUPER MIX']);
     if (!menus.some(row => row[0] === subpages.mix)) subpages.mix = 'rate';
     if (subpages.mix === 'rate') {
-      title = 'Rate';
+      title = 'Rate'; hint = 'Frames';
       entries.push(number('AUTO rate', state.autoFrames ?? 25, 1, 1000,
         frames => command({ cmd: 'rate', frames }), 1, 'Frames'));
     } else if (subpages.mix === 'dust') {
@@ -193,21 +194,28 @@ function currentScreen() {
 }
 function paint() {
   if (editing || touching || document.activeElement?.tagName === 'INPUT') return;
-  const stamp = JSON.stringify([state, catalogue, page, subpages, keySlot, keyTarget, effect, matrixPage, innerWidth, innerHeight]);
+  const stamp = JSON.stringify([state, panelMe, touchMe, catalogue, page, subpages, keySlot, keyTarget, effect, matrixPage, innerWidth, innerHeight]);
   if (stamp === lastPaint) return;
-  lastPaint = stamp; paintedMe = state.me || 0;
+  lastPaint = stamp; paintedMe = touchMe ?? state.me ?? 0;
   const model = currentScreen();
   $('mes').replaceChildren(); $('rail').replaceChildren(); $('submenus').replaceChildren(); $('matrix').replaceChildren(); $('pagination').replaceChildren();
-  for (let slot = 0; slot < (state.capabilities?.meCount || 4); slot++)
-    $('mes').append(button(innerWidth < 600 ? String(slot + 1) : `M/E ${slot + 1}`, () => command({ cmd: 'me', slot }), slot === paintedMe));
-  for (const [id, label] of Object.entries(categories)) $('rail').append(button(label, () => selectCategory(id), id === page));
-  $('title').textContent = page === 'home' ? model.title : `M/E ${paintedMe + 1} › ${categories[page]} › ${model.title}`;
-  $('context').textContent = model.hint;
+  for (let slot = 0; slot < Math.min(4, state.capabilities?.meCount || 4); slot++) {
+    const item = button(`M/E ${slot + 1}`, () => { if(busy)return; touchMe=slot; matrixPage=0; lastPaint=''; poll(); }, slot === paintedMe);
+    item.classList.toggle('panel-me', slot === panelMe); item.setAttribute('aria-pressed', String(slot===paintedMe));
+    if(slot===panelMe)item.title='Selected on physical panel';
+    $('mes').append(item);
+  }
+  for(let slot=0;slot<4;slot++) $('rail').append(button(`KEY ${slot+1}`,()=>{keyTarget='key';keySlot=slot;selectCategory('keys');},page==='keys'&&keyTarget==='key'&&keySlot===slot));
+  $('rail').append(button('TRANS',()=>selectCategory('trans'),['trans','mix','wipe','dme'].includes(page)),button('MISC',()=>selectCategory('misc'),page==='misc'||page==='keys'&&keyTarget==='dsk'));
+  $('title').textContent = `M/E ${paintedMe+1} › ${categories[page] || page.toUpperCase()} › ${model.title}`;
+  $('fullscreen').classList.toggle('selected',!!document.fullscreenElement);
+  $('fullscreen').setAttribute('aria-pressed',String(!!document.fullscreenElement));
+  $('context').textContent = ['mix','wipe','dme'].includes(page) ? `${model.hint} · Shared transition settings` : model.hint;
   $('context').classList.toggle('onair', !!model.onAir);
   for (const [id, label] of model.menus) $('submenus').append(button(label, () => selectSubpage(id), id === subpages[page]));
   const box = $('matrix').getBoundingClientRect();
   const columns = Math.max(1, Math.min(6, Math.floor((box.width + 8) / 155)));
-  const rows = Math.max(1, Math.min(6, Math.floor((box.height + 8) / 82)));
+  const rows = 5;
   const capacity = columns * rows, pages = Math.max(1, Math.ceil(model.entries.length / capacity));
   matrixPage = Math.max(0, Math.min(matrixPage, pages - 1));
   $('matrix').style.gridTemplateColumns = `repeat(${columns}, minmax(0, 1fr))`;
@@ -221,6 +229,8 @@ function paint() {
   for (const entry of model.entries.slice(matrixPage * capacity, (matrixPage + 1) * capacity)) {
     const item = button('', entry.action || (() => {}), !!entry.selected);
     item.classList.add('tile', 'choice');
+    if(!['home','trans','misc'].includes(page) && !(page==='keys'&&subpages.keys==='delegate') && !(page==='dme'&&subpages.dme==='effects'))item.classList.add('function');
+    if(page==='keys'&&model.onAir&&subpages.keys!=='delegate')item.classList.add('program');
     const label = document.createElement('span'); label.className = 'label'; label.textContent = entry.label; item.append(label);
     if (entry.value !== undefined) { const value = document.createElement('strong'); value.className = 'value'; value.textContent = entry.value; item.append(value); }
     if (entry.color) {
@@ -262,7 +272,7 @@ $('commit').onclick = async () => {
   if (await save(number)) cancelEdit();
 };
 $('home').onclick = () => selectCategory('home');
-$('back').onclick = () => { if (page !== 'home' && subpages[page] !== currentScreen().menus[0]?.[0]) selectSubpage(currentScreen().menus[0][0]); else selectCategory('home'); };
+$('back').onclick = () => { if (!['home','trans','misc'].includes(page) && currentScreen().menus.length && subpages[page] !== currentScreen().menus[0]?.[0]) selectSubpage(currentScreen().menus[0][0]); else selectCategory('home'); };
 $('fullscreen').onclick = async () => {
   try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); }
   catch (_) { notify('Full screen is unavailable in this browser', true); }
@@ -271,12 +281,16 @@ async function poll() {
   try {
     const response = await fetch('/api/state', { cache: 'no-store' });
     if (!response.ok) throw Error('HTTP unavailable');
-    const data = await response.json(); state = data.state || {}; catalogue = data.catalogue || [];
+    const data = await response.json(); const raw = data.state || {}; panelMe = raw.me ?? 0;
+    if(touchMe === null) touchMe=panelMe;
+    const bank=raw.mes?.[touchMe];
+    state={...raw,me:touchMe,...(bank?{keys:bank.keys,preview:bank.preview,program:bank.program}: {})};
+    catalogue = data.catalogue || [];
     const connected = data.transportConnected && Object.keys(state).length > 0;
-    const ready = connected && !!state.capabilities?.touchPreparation;
+    const ready = connected && !!state.capabilities?.touchPreparation && !!state.capabilities?.touchIndependentMe;
     $('lost').hidden = ready;
     $('lost').querySelector('strong').textContent = connected && !ready ? 'UPDATE KAVTOR' : 'SERVER LOST';
-    $('lost').querySelector('span').textContent = connected && !ready ? 'Touch preparation requires kavtor 0.26.0 or newer' : 'Waiting for kavtor';
+    $('lost').querySelector('span').textContent = connected && !ready ? 'Independent touch preparation requires kavtor 0.31.0 or newer' : 'Waiting for kavtor';
     $('status').textContent = ready ? (state.connected ? 'CONNECTED' : 'ENGINE LOST') : 'SERVER LOST';
     paint();
   } catch (_) { $('lost').hidden = false; $('status').textContent = 'SERVER LOST'; }
@@ -284,5 +298,5 @@ async function poll() {
 document.addEventListener('pointerdown', () => { touching = true; });
 for (const event of ['pointerup', 'pointercancel']) document.addEventListener(event, () => setTimeout(() => { touching = false; paint(); }, 0));
 window.addEventListener('resize', () => { lastPaint = ''; paint(); });
-document.addEventListener('fullscreenchange', () => { $('fullscreen').textContent = document.fullscreenElement ? 'Window' : 'Full screen'; lastPaint = ''; paint(); });
+document.addEventListener('fullscreenchange', () => { lastPaint = ''; paint(); });
 poll(); setInterval(poll, 500);

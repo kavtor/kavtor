@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>kavtor · Touch preparation</title>
+<title>kavtor · Extended operation</title>
 <link rel="stylesheet" href="/surface.css">
 </head>
 <body>
 <header>
-  <button id="home" class="brand">kavtor</button>
-  <div id="mes" class="delegation" aria-label="M/E delegation"></div>
+  <div class="header-left"><button id="home" class="brand" aria-label="kavtor top menu"><img src="/icon.svg" alt="kavtor"></button>
+  <div id="mes" class="delegation" aria-label="M/E delegation"></div></div>
+  <div class="header-right"><div id="breadcrumb"><h1 id="title">Extended operation</h1><span id="context" class="hint"></span></div>
   <span id="status" class="status">Connecting</span>
-  <button id="fullscreen" aria-label="Toggle full screen">Full screen</button>
+  <button id="fullscreen" aria-label="Toggle full screen">FULL SCREEN</button></div>
 </header>
 <div id="workspace">
   <nav id="rail" aria-label="Function menus"></nav>
   <main>
     <div class="titlebar">
-      <div><h1 id="title">Preparation</h1><span id="context" class="hint"></span></div>
+      <span id="message" class="message" role="status" aria-live="polite"></span>
       <div id="pagination" aria-label="Matrix page selection"></div>
     </div>
-    <div id="message" class="message" role="status" aria-live="polite"></div>
     <div id="matrix" class="matrix"></div>
   </main>
 </div>

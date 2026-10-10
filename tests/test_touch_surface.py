@@ -32,7 +32,7 @@ class TouchSurfaceTest(unittest.TestCase):
         self.calls = []
         self.peer = None
         self.stop = threading.Event()
-        self.state = {'event': 'state', 'connected': True, 'me': 0, 'dustRatio': 50, 'capabilities': {'touchPreparation': True}}
+        self.state = {'event': 'state', 'connected': True, 'me': 0, 'dustRatio': 50, 'capabilities': {'touchPreparation': True, 'touchIndependentMe': True}}
         self.thread = threading.Thread(target=self.receive, daemon=True)
         self.thread.start()
         self.bridge = surface.PanelBridge('127.0.0.1', self.listener.getsockname()[1])
@@ -103,7 +103,7 @@ class TouchSurfaceTest(unittest.TestCase):
             state = json.load(response)
         self.assertTrue(state['transportConnected'])
         self.assertEqual(state['state']['dustRatio'], 50)
-        for path, kind in (('/', 'text/html'), ('/surface.js', 'text/javascript'), ('/surface.css', 'text/css')):
+        for path, kind in (('/', 'text/html'), ('/surface.js', 'text/javascript'), ('/surface.css', 'text/css'), ('/icon.svg','image/svg+xml')):
             with urlopen(self.url + path) as response:
                 self.assertTrue(response.headers['Content-Type'].startswith(kind))
                 self.assertIn("script-src 'self'", response.headers['Content-Security-Policy'])
@@ -133,6 +133,13 @@ class TouchSurfaceTest(unittest.TestCase):
         self.assertEqual(code, 200)
         self.assertEqual(reply['cmd'], 'key_processing')
         self.assertTrue(next(call for call in self.calls if call['cmd'] == 'key_processing')['guardOnAir'])
+
+    def test_touch_cannot_change_panel_delegation(self):
+        self.assertEqual(self.request({'cmd':'me','slot':2})[0],400)
+        code,_=self.request({'cmd':'key_processing','target':'key','slot':0,'targetMe':2,'settings':{'mode':'linear'}})
+        self.assertEqual(code,200)
+        self.assertEqual(self.bridge.snapshot()['state']['me'],0)
+        self.assertEqual(next(c for c in self.calls if c['cmd']=='key_processing')['targetMe'],2)
 
     def test_disconnect_removes_stale_state(self):
         self.peer.shutdown(socket.SHUT_RDWR)

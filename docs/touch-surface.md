@@ -82,3 +82,25 @@ A panel ACK confirms handler acceptance, not a completed renderer operation.
 
 These references inform interaction patterns. No manufacturer graphics or
 proprietary UI assets are copied.
+
+## Fixed-grid extended operation (0.31.0)
+
+The three surfaces have distinct roles: Qt prepares inputs/media/layouts; the
+physical panel operates the live show quickly; the touch surface provides
+extended parameter operation. A future Basic Operation mode will expose only
+preview/program selection, AUTO TRANS, transition type, key/DSK visibility and
+FTB. It is not enabled by this layout change.
+
+Eight equal viewport rows define the layout. Status and footer each consume one;
+the rail uses six keys (KEY1–4, TRANS, MISC), and the matrix always retains five
+fixed rows even when empty. The breadcrumb belongs in the status bar. Selected
+navigation uses deeper blue-gray, parameter functions orange, and changes to an
+on-air key purple. FULL SCREEN retains its label in both states.
+
+Browser M/E delegation is local. A red outline identifies the physical panel's
+M/E. Key processing carries targetMe, commits to that bank after AMCP success,
+and never temporarily changes the panel/MV delegation. Existing transition
+preparation values remain shared across M/Es and are labelled accordingly;
+independent per-M/E transition preparation is follow-up work. DSKs remain global.
+The new surface requires the touchIndependentMe capability (kavtor 0.31.0) so
+older servers cannot silently apply an edit to the wrong key.

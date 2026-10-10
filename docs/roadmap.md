@@ -117,3 +117,10 @@ Retain exact numeric colour entry. Also investigate a colour wheel rendered in
 preview or an auxiliary monitoring window and selected with the panel joystick
 for approximate choices. Define explicit preview/commit/cancel ownership and
 keep the wheel away from programme. No colour-wheel implementation yet.
+
+## Touch extended operation
+
+- Extend parameter pages to all engine-supported controls with touch-only editors.
+- Add per-M/E transition preparation, replacing the current explicitly shared values.
+- Add Basic Operation mode: PGM/PST, AUTO, type, key/DSK visibility and FTB;
+  explicit action coloring and intentional program control.
