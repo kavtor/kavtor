@@ -1337,7 +1337,7 @@ void SwitcherEngine::onAmcpConnected()
     m_restoreFailed = false;
     m_restoreVersionKnown = false;
     m_restoreBatch = 0;
-    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_edgePageSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
+    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_karaokeSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_edgePageSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
     setConnected(true);
     send(QStringLiteral("VERSION"));
     startOscListener();
@@ -1363,7 +1363,7 @@ void SwitcherEngine::onAmcpDisconnected()
     captureBank();
     m_restoreBatch = 0;
     m_restoreVersionKnown = false;
-    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_edgePageSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
+    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_karaokeSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_edgePageSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
     m_nativeMvReady=false;
     m_manualBanks = {};
     m_requestedMe = -1;
@@ -1429,6 +1429,7 @@ void SwitcherEngine::onAmcpResponse(int code, const QString& status, const QStri
         m_spatialSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,12,0);
         m_frameSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,17,0);
         m_edgePageSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,20,0);
+        m_karaokeSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,21,0);
         m_mirrorSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,16,0);
         m_planarSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,14,0);
         m_nativeKeyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,13,0);
@@ -2398,7 +2399,7 @@ int SwitcherEngine::nativeSonyCode(const Transition& transition, bool* reverse) 
 {
     if (transition.type != TransitionType::Smil || transition.shadowAmount > 0)
         return 0;
-    for (int code : supportedSonyWipes(m_expandedSonyAvailable,m_enhancedSonyAvailable,m_rotarySonyAvailable,m_mosaicSonyAvailable,m_compoundSonyAvailable)) {
+    for (int code : supportedSonyWipes(m_expandedSonyAvailable,m_enhancedSonyAvailable,m_rotarySonyAvailable,m_mosaicSonyAvailable,m_compoundSonyAvailable,m_karaokeSonyAvailable)) {
         WipePattern pattern;
         bool inherent = false;
         if (lookupWipeBySony(code, &pattern, &inherent) && pattern.smilType == transition.smilType &&
