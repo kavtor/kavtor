@@ -78,12 +78,12 @@ function currentScreen() {
         frames => command({ cmd: 'rate', frames }), 1, 'Frames'));
     } else if (subpages.mix === 'dust') {
       title = 'Dust Mix'; hint = 'MIX 8 · preparation';
-      const save = (ratio = state.dustRatio ?? 50, size = state.dustSize ?? 2, flash = state.dustFlash ?? 0) =>
+      const save = (ratio = state.dustRatio ?? 100, size = state.dustSize ?? 2, flash = state.dustFlash ?? 0) =>
         command({ cmd: 'dust_params', ratio, size, flash });
-      entries.push(number('Mix ratio', state.dustRatio ?? 50, 0, 100, n => save(n), 1, '% dust'),
+      entries.push(number('Mix ratio', state.dustRatio ?? 100, 0, 100, n => save(n), 1, '% dust'),
         number('Particle size', state.dustSize ?? 2, 1, 100, n => save(undefined, n), 1, '% picture height'),
         number('Flash steps', state.dustFlash ?? 0, 0, 100, n => save(undefined, undefined, n)),
-        choice('Default recall', () => save(50, 2, 0), false, '50 / 2 / 0'));
+        choice('Default recall', () => save(100, 2, 0), false, '100 / 2 / 0'));
     } else if (subpages.mix === 'dip') {
       title = 'DIP color';
       entries.push(color('Intermediate color', state.dipColor, n => command({ cmd: 'dip_color', color: n })));

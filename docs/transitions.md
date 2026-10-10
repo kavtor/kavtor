@@ -104,8 +104,7 @@ is removed. Existing independent, silent DME backgrounds remain supported.
 
 With casparMIX 0.19.0, `dustmix` is an additional MIX mode. faderOS assigns it to
 MIX 8. Preparation stores ratio 0–100%, square particle side 1–100% of picture
-height and flash steps 0–100. Default 50 / 2 / 0 combines a normal dissolve with
-stable diamond-shaped reveal. Flash steps change the deterministic particle
+height and flash steps 0–100. Default 100 / 2 / 0 uses a pure stable diamond-shaped reveal. Flash steps change the deterministic particle
 sequence as progress advances; stopping/rewinding a manual take holds/retraces it.
 This is a project interpretation of Sony's Dust Mix concept, not a measured
 implementation of its random generator or clock. Standalone Sony 274 remains
@@ -123,3 +122,7 @@ mask use the same frame-local distance field. BORD F4 cycles placement; detailed
 softness is available in Qt preparation and the touch surface. The profile is a
 shared preparation default in this first version, while existing width/softness
 local overrides retain their prior behavior.
+
+From 0.26.1 default recall uses 100/2/0. Explicit saved ratios are preserved;
+a lower ratio includes a uniform dissolve. This first Dust Mix variant shares
+the alternate MIX restriction: background-only NEXT TRANSITION.
