@@ -455,6 +455,21 @@ private slots:
         config.setAutoDurationFrames(2);peer.commands.clear();socket.write("{\"cmd\":\"dme\",\"sony\":1025}\n");QTRY_VERIFY(peer.commands.join('\n').contains("route://2 RENDERED DMENATIVE 2 SONY_1025"));QTRY_VERIFY(!engine.isBusy());
     }
 
+    void completeSonyWipeProtocol() {
+        FakeCaspar peer;peer.engineVersion="2.5.1 Stable (casparMIX 0.23.0)";
+        Configuration config;config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(peer.port());
+        AmcpClient client;client.setReconnectIntervalMs(0);SwitcherEngine engine(&config,&client);
+        engine.connectToCaspar();QTRY_VERIFY(engine.completeSonyWipesAvailable());QTRY_COMPARE(client.queuedCommandCount(),0);
+        engine.selectPreview(0);QTRY_COMPARE(engine.previewSource(),0);engine.executeCut();QTRY_COMPARE(engine.programSource(),0);engine.selectPreview(1);QTRY_COMPARE(engine.previewSource(),1);
+        PanelProtocol panel(&engine);QVERIFY(panel.start(0));QTcpSocket socket;socket.connectToHost(QHostAddress::LocalHost,panel.port());QTRY_VERIFY(socket.canReadLine());
+        auto state=QJsonDocument::fromJson(socket.readLine()).object();const auto caps=state["capabilities"].toObject();QCOMPARE(caps["sonyWipes"].toArray().size(),116);QCOMPARE(caps["sonyPendingWipes"].toArray().size(),0);socket.readAll();
+        for(int code:pendingSonyWipes(true,true)){
+            socket.write(QJsonDocument(QJsonObject{{"cmd","manual"},{"type","wipe"},{"sony",code},{"position",2000}}).toJson(QJsonDocument::Compact)+"\n");QTRY_VERIFY(engine.isManualTransition());QTRY_COMPARE(client.queuedCommandCount(),0);QVERIFY(peer.commands.join('\n').contains(QString("SONY %1 ").arg(code)));
+            socket.write(QJsonDocument(QJsonObject{{"cmd","manual"},{"type","wipe"},{"sony",code},{"position",0}}).toJson(QJsonDocument::Compact)+"\n");QTRY_VERIFY(!engine.isBusy());
+        }
+        peer.commands.clear();socket.write("{\"cmd\":\"manual\",\"type\":\"wipe\",\"sony\":999,\"position\":2000}\n");QTest::qWait(60);QVERIFY(!engine.isManualTransition());QVERIFY(!peer.commands.join('\n').contains("WIPESONY"));
+    }
+
     void randomSonyProtocol() {
         FakeCaspar peer;peer.engineVersion="2.5.1 Stable (casparMIX 0.22.0)";
         Configuration config;config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(peer.port());

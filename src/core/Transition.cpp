@@ -304,7 +304,16 @@ QVector<WipePattern> builtinWipePatterns()
         smil(350, "waterfallWipe", "verticalLeft", "waterfall vertical", 351),
         smil(352, "waterfallWipe", "horizontalLeft", "waterfall horizontal", 353),
     };
-    for(int code:pendingSonyWipes(true,true)){
+    for(int code=224;code<=247;++code){
+        const QString family=code<232?"Paired serpent":code<240?"Twin spiral":"Parallel sweep";
+        auto pattern=smil(0,"sonyWipe",QString("pattern%1").arg(code).toUtf8().constData(),QString("Sony %1 — %2 (provisional)").arg(code).arg(family).toUtf8().constData());
+        patterns.append(pattern);
+    }
+    for(int code=270;code<=272;++code){
+        auto pattern=smil(0,"sonyWipe",QString("pattern%1").arg(code).toUtf8().constData(),QString("Sony %1 — Random grain %2 (provisional)").arg(code).arg(code-269).toUtf8().constData());
+        patterns.append(pattern);
+    }
+    for(int code:pendingSonyWipes(true,true,true)){
         auto pattern=smil(0,"sonyWipe",QString("pattern%1").arg(code).toUtf8().constData(),QString("Sony %1 — Pending implementation").arg(code).toUtf8().constData());
         pattern.label=QString("Sony %1 — Pending implementation").arg(code);pattern.implemented=false;patterns.append(pattern);
     }
@@ -447,6 +456,7 @@ bool wipeEdgeModeFromString(const QString& text, WipeEdgeMode* mode)
 // namespace separate from SMPTE; do not guess unverified Sony catalogue IDs.
 bool lookupWipeBySony(int code,WipePattern* pattern,bool* inherentReverse)
 {
+    if((code>=224&&code<=247)||(code>=270&&code<=272)){if(pattern)*pattern=wipePatternById(QString("smil_sonyWipe_pattern%1").arg(code));if(inherentReverse)*inherentReverse=false;return true;}
     if(QList<int>{13,14,15,16,19,20,26,27,29,49,300,301,302,303,304,100,101,102,103,104,105,106,107,150,151,156,158,160,162,516,518,604,606,624,661,200,201,202,203,206,207,208,209,210,211,212,213,220,221,222,223,273,274,250,251,252,253,254,255,256,257,260,261,262,263,264,265,266,267,268,269}.contains(code)){if(pattern)*pattern=wipePatternById(QString("smil_sonyWipe_pattern%1").arg(code));if(inherentReverse)*inherentReverse=false;return true;}
     int smpte=-1;bool reverse=false;
     switch(code) {
@@ -476,7 +486,8 @@ bool lookupWipeBySony(int code,WipePattern* pattern,bool* inherentReverse)
     return true;
 }
 
-QList<int> supportedSonyWipes(bool expanded,bool enhanced,bool rotary,bool mosaic,bool compound,bool karaoke,bool random) {
+QList<int> supportedSonyWipes(bool expanded,bool enhanced,bool rotary,bool mosaic,bool compound,bool karaoke,bool random,bool complete) {
+    if(complete){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,compound,karaoke,random,false);for(int code=224;code<=247;++code)codes.append(code);codes.append(QList<int>{270,271,272});std::sort(codes.begin(),codes.end());return codes;}
     if(random){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,compound,karaoke,false);codes.append(QList<int>{273,274});std::sort(codes.begin(),codes.end());return codes;}
     if(karaoke){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,compound,false);codes.append(QList<int>{220,221,222,223});std::sort(codes.begin(),codes.end());return codes;}
     if(compound){auto codes=supportedSonyWipes(expanded,enhanced,rotary,mosaic,false);codes.append(QList<int>{250,251,252,253,254,255,256,257,260,261,262,263,264,265,266,267,268,269});return codes;}
@@ -500,7 +511,8 @@ bool lookupDmeBySony(int code, QString* effect, QString* direction,bool primitiv
     return true;
 }
 
-QList<int> pendingSonyWipes(bool karaoke,bool random){
+QList<int> pendingSonyWipes(bool karaoke,bool random,bool complete){
+    if(complete)return {};
     // TODO: 224-247 need decoded paths; 220-223 are version-gated row patterns;
     // 270-272 need identified preset masks; 273/274 are version gated.
     QList<int> codes;for(int code=karaoke?224:220;code<=247;++code)codes.append(code);

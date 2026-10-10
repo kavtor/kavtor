@@ -18,3 +18,7 @@ asset directory. The initial inspection found 401 PNG files in each collection;
 `1.png` has an original 62×50 raster and a 20×16 reduction. Start with number 1
 and await its description before changing the interpretation. No icon library is
 embedded in the firmware by this preparation step.
+
+The operator subsequently authorized provisional implementation of every remaining
+WIPE on 2026-10-10, followed by review. See sony-wipe-interpretations.json;
+implementation membership never implies morphological approval.

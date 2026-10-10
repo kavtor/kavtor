@@ -280,7 +280,8 @@ private slots:
         QCOMPARE(supportedSonyWipes(true,true,true,true,true).size(),83);
         QCOMPARE(pendingSonyWipes().size(),33);QCOMPARE(pendingSonyWipes(true).size(),29);QCOMPARE(supportedSonyWipes(true,true,true,true,true,true).size(),87);
         QCOMPARE(pendingSonyWipes(true,true).size(),27);QCOMPARE(supportedSonyWipes(true,true,true,true,true,true,true).size(),89);
-        for(int code:pendingSonyWipes(true,true)){QVERIFY(!supportedSonyWipes(true,true,true,true,true).contains(code));QVERIFY(!wipePatternById(QString("smil_sonyWipe_pattern%1").arg(code)).implemented);}
+        QVERIFY(pendingSonyWipes(true,true,true).isEmpty());QCOMPARE(supportedSonyWipes(true,true,true,true,true,true,true,true).size(),116);
+        for(int code:supportedSonyWipes(true,true,true,true,true,true,true,true)){WipePattern pattern;bool rev;QVERIFY(lookupWipeBySony(code,&pattern,&rev));QVERIFY(pattern.implemented);}
         for(int code:supportedSonyWipes(true,true,true,true)){WipePattern p;bool reverse;QVERIFY(lookupWipeBySony(code,&p,&reverse));}
         for(int code:supportedSonyWipes(true,true,true)){WipePattern p;bool reverse;QVERIFY(lookupWipeBySony(code,&p,&reverse));}
         for(int code:supportedSonyWipes(true,true)){WipePattern p;bool reverse;QVERIFY(lookupWipeBySony(code,&p,&reverse));}
