@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(kavtor VERSION 0.26.1 LANGUAGES CXX)
+project(kavtor VERSION 0.26.2 LANGUAGES CXX)
 
 configure_file(src/Version.h.in generated/Version.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/generated)

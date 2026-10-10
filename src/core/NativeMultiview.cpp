@@ -62,7 +62,7 @@ struct Painter {
         double y = edge == "top" ? r.top() + 8 : r.bottom() - size - 18;
         QRectF box(r.x() + 18, y, r.width() - 36, size + 12);
         text(box, value, size, "#ffffff", align,
-             {{"background", color}, {"padding", 10}, {"bold", true}, {"spacing", 1}});
+             {{"background", color}, {"padding", 10}, {"bold", true}, {"spacing", 1}, {"valign", "center"}});
     }
 };
 bool same(int a, int b) { return a == b || ((a == 11 || a == 23) && (b == 11 || b == 23)); }
@@ -164,8 +164,8 @@ QJsonObject NativeMultiview::scene(const Configuration &config) const {
             QRectF box(r.center().x() - 95, r.center().y() - 21, 190, 42);
             p.rect(box, "#000000c7");
             p.border(box, "#ffffff59", 1);
-            p.text(box.adjusted(10, 7, -10, -5), "NO SOURCE", 18, "#f3f3f3", "center",
-                   {{"bold", true}, {"spacing", 2}});
+            p.text(box.adjusted(10, 0, -10, 0), "NO SOURCE", 18, "#f3f3f3", "center",
+                   {{"bold", true}, {"spacing", 2}, {"valign", "center"}});
         }
         levels(r, id);
         if (id < clocks.size() && clocks[id].duration > .05) {
