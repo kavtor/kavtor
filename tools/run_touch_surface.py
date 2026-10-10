@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Serve kavtor's touch preparation surface through its authoritative panel API."""
+"""Serve kavtor's extended touch operation surface through its authoritative panel API."""
 import argparse
 import copy
 import json
@@ -11,7 +11,7 @@ import time
 from urllib.parse import urlsplit
 
 PREPARATION_COMMANDS = frozenset({
-    'me', 'rate', 'wipe_settings', 'wipe_style', 'wipe_pattern', 'wipe_dir',
+    'rate', 'wipe_settings', 'wipe_style', 'wipe_pattern', 'wipe_dir',
     'wipe_edge', 'wipe_border_profile', 'dust_params', 'mix_params', 'dip_color',
     'key_processing', 'dme_background',
 })
@@ -88,6 +88,8 @@ class PanelBridge:
         if not isinstance(command, dict) or command.get('cmd') not in PREPARATION_COMMANDS:
             raise ValueError('This surface accepts preparation commands only')
         command = dict(command)
+        if 'targetMe' in command and not self.state.get('capabilities', {}).get('touchIndependentMe',False):
+            raise ValueError('Independent M/E preparation requires kavtor 0.31.0 or newer')
         if command['cmd'] == 'key_processing':
             command['guardOnAir'] = True
         with self.command_lock, self.condition:
@@ -139,11 +141,11 @@ def handler(bridge, root):
             path = urlsplit(self.path).path
             if path == '/api/state':
                 self.send_json(bridge.snapshot())
-            elif path in ('/', '/index.html', '/surface.js', '/surface.css'):
+            elif path in ('/', '/index.html', '/surface.js', '/surface.css', '/icon.svg'):
                 name = 'index.html' if path == '/' else path[1:]
                 body = (root / name).read_bytes()
                 self.send_response(200)
-                self.send_header('Content-Type', {'index.html': 'text/html; charset=utf-8', 'surface.js': 'text/javascript; charset=utf-8', 'surface.css': 'text/css; charset=utf-8'}[name])
+                self.send_header('Content-Type', {'index.html': 'text/html; charset=utf-8', 'surface.js': 'text/javascript; charset=utf-8', 'surface.css': 'text/css; charset=utf-8', 'icon.svg':'image/svg+xml'}[name])
                 self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:")
                 self.send_header('Content-Length', str(len(body)))
                 self.send_header('Cache-Control', 'no-cache')
@@ -191,7 +193,7 @@ def main():
     if root is None:
         parser.error('Touch assets not found; install share/kavtor/touch or run from the source tree')
     server = ThreadingHTTPServer((args.listen, args.port), handler(bridge, root))
-    print(f'kavtor touch preparation: http://{args.listen}:{server.server_port}', flush=True)
+    print(f'kavtor extended operation: http://{args.listen}:{server.server_port}', flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
