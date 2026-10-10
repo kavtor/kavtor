@@ -168,7 +168,7 @@ QString staticDmeImageProducer(const QString& path) {
 }
 bool Configuration::setDmeBackgroundImage(const QString& effect,const QString& path) {
     const int code=effect.section('_',1).toInt();
-    const bool preset=effect==QString("sony_%1").arg(code)&&supportedSonyDmes(true,true,true,true,true).contains(code);
+    const bool preset=effect==QString("sony_%1").arg(code)&&supportedSonyDmes(true,true,true,true,true,true).contains(code);
     if((!preset&&!QStringList{"global","move","cube","zoom","page_curl","page_roll"}.contains(effect))||staticDmeImageProducer(path).isEmpty())return false;
     m_dmeBackgrounds.insert(effect,QJsonObject{{"image",path}});if(effect!="global")m_dmeBackgroundScopes.insert(effect,true);emit configurationChanged();return true;
 }
@@ -1542,7 +1542,7 @@ bool Configuration::setDestinations(const QList<OutputDestination>& destinations
 
 QJsonObject Configuration::dmeBackgrounds() const {
     QJsonObject result;for(const auto& effect:QStringList{"global","move","cube","zoom","page_curl","page_roll"})result.insert(effect,dmeBackgroundValue(effect).isUndefined()?QJsonValue(-1):dmeBackgroundValue(effect));
-    for(int code:supportedSonyDmes(true,true,true,true,true)){const QString effect=QString("sony_%1").arg(code);auto value=dmeBackgroundValue(effect);result.insert(effect,value.isUndefined()?QJsonValue(-1):value);}
+    for(int code:supportedSonyDmes(true,true,true,true,true,true)){const QString effect=QString("sony_%1").arg(code);auto value=dmeBackgroundValue(effect);result.insert(effect,value.isUndefined()?QJsonValue(-1):value);}
     return result;
 }
 void Configuration::setDmeBackground(const QString& effect,int input){

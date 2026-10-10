@@ -47,6 +47,7 @@ public:
     bool setDipColour(const QString& colour);
     bool nativeKeyAvailable() const {return m_nativeKeyAvailable;}
     bool frameSonyAvailable() const {return m_frameSonyAvailable;}
+    bool edgePageSonyAvailable() const {return m_edgePageSonyAvailable;}
     bool mirrorSonyAvailable() const {return m_mirrorSonyAvailable;}
     bool planarSonyAvailable() const {return m_planarSonyAvailable;}
     bool spatialSonyAvailable() const {return m_spatialSonyAvailable;}
@@ -305,7 +306,7 @@ private:
     QString nativeWipeOptions(const Transition& transition) const;
     int m_takeDmeBackground=-1;
     bool m_transportGraphicsAvailable=false;
-    bool m_nativeDmeAvailable=false,m_pageDmeAvailable=false,m_expandedSonyAvailable=false,m_staticDmeAvailable=false,m_enhancedSonyAvailable=false,m_rotarySonyAvailable=false,m_mosaicSonyAvailable=false,m_compoundSonyAvailable=false,m_primitiveSonyAvailable=false,m_spatialSonyAvailable=false,m_planarSonyAvailable=false,m_mirrorSonyAvailable=false,m_frameSonyAvailable=false,m_nativeKeyAvailable=false,m_broadcastMixAvailable=false,m_dustMixAvailable=false;
+    bool m_nativeDmeAvailable=false,m_pageDmeAvailable=false,m_expandedSonyAvailable=false,m_staticDmeAvailable=false,m_enhancedSonyAvailable=false,m_rotarySonyAvailable=false,m_mosaicSonyAvailable=false,m_compoundSonyAvailable=false,m_primitiveSonyAvailable=false,m_spatialSonyAvailable=false,m_planarSonyAvailable=false,m_mirrorSonyAvailable=false,m_frameSonyAvailable=false,m_edgePageSonyAvailable=false,m_nativeKeyAvailable=false,m_broadcastMixAvailable=false,m_dustMixAvailable=false;
     QString nativeDmeSuffix(const Transition&, bool manual=false) const;
     QString nativeWipeSuffix(const Transition& transition, bool manual = false) const;
     QString wipeBorderLayerCommand(const Transition& transition) const;

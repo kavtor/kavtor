@@ -1,7 +1,7 @@
 {
   "source": "Operator-supplied catalogue cross-checked with Sony XVS manual pictograms",
-  "native_implemented": 72,
-  "pending": 197,
+  "native_implemented": 80,
+  "pending": 189,
   "entries": [
     {
       "code": 1001,
@@ -774,37 +774,37 @@
       "code": 1301,
       "family": "Page Turn",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1302,
       "family": "Page Turn",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1303,
       "family": "Page Turn",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1304,
       "family": "Page Turn",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1305,
@@ -972,37 +972,37 @@
       "code": 1321,
       "family": "Page Roll / Roll",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1322,
       "family": "Page Roll / Roll",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1323,
       "family": "Page Roll / Roll",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1324,
       "family": "Page Roll / Roll",
       "channel_mode": 1,
-      "implemented": false,
+      "implemented": true,
       "pictogram_available": true,
       "operator_verified": false,
-      "review": "Pattern-specific fold axes, texture roles and Radius/Magnitude/Start Angle preparation need review."
+      "review": "Native edge page/roll project interpretation: 1301/1321 right-to-left, 1302/1322 left-to-right, 1303/1323 bottom-to-top, 1304/1324 top-to-bottom. Native geometry/video checks passed; operator morphology pending."
     },
     {
       "code": 1325,

@@ -400,7 +400,7 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
             QString effect=obj.value("effect").toString();
             QString sonyDirection;
             if(obj.contains("sony")) {
-                if(obj.contains("effect")||obj.contains("direction")||!validIndex("sony",4000,true)||!lookupDmeBySony(obj.value("sony").toInt(),&effect,&sonyDirection,m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable())){rejectKeyerRequest("Unknown or invalid Sony DME");return;}
+                if(obj.contains("effect")||obj.contains("direction")||!validIndex("sony",4000,true)||!lookupDmeBySony(obj.value("sony").toInt(),&effect,&sonyDirection,m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable(),m_engine->edgePageSonyAvailable())){rejectKeyerRequest("Unknown or invalid Sony DME");return;}
                 if(effect!="sony"&&obj.value("reverse").toBool())sonyDirection=oppositeEntry(sonyDirection);
             }
             if(effect!="move"&&effect!="cube"&&effect!="zoom"&&effect!="page_curl"&&effect!="page_roll"&&effect!="push"&&effect!="slide"&&effect!="sony"){rejectKeyerRequest("Manual DME effect not available");return;}
@@ -497,7 +497,7 @@ void PanelProtocol::handleLine(QTcpSocket* client, const QString& line)
         QString effect=obj.value("effect").toString();
         QString direction=obj.value("direction").toString();
         if(obj.contains("sony")) {
-            if(obj.contains("effect")||obj.contains("direction")||!validIndex("sony",4000,true)||!lookupDmeBySony(obj.value("sony").toInt(),&effect,&direction,m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable())) {rejectKeyerRequest("Unknown or invalid Sony DME");return;}
+            if(obj.contains("effect")||obj.contains("direction")||!validIndex("sony",4000,true)||!lookupDmeBySony(obj.value("sony").toInt(),&effect,&direction,m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable(),m_engine->edgePageSonyAvailable())) {rejectKeyerRequest("Unknown or invalid Sony DME");return;}
             if(effect!="sony"&&obj.value("reverse").toBool())direction=oppositeEntry(direction);
         }
         if((effect!="push"&&effect!="slide"&&effect!="move"&&effect!="cube"&&effect!="zoom"&&effect!="page_curl"&&effect!="page_roll"&&effect!="sony")||((effect=="push"||effect=="slide")&&(direction!="left"&&direction!="right"&&direction!="top"&&direction!="bottom"))) {
@@ -1024,8 +1024,8 @@ QJsonObject PanelProtocol::stateObject() const
     QJsonArray dmeEffects{"push","slide"};if(m_engine->nativeDmeAvailable()){dmeEffects.append("move");dmeEffects.append("cube");dmeEffects.append("zoom");}if(m_engine->pageDmeAvailable()){dmeEffects.append("page_curl");dmeEffects.append("page_roll");}capabilities.insert("dmeEffects",dmeEffects);capabilities.insert("dmeBackground",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundScopes",m_engine->pageDmeAvailable());capabilities.insert("dmeBackgroundImages",m_engine->staticDmeAvailable());capabilities.insert("mixPreparation",true);capabilities.insert("broadcastMixes",m_engine->broadcastMixAvailable());capabilities.insert("sonyDmeBackground",m_engine->primitiveSonyAvailable());capabilities.insert("sonyGeometry",m_engine->enhancedSonyAvailable());capabilities.insert("sonyMosaic",m_engine->mosaicSonyAvailable());
     QJsonArray sonyWipes;for(int code:supportedSonyWipes(m_engine->expandedSonyAvailable(),m_engine->enhancedSonyAvailable(),m_engine->rotarySonyAvailable(),m_engine->mosaicSonyAvailable(),m_engine->compoundSonyAvailable()))sonyWipes.append(code);capabilities.insert("sonyWipes",sonyWipes);
     QJsonArray pending;for(int code:pendingSonyWipes())pending.append(code);capabilities.insert("sonyPendingWipes",pending);
-    QJsonArray sonyDmes;if(m_engine->nativeDmeAvailable())for(int code:supportedSonyDmes(m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable()))sonyDmes.append(code);capabilities.insert("sonyDmes",sonyDmes);
-    QJsonArray pendingDmes;for(int code:pendingSonyDmes(m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable()))pendingDmes.append(code);capabilities.insert("sonyPendingDmes",pendingDmes);
+    QJsonArray sonyDmes;if(m_engine->nativeDmeAvailable())for(int code:supportedSonyDmes(m_engine->primitiveSonyAvailable(),m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable(),m_engine->edgePageSonyAvailable()))sonyDmes.append(code);capabilities.insert("sonyDmes",sonyDmes);
+    QJsonArray pendingDmes;for(int code:pendingSonyDmes(m_engine->spatialSonyAvailable(),m_engine->planarSonyAvailable(),m_engine->mirrorSonyAvailable(),m_engine->frameSonyAvailable(),m_engine->edgePageSonyAvailable()))pendingDmes.append(code);capabilities.insert("sonyPendingDmes",pendingDmes);
     obj.insert(QStringLiteral("capabilities"), capabilities);
     QJsonArray banks;
     for (int me = 0; me < m_engine->meCount(); ++me) {
