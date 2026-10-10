@@ -96,6 +96,23 @@ class TestSwitcherEngine : public QObject
 private:
     QTemporaryDir m_configRoot;
 private slots:
+    void edgePageSonyDmeProtocol() {
+        FakeCaspar caspar;caspar.engineVersion="2.5.1 Stable (casparMIX 0.20.0)";
+        Configuration config;config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(caspar.port());
+        AmcpClient client;client.setReconnectIntervalMs(0);SwitcherEngine engine(&config,&client);
+        engine.connectToCaspar();QTRY_VERIFY(engine.edgePageSonyAvailable());QTRY_COMPARE(client.queuedCommandCount(),0);
+        engine.selectPreview(0);QTRY_COMPARE(engine.previewSource(),0);engine.executeCut();QTRY_COMPARE(engine.programSource(),0);
+        engine.selectPreview(1);QTRY_COMPARE(engine.previewSource(),1);QTRY_COMPARE(client.queuedCommandCount(),0);
+        Transition effect;effect.type=TransitionType::SonyDme;effect.sonyDmeCode=1303;effect.durationFrames=25;
+        QVERIFY(engine.setManualPosition(2000,effect));QTRY_COMPARE(client.queuedCommandCount(),0);
+        bool found=false;for(const auto& command:caspar.commands)found|=command.contains("DMENATIVE 25 SONY_1303 MANUAL 1");QVERIFY(found);
+        for(int code:QList<int>{1301,1302,1303,1304,1321,1322,1323,1324}) {
+            QVERIFY(!lookupDmeBySony(code,nullptr,nullptr,true,true,true,true,true));
+            QVERIFY(lookupDmeBySony(code,nullptr,nullptr,true,true,true,true,true,true));
+            QVERIFY(!pendingSonyDmes(true,true,true,true,true).contains(code));
+        }
+    }
+
     void frameSonyDmeProtocol() {
         FakeCaspar caspar;caspar.engineVersion="2.5.1 Stable (casparMIX 0.17.0)";
         Configuration config;config.setOscPort(0);config.setCasparHost("127.0.0.1");config.setCasparPort(caspar.port());

@@ -1337,7 +1337,7 @@ void SwitcherEngine::onAmcpConnected()
     m_restoreFailed = false;
     m_restoreVersionKnown = false;
     m_restoreBatch = 0;
-    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
+    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_edgePageSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
     setConnected(true);
     send(QStringLiteral("VERSION"));
     startOscListener();
@@ -1363,7 +1363,7 @@ void SwitcherEngine::onAmcpDisconnected()
     captureBank();
     m_restoreBatch = 0;
     m_restoreVersionKnown = false;
-    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
+    m_transportGraphicsAvailable=m_nativeDmeAvailable=m_pageDmeAvailable=m_expandedSonyAvailable=m_staticDmeAvailable=m_enhancedSonyAvailable=m_rotarySonyAvailable=m_mosaicSonyAvailable=m_compoundSonyAvailable=m_primitiveSonyAvailable=m_spatialSonyAvailable=m_planarSonyAvailable=m_mirrorSonyAvailable=m_frameSonyAvailable=m_edgePageSonyAvailable=m_nativeKeyAvailable=m_broadcastMixAvailable=m_dustMixAvailable=false;
     m_nativeMvReady=false;
     m_manualBanks = {};
     m_requestedMe = -1;
@@ -1428,6 +1428,7 @@ void SwitcherEngine::onAmcpResponse(int code, const QString& status, const QStri
         m_primitiveSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,10,0);
         m_spatialSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,12,0);
         m_frameSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,17,0);
+        m_edgePageSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,20,0);
         m_mirrorSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,16,0);
         m_planarSonyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,14,0);
         m_nativeKeyAvailable=m_nativeDmeAvailable&&QVersionNumber::fromString(match.captured(1))>=QVersionNumber(0,13,0);
@@ -3137,7 +3138,7 @@ QString SwitcherEngine::nativeDmeSuffix(const Transition& transition,bool manual
     if(transition.type!=TransitionType::Move&&transition.type!=TransitionType::Cube&&transition.type!=TransitionType::Zoom&&transition.type!=TransitionType::Push&&transition.type!=TransitionType::Slide&&transition.type!=TransitionType::PageCurl&&transition.type!=TransitionType::PageRoll&&transition.type!=TransitionType::SonyDme&&transition.type!=TransitionType::Nam&&transition.type!=TransitionType::SuperMix)return {};
     QString effect=transition.type==TransitionType::Move?"MOVE":transition.type==TransitionType::Cube?"CUBE":transition.type==TransitionType::PageCurl?"PAGE_CURL":transition.type==TransitionType::PageRoll?"PAGE_ROLL":"ZOOM";
     if(transition.type==TransitionType::Push||transition.type==TransitionType::Slide)effect=(transition.type==TransitionType::Push?"PUSH_":"SLIDE_")+transitionDirectionToken(transition.direction).mid(4);
-    if(transition.type==TransitionType::SonyDme){if(!m_primitiveSonyAvailable||!supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable).contains(transition.sonyDmeCode))return {};effect=QString("SONY_%1").arg(transition.sonyDmeCode);}
+    if(transition.type==TransitionType::SonyDme){if(!m_primitiveSonyAvailable||!supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable,m_edgePageSonyAvailable).contains(transition.sonyDmeCode))return {};effect=QString("SONY_%1").arg(transition.sonyDmeCode);}
     const bool broadcast=transition.type==TransitionType::Nam||(transition.type==TransitionType::SuperMix||transition.type==TransitionType::DustMix);
     if(broadcast){if(!m_broadcastMixAvailable)return {};effect=transition.type==TransitionType::Nam?"NAM":"SUPER_MIX";}
     const QString key=effect.toLower();const int background=transition.dmeBackground==-2?m_config->dmeBackground(key):transition.dmeBackground;
@@ -3193,7 +3194,7 @@ void SwitcherEngine::refreshDmeBackgroundPreview(const QString& effect) {
 }
 bool SwitcherEngine::setDmeBackground(const QString& effect,int source) {
     const int code=effect.section('_',1).toInt();
-    const bool preset=m_primitiveSonyAvailable&&effect==QString("sony_%1").arg(code)&&supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable).contains(code);
+    const bool preset=m_primitiveSonyAvailable&&effect==QString("sony_%1").arg(code)&&supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable,m_edgePageSonyAvailable).contains(code);
     if(source==11||source==23||!m_connected||!m_pageDmeAvailable||(!preset&&!QStringList{"global","move","cube","zoom","page_curl","page_roll"}.contains(effect))||(source!=-1&&dmeBackgroundProducer(source).isEmpty())||sourceWouldFeedback(source,m_activeMe))return false;
     const auto previous=m_config->toJson();m_config->setDmeBackground(effect,source);
     if(!m_config->save()){m_config->fromJson(previous);return false;}
@@ -3201,7 +3202,7 @@ bool SwitcherEngine::setDmeBackground(const QString& effect,int source) {
 }
 bool SwitcherEngine::setDmeBackgroundScope(const QString& effect,bool custom,bool copyGlobal) {
     const int code=effect.section('_',1).toInt();
-    const bool preset=m_primitiveSonyAvailable&&effect==QString("sony_%1").arg(code)&&supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable).contains(code);
+    const bool preset=m_primitiveSonyAvailable&&effect==QString("sony_%1").arg(code)&&supportedSonyDmes(true,m_spatialSonyAvailable,m_planarSonyAvailable,m_mirrorSonyAvailable,m_frameSonyAvailable,m_edgePageSonyAvailable).contains(code);
     if(!m_connected||!m_pageDmeAvailable||(!preset&&!QStringList{"move","cube","zoom","page_curl","page_roll"}.contains(effect)))return false;
     const auto previous=m_config->toJson();m_config->setDmeBackgroundScope(effect,custom,copyGlobal);
     const int source=m_config->dmeBackground(effect);const QString image=m_config->dmeBackgroundImage(effect);

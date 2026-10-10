@@ -67,11 +67,11 @@ WipePattern wipePatternById(const QString& id);
 WipePatternLookup lookupWipePattern(const QString& id);
 bool lookupWipeBySmpte(int code, WipePattern* pattern, bool* inherentReverse);
 bool lookupWipeBySony(int code, WipePattern* pattern, bool* inherentReverse);
-bool lookupDmeBySony(int code, QString* effect, QString* direction,bool primitives=false,bool spatial=false,bool planar=false,bool mirror=false,bool frame=false);
+bool lookupDmeBySony(int code, QString* effect, QString* direction,bool primitives=false,bool spatial=false,bool planar=false,bool mirror=false,bool frame=false,bool pages=false);
 QList<int> supportedSonyWipes(bool expanded,bool enhanced = false,bool rotary = false,bool mosaic = false,bool compound = false);
 QList<int> pendingSonyWipes();
-QList<int> supportedSonyDmes(bool primitives=false,bool spatial=false,bool planar=false,bool mirror=false,bool frame=false);
-QList<int> pendingSonyDmes(bool spatial=false,bool planar=false,bool mirror=false,bool frame=false);
+QList<int> supportedSonyDmes(bool primitives=false,bool spatial=false,bool planar=false,bool mirror=false,bool frame=false,bool pages=false);
+QList<int> pendingSonyDmes(bool spatial=false,bool planar=false,bool mirror=false,bool frame=false,bool pages=false);
 
 QString wipeDirectionModeToString(WipeDirectionMode mode);
 bool wipeDirectionModeFromString(const QString& text, WipeDirectionMode* mode);

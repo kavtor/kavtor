@@ -126,3 +126,13 @@ local overrides retain their prior behavior.
 From 0.26.1 default recall uses 100/2/0. Explicit saved ratios are preserved;
 a lower ratio includes a uniform dissolve. This first Dust Mix variant shares
 the alternate MIX restriction: background-only NEXT TRANSITION.
+
+## Sony edge page turns and rolls
+
+casparMIX 0.20.0 enables DIRECT 1301–1304 (Page Turn) and 1321–1324 (Roll).
+Within each block: right-to-left, left-to-right, bottom-to-top, top-to-bottom.
+NORM unfolds incoming B; REV folds outgoing A on the inverse path. Manual
+T-bar, AUTO and existing default/custom DME background preparation apply.
+These presets are hidden when the connected engine is older; no substitute
+effect is used. Radius/Magnitude/Start Angle editors remain future work.
+Operator morphological validation is pending.

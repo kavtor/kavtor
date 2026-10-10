@@ -226,7 +226,7 @@ private slots:
         QVERIFY(!lookupDmeBySony(1005,nullptr,nullptr));
         QCOMPARE(supportedSonyDmes(true).size(),44);
         QCOMPARE(supportedSonyDmes(true,true).size(),54);
-        QCOMPARE(supportedSonyDmes(true,true,true).size(),67);QCOMPARE(supportedSonyDmes(true,true,true,true).size(),71);QCOMPARE(supportedSonyDmes(true,true,true,true,true).size(),72);QCOMPARE(pendingSonyDmes(true,true,true,true).size(),197);QCOMPARE(pendingSonyDmes(true,true,true).size(),198);QCOMPARE(pendingSonyDmes(true,true).size(),202);
+        QCOMPARE(supportedSonyDmes(true,true,true).size(),67);QCOMPARE(supportedSonyDmes(true,true,true,true).size(),71);QCOMPARE(supportedSonyDmes(true,true,true,true,true).size(),72);QCOMPARE(supportedSonyDmes(true,true,true,true,true,true).size(),80);QCOMPARE(pendingSonyDmes(true,true,true,true,true).size(),189);QCOMPARE(pendingSonyDmes(true,true,true,true).size(),197);QCOMPARE(pendingSonyDmes(true,true,true).size(),198);QCOMPARE(pendingSonyDmes(true,true).size(),202);
         QVERIFY(!lookupDmeBySony(1051,nullptr,nullptr,true,true));QVERIFY(lookupDmeBySony(1051,nullptr,nullptr,true,true,true));
         QCOMPARE(pendingSonyDmes(true).size(),215);
         for(int code:QList<int>{1045,1046,1047,1048,1101,1102,1103,1104,1121,1122}){QVERIFY(!lookupDmeBySony(code,nullptr,nullptr,true));QVERIFY(lookupDmeBySony(code,nullptr,nullptr,true,true));}

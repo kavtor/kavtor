@@ -479,12 +479,12 @@ QList<int> supportedSonyWipes(bool expanded,bool enhanced,bool rotary,bool mosai
     return expanded ? QList<int>{1,2,3,4,5,6,7,8,9,10,11,12,17,18,21,22,23,24}
                     : QList<int>{1,3,5,6,9,17,18,21,23,24};
 }
-QList<int> supportedSonyDmes(bool primitives,bool spatial,bool planar,bool mirror,bool frame) {
+QList<int> supportedSonyDmes(bool primitives,bool spatial,bool planar,bool mirror,bool frame,bool pages) {
     if(!primitives)return {1001,1002,1003,1004,2601,2602,2603,2604};
-    QList<int> codes;for(auto range:QList<QPair<int,int>>{{1001,1008},{1011,1013},{1021,1031},{1041,1044},{1384,1385},{2601,2608},{2621,2628}})for(int code=range.first;code<=range.second;++code)codes.append(code);if(spatial)codes.append(QList<int>{1045,1046,1047,1048,1101,1102,1103,1104,1121,1122});if(planar){for(int code=1051;code<=1058;++code)codes.append(code);for(int code=1061;code<=1064;++code)codes.append(code);codes.append(1068);}if(mirror)for(int code=1355;code<=1358;++code)codes.append(code);if(frame)codes.append(1201);std::sort(codes.begin(),codes.end());return codes;
+    QList<int> codes;for(auto range:QList<QPair<int,int>>{{1001,1008},{1011,1013},{1021,1031},{1041,1044},{1384,1385},{2601,2608},{2621,2628}})for(int code=range.first;code<=range.second;++code)codes.append(code);if(spatial)codes.append(QList<int>{1045,1046,1047,1048,1101,1102,1103,1104,1121,1122});if(planar){for(int code=1051;code<=1058;++code)codes.append(code);for(int code=1061;code<=1064;++code)codes.append(code);codes.append(1068);}if(mirror)for(int code=1355;code<=1358;++code)codes.append(code);if(frame)codes.append(1201);if(pages)codes.append(QList<int>{1301,1302,1303,1304,1321,1322,1323,1324});std::sort(codes.begin(),codes.end());return codes;
 }
-bool lookupDmeBySony(int code, QString* effect, QString* direction,bool primitives,bool spatial,bool planar,bool mirror,bool frame) {
-    if (!supportedSonyDmes(primitives,spatial,planar,mirror,frame).contains(code)) return false;
+bool lookupDmeBySony(int code, QString* effect, QString* direction,bool primitives,bool spatial,bool planar,bool mirror,bool frame,bool pages) {
+    if (!supportedSonyDmes(primitives,spatial,planar,mirror,frame,pages).contains(code)) return false;
     if(primitives){if(effect)*effect="sony";if(direction)*direction=QString::number(code);return true;}
     if (effect) *effect = code < 2000 ? QStringLiteral("slide") : QStringLiteral("push");
     const QStringList entries = {"left","right","top","bottom"};
@@ -499,7 +499,7 @@ QList<int> pendingSonyWipes(){
     for(int code=270;code<=274;++code)codes.append(code);return codes;
 }
 
-QList<int> pendingSonyDmes(bool spatial,bool planar,bool mirror,bool frame){
+QList<int> pendingSonyDmes(bool spatial,bool planar,bool mirror,bool frame,bool pages){
     // TODO: individually reviewed reasons live in docs/sony-dme-inventory.json.
     // IDs are reserved, not advertised as executable presets.
     QList<int> codes{1032,1033,1045,1046,1047,1048,1051,1052,1053,1054,1055,1056,1057,1058,1061,1062,1063,1064,1068,1071,1072,1074,1076,1077,1088,1091,1092,1093,1094,1101,1102,1103,1104,1109,1110,1121,1122,1124,1131,1132,1133,1135,1201,1202,1203,1204,1205,1206,1207,1208,1209,1221,1222,1223,1224,1225,1251,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1313,1315,1316,1317,1318,1321,1322,1323,1324,1325,1326,1327,1328,1329,1330,1331,1332,1333,1335,1336,1337,1338,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1355,1356,1357,1358,1365,1371,1372,1378,1379,1381,1386,1387,1388,1389,1391,1393,1394,1396,1398,1399,1701,1702,2631,2632,2633,2634,2642,2644,2651,2652,2661,2662,2701,2702,2703,2704,2705,2706,2707,2708,2709,2710,2711,2712,2713,2715,2716,2717,2718,2721,2722,2723,2724,2725,2726,2727,2728,2729,2730,2731,2732,2733,2735,2736,2737,2738,2741,2742,2743,2744,2745,2746,2747,2748,2749,2750,2801,2802,2803,2804,2811,2812,2813,2814,2851,2852,2853,2854,2861,2862,2863,2864,3601,7001,7002,7003,7004,7005,7006,7007,7008,7021,7022,7023,7024,7025,7026,7027,7028,7029,7030,7031,7201,7202,7203,7204,7205,7206,7207,7208,7221,7222,7223,7224};
@@ -507,5 +507,6 @@ QList<int> pendingSonyDmes(bool spatial,bool planar,bool mirror,bool frame){
     if(planar){for(int code=1051;code<=1058;++code)codes.removeAll(code);for(int code=1061;code<=1064;++code)codes.removeAll(code);codes.removeAll(1068);}
     if(mirror)for(int code=1355;code<=1358;++code)codes.removeAll(code);
     if(frame)codes.removeAll(1201);
+    if(pages)for(int code:QList<int>{1301,1302,1303,1304,1321,1322,1323,1324})codes.removeAll(code);
     return codes;
 }
