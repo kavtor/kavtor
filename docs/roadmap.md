@@ -1,6 +1,6 @@
 # Open work — kavtor
 
-Reviewed against kavtor 0.24.0, casparMIX 0.17.0 and faderOS 0.27.0 on 2026-10-07.
+Reviewed against kavtor 0.30.0, casparMIX 0.23.0 and faderOS 0.29.1 on 2026-10-10.
 This file lists outstanding work only. Implemented behaviour belongs in feature
 guides and the Git history. Related historical investigations are evidence, not
 an additional implementation queue.
@@ -10,8 +10,9 @@ an additional implementation queue.
 - Complete key processing: separate fill/key and SOURCE modes, pattern keys,
   additional masks and DVE/PinP geometry, borders and shadows. LINEAR, CHROMA,
   LUMA, KEY INV and rectangular MAIN MASK/inversion are implemented.
-- Complete and review the Sony catalogue: 83 executable wipes, 33 reserved wipe
-  IDs; 72 executable DME presets, 197 reserved DME/Resizer IDs. See
+- Review the complete 116-pattern WIPE catalogue, especially provisional
+  224–247 and 270–272. Complete DME: 80 executable presets and 189 reserved
+  DME/Resizer IDs. See
   [the per-ID inventory](sony-dme-inventory.json). Operator review remains
   required for inferred geometry, defaults and temporal curves.
 - Add per-effect page/roll material, backside highlights and projected shadows;
